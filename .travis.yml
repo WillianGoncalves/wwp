@@ -1,1 +1,6 @@
 language: ruby
+deploy:
+  provider: heroku
+  app:
+    develop: staging-wwp
+    master: wwp
