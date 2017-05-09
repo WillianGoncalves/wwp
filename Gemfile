@@ -11,6 +11,7 @@ gem 'rails', '~> 5.0.2'
 gem 'pg'
 gem 'pg_search'
 gem 'materialize-sass'
+gem 'devise'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
