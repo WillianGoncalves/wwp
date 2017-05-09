@@ -1,0 +1,12 @@
+<% if user_signed_in? %>
+  <header>
+    <nav>
+      <div class="nav-wrapper">
+        <%= link_to 'Home', root_path %>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+<% end %>
