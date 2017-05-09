@@ -83,4 +83,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  host = 'http://staging-wwp.herokuapp.com'
+  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.asset_host = host
 end
