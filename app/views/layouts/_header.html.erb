@@ -1,10 +1,24 @@
 <% if user_signed_in? %>
   <header>
+    <ul id="dropdown1" class="dropdown-content">
+      <li><%= link_to 'My profile', edit_user_registration_path(current_user) %> </li>
+      <li class="divider"></li>
+      <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+    </ul>
     <nav>
       <div class="nav-wrapper">
         <%= link_to 'Home', root_path %>
         <ul id="nav-mobile" class="right">
-          <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+          <li>
+            <a class="dropdown-button avatar" href="#!" data-activates="dropdown1">
+              <% if current_user.avatar.present? %>
+                <%= image_tag current_user.avatar.url, class: 'circle' %>
+              <% else %>
+                <%= image_tag "user.svg", class: 'circle' %>
+              <% end %>
+              <i class="material-icons right">arrow_drop_down</i>
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
