@@ -12,9 +12,9 @@
           <li>
             <a class="dropdown-button avatar" href="#!" data-activates="dropdown1">
               <% if current_user.avatar.present? %>
-                <%= image_tag current_user.avatar.url, class: 'circle' %>
+                <%= image_tag current_user.avatar.url, class: 'circle responsive-img' %>
               <% else %>
-                <%= image_tag "user.svg", class: 'circle' %>
+                <%= image_tag "user.svg", class: 'circle responsive-img' %>
               <% end %>
               <i class="material-icons right">arrow_drop_down</i>
             </a>
