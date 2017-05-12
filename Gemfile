@@ -12,6 +12,7 @@ gem 'pg'
 gem 'pg_search'
 gem 'materialize-sass'
 gem 'devise'
+gem 'carrierwave', '~> 1.0'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
