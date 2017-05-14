@@ -48,6 +48,7 @@ group :development, :test do
   gem 'fabrication'
   gem 'faker'
   gem 'rails-controller-testing'
+  gem 'mini_magick'
 end
 
 group :development do
