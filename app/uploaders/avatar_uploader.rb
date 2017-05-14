@@ -1,4 +1,5 @@
 class AvatarUploader < CarrierWave::Uploader::Base
+  include CarrierWave::MiniMagick unless Figaro.env.cloudinary_url?
   include Cloudinary::CarrierWave if Figaro.env.cloudinary_url?
 
   # Include RMagick or MiniMagick support:
@@ -6,7 +7,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   process :convert => 'png'
-  process :tags => ['user_avatar', "env_#{Rails.env}"]
+  process :tags => ['user_avatar', "env_#{Rails.env}"] if Figaro.env.cloudinary_url?
 
   version :standard do
     process :resize_to_fill => [100, 100]
