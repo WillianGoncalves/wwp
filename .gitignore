@@ -42,3 +42,6 @@ bower.json
 .byebug_history
 
 public/uploads/*
+
+# Ignore application configuration
+/config/application.yml
