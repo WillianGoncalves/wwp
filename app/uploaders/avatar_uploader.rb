@@ -1,5 +1,5 @@
 class AvatarUploader < CarrierWave::Uploader::Base
-  include Cloudinary::CarrierWave
+  include Cloudinary::CarrierWave if Figaro.env.cloudinary_url?
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -25,5 +25,5 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def public_id
     "#{Rails.env}/#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}/#{SecureRandom.hex}"
   end
-  
+
 end
