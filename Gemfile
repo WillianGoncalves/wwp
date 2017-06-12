@@ -44,12 +44,18 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'mini_magick'
+  gem 'annotate'
+end
+
+group :test do
+  gem 'simplecov', :require => false
   gem 'rspec-rails', '~> 3.5'
   gem 'fabrication'
   gem 'faker'
   gem 'rails-controller-testing'
-  gem 'mini_magick'
   gem "rspec_junit_formatter"
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
 
 group :development do
