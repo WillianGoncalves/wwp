@@ -49,6 +49,7 @@ group :development, :test do
   gem 'faker'
   gem 'rails-controller-testing'
   gem 'mini_magick'
+  gem "rspec_junit_formatter"
 end
 
 group :development do
