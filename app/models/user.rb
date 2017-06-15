@@ -18,17 +18,16 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  avatar                 :string
-#  group_id               :integer
+#  last_group_id          :integer
 #
 # Indexes
 #
 #  index_users_on_email                 (email) UNIQUE
-#  index_users_on_group_id              (group_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 # Foreign Keys
 #
-#  fk_rails_...  (group_id => groups.id)
+#  fk_rails_...  (last_group_id => groups.id)
 #
 
 class User < ApplicationRecord
@@ -41,7 +40,7 @@ class User < ApplicationRecord
   has_many :groups, through: :members
   has_many :invites, inverse_of: :user
   has_many :comments, inverse_of: :commenter
-  belongs_to :last_group, class_name: "Group", foreign_key: "group_id"
+  belongs_to :last_group, class_name: "Group"
 
   validates :first_name, :last_name, presence: true
 
