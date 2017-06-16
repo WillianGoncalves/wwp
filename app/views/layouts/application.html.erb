@@ -5,7 +5,8 @@
     <title>Wwp</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -13,8 +14,11 @@
 
     <%= render 'layouts/header' %>
 
-    <main class="container">
+    <main id="app" class="container">
       <%= yield %>
     </main>
+
+    <%= javascript_pack_tag 'application' %>
+
   </body>
 </html>
