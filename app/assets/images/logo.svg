@@ -52,11 +52,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="91.223829"
-     inkscape:cy="-21.565729"
+     inkscape:zoom="1.979899"
+     inkscape:cx="161.82302"
+     inkscape:cy="-64.666218"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="text3336"
      showgrid="false"
      inkscape:window-width="1440"
      inkscape:window-height="835"
@@ -85,17 +85,21 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-178.96211,-158.64011)">
-    <text
-       xml:space="preserve"
+    <g
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:1;fill:url(#linearGradient4210);fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="178.57143"
-       y="186.64792"
-       id="text3336"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3338"
-         x="178.57143"
-         y="186.64792"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Days One';-inkscape-font-specification:'Days One, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient4210);fill-opacity:1">WWP</tspan></text>
+       id="text3336">
+      <path
+         d="m 179.05971,160.28073 q -0.0977,-0.23437 -0.0977,-0.52734 0,-0.3125 0.33203,-0.70313 0.35157,-0.41015 1.03516,-0.41015 l 4.27734,0 q 0.76172,0 1.40625,0.52734 0.64453,0.52734 0.91797,1.32812 l 5.15625,15.46875 4.76563,-15.46875 q 0.5664,-1.85546 2.32422,-1.85546 l 3.59375,0 q 1.75781,0 2.32421,1.85546 l 4.76563,15.46875 5.15625,-15.46875 q 0.27344,-0.80078 0.91797,-1.32812 0.64453,-0.52734 1.40625,-0.52734 l 4.27734,0 q 0.66406,0 0.9961,0.41015 0.35156,0.39063 0.35156,0.70313 0,0.29297 -0.0781,0.52734 l -8.71093,24.375 q -0.72266,1.99219 -2.8125,1.99219 l -2.83204,0 q -2.16796,0 -2.79296,-1.99219 l -4.76563,-15.03906 -4.76562,15.03906 q -0.64454,1.99219 -2.79297,1.99219 l -2.85157,0 q -2.07031,0 -2.79296,-1.99219 l -8.71094,-24.375 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Days One';-inkscape-font-specification:'Days One, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient4210);fill-opacity:1"
+         id="path4148" />
+      <path
+         d="m 223.90346,160.28073 q -0.0977,-0.23437 -0.0977,-0.52734 0,-0.3125 0.33203,-0.70313 0.35157,-0.41015 1.03516,-0.41015 l 4.27734,0 q 0.76172,0 1.40625,0.52734 0.64453,0.52734 0.91797,1.32812 l 5.15625,15.46875 4.76563,-15.46875 q 0.5664,-1.85546 2.32422,-1.85546 l 3.59375,0 q 1.75781,0 2.32421,1.85546 l 4.76563,15.46875 5.15625,-15.46875 q 0.27344,-0.80078 0.91797,-1.32812 0.64453,-0.52734 1.40625,-0.52734 l 4.27734,0 q 0.66406,0 0.9961,0.41015 0.35156,0.39063 0.35156,0.70313 0,0.29297 -0.0781,0.52734 l -8.71093,24.375 q -0.72266,1.99219 -2.8125,1.99219 l -2.83204,0 q -2.16796,0 -2.79296,-1.99219 l -4.76563,-15.03906 -4.76562,15.03906 q -0.64454,1.99219 -2.79297,1.99219 l -2.85157,0 q -2.07031,0 -2.79296,-1.99219 l -8.71094,-24.375 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Days One';-inkscape-font-specification:'Days One, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient4210);fill-opacity:1"
+         id="path4150" />
+      <path
+         d="m 271.0519,184.81198 0,-24.31641 q 0,-0.76171 0.52734,-1.30859 0.52734,-0.54687 1.28906,-0.54687 l 14.90235,0 q 11.8164,0 11.8164,10.89843 0,10.87891 -11.8164,10.87891 l -9.35547,0 0,4.39453 q 0,0.76172 -0.54688,1.30859 -0.52734,0.52735 -1.28906,0.52735 l -3.67188,0 q -0.76171,0 -1.30859,-0.52735 -0.54687,-0.54687 -0.54687,-1.30859 z m 7.36328,-9.92187 7.1289,0 q 3.28125,0 4.98047,-1.09375 1.69922,-1.11329 1.69922,-4.25782 0,-3.16406 -1.69922,-4.25781 -1.69922,-1.11328 -4.98047,-1.11328 l -7.1289,0 0,10.72266 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Days One';-inkscape-font-specification:'Days One, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:url(#linearGradient4210);fill-opacity:1"
+         id="path4152" />
+    </g>
   </g>
 </svg>
