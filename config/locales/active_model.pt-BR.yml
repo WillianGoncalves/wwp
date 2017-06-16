@@ -1,0 +1,6 @@
+pt-BR:
+  activerecord:
+    attributes:
+      group:
+        members: Membros
+        songs: Músicas

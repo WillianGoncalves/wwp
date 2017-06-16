@@ -15,7 +15,7 @@ RSpec.describe GroupsController, type: :controller do
 
     describe 'GET #index' do
       before { get :index }
-      it { expect(response.status).to be(200) }
+      it { expect(response.status).to render_template :index }
     end
   end
 end
