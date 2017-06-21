@@ -1,7 +1,16 @@
+class HasLastGroupConstraint
+  def matches?(request)
+    user = User.find_by_id(request.session["warden.user.user.key"][0][0])
+    user.last_group.present?
+  end
+end
+
 Rails.application.routes.draw do
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'welcome#index'
+
+  root 'groups#index'
 
   resources :groups
+
+  get '/groups', to: 'groups#show', constraints: HasLastGroupConstraint.new
 end
