@@ -10,8 +10,13 @@ $primary-color-dark: false !default;
 @if not $primary-color-dark {
   $primary-color-dark: darken($primary-color, 15%);
 }
-$secondary-color: color("blue", "darken-1") !default;
+$secondary-color: #292E40 !default;
+// $secondary-color: color("indigo", "base") !default;
 $success-color: color("green", "base") !default;
 $error-color: color("red", "base") !default;
 
 $link-color: color("light-blue", "darken-1") !default;
+
+
+//#422E39
+//#4CD4B0
