@@ -1,5 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+@import url('https://fonts.googleapis.com/css?family=Varela+Round|Unica+One');
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 html {
   font-family: 'Varela Round', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Unica One', cursive;
+  text-transform: uppercase;
 }

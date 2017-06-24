@@ -1,2 +1,14 @@
-<%= current_user.first_name %>
-<%= current_user.last_group.name %>
+<% content_for :stylesheet do %>
+    <%= stylesheet_link_tag 'pages/groups/show' %>
+<% end %>
+
+<div class="center-align">
+  <h1 class="teste"><%= @group.name %></h1>
+
+  <div>
+    <% @group.members.each do |member| %>
+      <avatar url="<%= member.user.avatar.standard.url %>" class="avatar"></avatar>
+    <% end %>
+  </div>
+
+</div>
