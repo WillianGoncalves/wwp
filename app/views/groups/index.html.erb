@@ -1,1 +1,14 @@
-<groups :groups="<%= render(template: 'groups/index.json.jbuilder') %>"></groups>
+<div class="right-align">
+  <%= link_to t('groups.new'), new_group_path, class: 'btn' %>
+</div>
+
+<groups
+  title="<%= t('groups.user_groups') %>"
+  redirecttogroup="true"
+  :groups="<%= render template: 'groups/index.json.jbuilder', locals: {groups: current_user.groups} %>">
+</groups>
+
+<groups
+  title="<%= t('groups.other_groups') %>"
+  :groups="<%= render template: 'groups/index.json.jbuilder', locals: {groups: @groups} %>">
+</groups>

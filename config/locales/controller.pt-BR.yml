@@ -1,3 +1,6 @@
 pt-BR:
   groups:
     index: Grupos
+    new: Criar grupo
+    user_groups: Seus grupos
+    other_groups: Outros grupos

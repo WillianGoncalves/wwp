@@ -7,7 +7,7 @@
       </div>
 
       <div class="card-action">
-        <a href="#">Entrar</a>
+        <a href="#" class="btn btn-flat">Entrar</a>
       </div>
     </div>
   </div>
