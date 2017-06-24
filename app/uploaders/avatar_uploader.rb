@@ -10,7 +10,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   process :tags => ['user_avatar', "env_#{Rails.env}"] if Figaro.env.cloudinary_url?
 
   version :standard do
-    process :resize_to_fill => [100, 100]
+    process :resize_to_fill => [50, 50]
   end
 
   # Override the directory where uploaded files will be stored.
@@ -25,6 +25,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   def public_id
     "#{Rails.env}/#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}/#{SecureRandom.hex}"
+  end
+
+  def extension_whitelist
+    %w(jpg jpeg png)
   end
 
 end
