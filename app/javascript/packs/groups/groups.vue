@@ -21,7 +21,7 @@ export default
   props:
     groups: Array
     title: String
-    redirecttogroup: Boolean
+    redirecttogroup: String
   data: ->
     expand: true
   components:

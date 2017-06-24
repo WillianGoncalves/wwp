@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">{{ group.name }}</span>
-        <avatar v-for="member in group.members" :url="member.avatar_url" class="avatar"></avatar>
+        <avatar v-for="member in group.members" :key="member.id" :url="member.avatar_url" class="avatar"></avatar>
       </div>
 
       <div class="card-action">
