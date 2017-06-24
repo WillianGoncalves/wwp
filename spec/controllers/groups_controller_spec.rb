@@ -13,6 +13,11 @@ RSpec.describe GroupsController, type: :controller do
       before { get :show, params: { id: 1 } }
       it { expect(response).to redirect_to user_session_path }
     end
+
+    describe 'GET #new' do
+      before { get :new }
+      it { expect(response).to redirect_to user_session_path }
+    end
   end
 
   context 'authenticated user' do
@@ -53,6 +58,36 @@ RSpec.describe GroupsController, type: :controller do
         it { expect(response).to render_template :show }
         it { expect(assigns(:group)).to eq group }
         it { expect(user.reload.last_group).to eq nil }
+      end
+    end
+
+    describe 'GET #new' do
+      before { get :new }
+
+      it{ expect(response).to render_template :new }
+      it{ expect(assigns(:group)).to be_a_new Group }
+    end
+
+    describe 'POST #create' do
+      context 'with invalid values' do
+        let(:group) { { name: ''} }
+
+        before { post :create, params: { group: group } }
+
+        it { expect(response).to have_http_status :bad_request }
+        it { expect(response).to render_template :new }
+      end
+
+      context 'with valid values' do
+        let(:group) { { name: 'foo'} }
+
+        before { post :create, params: { group: group } }
+        
+        it { expect(response).to redirect_to group_path(assigns(:group)) }
+        it { expect(user.reload.last_group).to eq assigns(:group) }
+        it { expect(assigns(:group).members).to_not be_empty }
+        it { expect(assigns(:group).members.first.user).to eq user }
+        it { expect(assigns(:group).members.first.admin).to eq true }
       end
     end
   end

@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col s12 m6 offset-m3">
+
+    <%= form_for @group do |f| %>
+    <div class="input-field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="file-field input-field">
+      <div class="btn white grey-text text-darken-3">
+        <span><%= t('activerecord.attributes.group.image') %></span>
+        <%= f.file_field :image %>
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+
+    <%= f.submit t('groups.create'), class: 'btn' %>
+    <% end %>
+
+  </div>
+</div>

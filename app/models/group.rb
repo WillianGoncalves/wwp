@@ -10,10 +10,12 @@
 #
 
 class Group < ApplicationRecord
-  has_many :invites, inverse_of: :group
-  has_many :presentations, inverse_of: :group
-  has_many :songs
-  has_many :members
+  has_many :invites, inverse_of: :group, dependent: :destroy
+  has_many :presentations, inverse_of: :group, dependent: :destroy
+  has_many :songs, dependent: :destroy
+  has_many :members, dependent: :destroy
   has_many :users, through: :members
   validates :name, presence: true
+
+  mount_uploader :image, GroupImageUploader
 end

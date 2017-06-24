@@ -2,5 +2,7 @@ pt-BR:
   activerecord:
     attributes:
       group:
+        name: Nome
+        image: Imagem
         members: Membros
         songs: Músicas
