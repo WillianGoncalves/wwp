@@ -82,13 +82,25 @@ RSpec.describe GroupsController, type: :controller do
         let(:group) { { name: 'foo'} }
 
         before { post :create, params: { group: group } }
-        
+
         it { expect(response).to redirect_to group_path(assigns(:group)) }
         it { expect(user.reload.last_group).to eq assigns(:group) }
         it { expect(assigns(:group).members).to_not be_empty }
         it { expect(assigns(:group).members.first.user).to eq user }
         it { expect(assigns(:group).members.first.admin).to eq true }
       end
+    end
+
+    describe 'GET #candidates' do
+      let!(:user1) { Fabricate :user }
+      let!(:user2) { Fabricate :user }
+      let!(:user3) { Fabricate :user }
+      let!(:member) { Fabricate.build :member_admin, user: user }
+      let!(:group) { Fabricate :group, members: [member]  }
+
+      before { get :candidates, params: { id: group, format: :json } }
+
+      it { expect(assigns(:candidates)).to match_array [user1, user2, user3] }
     end
   end
 end

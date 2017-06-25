@@ -1,0 +1,71 @@
+<template>
+  <div>
+    <p>
+      <%= I18n.t('activerecord.attributes.group.members') %>
+    </p>
+
+    <div class="valign-wrapper">
+      <avatar v-for="member in members" :key="member.id" :url="member.avatar_url" class="avatar"></avatar>
+      <button class="btn-floating" @click="showUsers = !showUsers" :class="{'close-button': showUsers}"><i class="material-icons">add</i></button>
+    </div>
+
+    <div id="chips" class="chips" v-if="invites.length > 0">
+      <div class="chip" v-for="(user, index) in invites">
+        {{fullName(user)}}
+        <i class="material-icons" @click="invites.splice(index, 1)">close</i>
+      </div>
+
+      <button class="btn-floating"><i class="material-icons">done</i></button>
+    </div>
+
+    <transition name="expand">
+      <candidates v-if="showUsers" :groupid="groupid" v-on:createInvite="createInvite"></candidates>
+    </transition>
+  </div>
+</template>
+
+<script lang="coffee">
+import Vue from 'vue';
+import Candidates from './members/candidates.vue';
+
+export default
+  props:
+    members: Array
+    groupid: String
+
+  data: ->
+    showUsers: false
+    invites: []
+
+  components:
+    'candidates': Candidates
+
+  methods:
+    fullName: (user) ->
+      "#{user.first_name} #{user.last_name}"
+      
+    createInvite: (user) ->
+      if (@invites.indexOf(user) == -1)
+        @invites.push user
+
+</script>
+
+<style scoped lang="sass?indentedSyntax">
+@import '../../../assets/stylesheets/modules/colors';
+.avatar
+  margin-right: 10px
+
+.chip
+  margin-top: 20px
+
+  i
+    float: right
+    padding-left: 8px
+    font-size: 16px
+    line-height: 32px
+    cursor: pointer
+
+.close-button
+  transform: rotate(45deg)
+  transition-duration: .2s
+</style>

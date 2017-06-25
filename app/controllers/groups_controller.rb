@@ -24,6 +24,17 @@ class GroupsController < ApplicationController
     end
   end
 
+  def candidates
+    group = Group.find(params[:id])
+    users = group.members.map(&:user)
+
+    @candidates = User.all - users
+
+    respond_to do |format|
+      format.json
+    end
+  end
+
   private
 
   def group_params

@@ -3,14 +3,13 @@
 <% end %>
 
 <div class="center-align">
-  <%= image_tag @group.image.url, class: 'circle responsive-img' %>
-
-  <h1 class="teste"><%= @group.name %></h1>
-
   <div>
-    <% @group.members.each do |member| %>
-      <avatar url="<%= member.user.avatar.standard.url %>" class="avatar"></avatar>
-    <% end %>
+    <h1 class="teste"><%= @group.name %></h1>
   </div>
 
+  <%= image_tag @group.image.url, class: 'circle responsive-img' %>
+</div>
+
+<div>  
+  <members groupid="<%= @group.id %>" :members="<%= render template: 'groups/members.json.jbuilder', locals: {members: @group.members} %>"></members>
 </div>

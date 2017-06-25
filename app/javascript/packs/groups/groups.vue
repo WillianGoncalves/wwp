@@ -2,7 +2,7 @@
   <div>
     <div class="header">
       {{ title }}
-      <button class="btn-floating btn-flat waves-effect waves-light right" @click="expand = !expand" :class="{ 'arrow-down': !expand }"><i class="material-icons">expand_less</i></button>
+      <button class="btn-floating btn-flat waves-effect waves-light right" @click="expand = !expand" :class="{ 'arrow-down': !expand }"><i class="material-icons dark-icon">expand_less</i></button>
     </div>
     <transition name="expand">
       <div class="row expandable" v-if="expand">
@@ -35,9 +35,6 @@ export default
 .header
   padding: 10px 0
   margin-bottom: 10px
-
-.btn-floating i
-  color: $color
 
 .expandable
   max-height: 500px

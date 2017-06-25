@@ -10,7 +10,11 @@ Rails.application.routes.draw do
 
   root 'groups#index'
 
-  resources :groups
+  resources :groups do
+    member do
+      get 'candidates'
+    end
+  end
 
   get '/groups', to: 'groups#show', constraints: HasLastGroupConstraint.new
 end
