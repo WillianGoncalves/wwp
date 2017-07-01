@@ -3,6 +3,12 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  helper_method :current_group
+
+  def current_group
+    @current_group ||= current_user.last_group
+  end
+
   def after_sign_in_path_for(user)
     return groups_path if user.last_group.nil?
     group_path(user.last_group)
