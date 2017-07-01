@@ -6,7 +6,7 @@
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  color_id   :integer
+#  color_id   :integer          not null
 #
 # Indexes
 #
@@ -16,5 +16,5 @@
 class Tag < ApplicationRecord
   belongs_to :color
   has_and_belongs_to_many :songs
-  validates :name, presence: true
+  validates :name, :color, presence: true
 end

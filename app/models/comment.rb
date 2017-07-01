@@ -4,11 +4,11 @@
 #
 #  id          :integer          not null, primary key
 #  body        :text
-#  user_id     :integer
+#  user_id     :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  target_type :string
-#  target_id   :integer
+#  target_type :string           not null
+#  target_id   :integer          not null
 #
 # Indexes
 #
@@ -23,5 +23,5 @@
 class Comment < ApplicationRecord
   belongs_to :commenter, class_name: "User", foreign_key: "user_id"
   belongs_to :target, polymorphic: true
-  validates :body, presence: true
+  validates :body, :commenter, :target, presence: true
 end

@@ -8,7 +8,7 @@
 #  tone       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  group_id   :integer
+#  group_id   :integer          not null
 #
 # Indexes
 #
@@ -24,5 +24,5 @@ class Song < ApplicationRecord
   has_and_belongs_to_many :tags
   has_and_belongs_to_many :presentations
   has_many :comments, as: :target
-  validates :title, presence: true
+  validates :title, :group, presence: true
 end

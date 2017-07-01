@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615012947) do
+ActiveRecord::Schema.define(version: 20170701235037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,11 +24,11 @@ ActiveRecord::Schema.define(version: 20170615012947) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
-    t.integer  "user_id"
+    t.integer  "user_id",     null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "target_type"
-    t.integer  "target_id"
+    t.string   "target_type", null: false
+    t.integer  "target_id",   null: false
     t.index ["target_type", "target_id"], name: "index_comments_on_target_type_and_target_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20170615012947) do
 
   create_table "invites", force: :cascade do |t|
     t.boolean  "accepted"
-    t.integer  "group_id"
-    t.integer  "user_id"
+    t.integer  "group_id",   null: false
+    t.integer  "user_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_invites_on_group_id", using: :btree
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20170615012947) do
 
   create_table "members", force: :cascade do |t|
     t.boolean  "admin"
-    t.integer  "user_id"
-    t.integer  "group_id"
+    t.integer  "user_id",    null: false
+    t.integer  "group_id",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_members_on_group_id", using: :btree
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20170615012947) do
     t.string   "local"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "group_id"
+    t.integer  "group_id",   null: false
     t.index ["group_id"], name: "index_presentations_on_group_id", using: :btree
   end
 
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20170615012947) do
     t.string   "tone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "group_id"
+    t.integer  "group_id",   null: false
     t.index ["group_id"], name: "index_songs_on_group_id", using: :btree
   end
 
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20170615012947) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "color_id"
+    t.integer  "color_id",   null: false
     t.index ["color_id"], name: "index_tags_on_color_id", using: :btree
   end
 

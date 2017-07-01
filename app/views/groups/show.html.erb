@@ -10,6 +10,6 @@
   <%= image_tag @group.image.url, class: 'circle responsive-img' %>
 </div>
 
-<div>  
+<div>
   <members groupid="<%= @group.id %>" :members="<%= render template: 'groups/members.json.jbuilder', locals: {members: @group.members} %>"></members>
 </div>

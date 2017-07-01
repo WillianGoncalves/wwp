@@ -4,8 +4,8 @@
 #
 #  id         :integer          not null, primary key
 #  accepted   :boolean
-#  group_id   :integer
-#  user_id    :integer
+#  group_id   :integer          not null
+#  user_id    :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -23,4 +23,5 @@
 class Invite < ApplicationRecord
   belongs_to :group
   belongs_to :user
+  validates :group, :user, presence: true
 end

@@ -18,4 +18,8 @@ class Group < ApplicationRecord
   validates :name, presence: true
 
   mount_uploader :image, GroupImageUploader
+
+  def invites_to_be_accepted
+    invites.where(accepted: nil)
+  end
 end

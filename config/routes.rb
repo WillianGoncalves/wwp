@@ -14,7 +14,9 @@ Rails.application.routes.draw do
     member do
       get 'candidates'
     end
+    resources :invites, only: [:create, :index]
   end
+
 
   get '/groups', to: 'groups#show', constraints: HasLastGroupConstraint.new
 end

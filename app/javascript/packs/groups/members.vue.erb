@@ -6,6 +6,7 @@
 
     <div class="valign-wrapper">
       <avatar v-for="member in members" :key="member.id" :url="member.avatar_url" class="avatar"></avatar>
+      <avatar v-for="member in invites_to_be_accepted" :key="member.id" :url="member.avatar_url" class="avatar transparent"></avatar>
       <button class="btn-floating" @click="showUsers = !showUsers" :class="{'close-button': showUsers}"><i class="material-icons">add</i></button>
     </div>
 
@@ -15,7 +16,7 @@
         <i class="material-icons" @click="invites.splice(index, 1)">close</i>
       </div>
 
-      <button class="btn-floating"><i class="material-icons">done</i></button>
+      <button class="btn-floating" @click="saveInvites()"><i class="material-icons">done</i></button>
     </div>
 
     <transition name="expand">
@@ -36,6 +37,7 @@ export default
   data: ->
     showUsers: false
     invites: []
+    invites_to_be_accepted: []
 
   components:
     'candidates': Candidates
@@ -43,10 +45,27 @@ export default
   methods:
     fullName: (user) ->
       "#{user.first_name} #{user.last_name}"
-      
+
     createInvite: (user) ->
       if (@invites.indexOf(user) == -1)
         @invites.push user
+
+    saveInvites: ->
+      data = @invites.map (user) -> { user_id: user.id }
+      $.ajax(
+        url: "/groups/#{@groupid}/invites"
+        type: 'POST'
+        data: JSON.stringify(invites: data)
+        dataType: 'json'
+        contentType: 'application/json'
+      ).done((data) =>
+        @invites = []
+        @invites_to_be_accepted = data
+      )
+
+  created: ->
+    $.get "/groups/#{@groupid}/invites", (data) =>
+      @invites_to_be_accepted = data
 
 </script>
 
@@ -54,6 +73,9 @@ export default
 @import '../../../assets/stylesheets/modules/colors';
 .avatar
   margin-right: 10px
+
+.transparent
+  opacity: 0.3
 
 .chip
   margin-top: 20px

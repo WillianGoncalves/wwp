@@ -4,8 +4,8 @@
 #
 #  id         :integer          not null, primary key
 #  admin      :boolean
-#  user_id    :integer
-#  group_id   :integer
+#  user_id    :integer          not null
+#  group_id   :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -23,4 +23,5 @@
 class Member < ApplicationRecord
   belongs_to :user
   belongs_to :group
+  validates :user, :group, presence: true
 end
