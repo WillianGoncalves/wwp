@@ -1,27 +1,31 @@
 <template>
-  <div class="row expandable">
-
-    <div class="input-field col s12">
-      <i class="material-icons prefix">search</i>
-      <input id="search" type="text" v-model="searchFor">
-    </div>
-
-    <div class="col s6 m3" v-for="user in users">
-      <div class="cell" :key="user.id" @click="$emit('createInvite', user)">
-        <avatar :url="user.avatar_url"></avatar>
-        <p>
-          {{ fullName(user) }}
-        </p>
+  <div>
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">search</i>
+        <input id="search" type="text" v-model="searchFor">
       </div>
     </div>
 
+    <div class="row scrollable">
+      <div class="col s6 m3" v-for="user in users">
+        <div class="cell" :key="user.id" @click="$emit('userSelected', user)">
+          <avatar :url="user.avatar_url"></avatar>
+          <p>
+            {{ fullName(user) }}
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="coffee">
 export default
   props:
-    groupid: String
+    groupid:
+      type: Number
+      required: true
 
   data: ->
     searchFor: ''
@@ -31,6 +35,10 @@ export default
     fullName: (user) ->
       "#{user.first_name} #{user.last_name}"
 
+    listUsers: ->
+      $.get "/groups/#{@groupid}/candidates", (data) =>
+        @users = @_users = data
+
   watch:
     searchFor: ->
       @users = @_users.filter (user) =>
@@ -38,23 +46,16 @@ export default
         user.last_name.toLowerCase().includes(@searchFor.toLowerCase())
 
   created: ->
-    $.get "/groups/#{this.groupid}/candidates", (data) =>
-      @users = @_users = data
+    @listUsers()
+
 </script>
 
 <style scoped lang="sass?indentedSyntax">
 @import '../../../../assets/stylesheets/modules/colors';
 
-.expandable
-  max-height: 500px
-  margin-top: 20px
+.scrollable
+  max-height: 300px
   overflow: auto
-
-.expand-enter-active, .expand-leave-active
-  transition: max-height .4s
-
-.expand-enter, .expand-leave-to
-  max-height: 0
 
 .cell
   height: 115px

@@ -5,22 +5,16 @@
     </p>
 
     <div class="valign-wrapper">
-      <avatar v-for="member in members" :key="member.id" :url="member.avatar_url" class="avatar"></avatar>
-      <avatar v-for="member in invites_to_be_accepted" :key="member.id" :url="member.avatar_url" class="avatar transparent"></avatar>
+      <avatar v-for="member in members" :key="member.id" :url="member.avatar_url" class="avatar" :tooltip="member.first_name"></avatar>
       <button class="btn-floating" @click="showUsers = !showUsers" :class="{'close-button': showUsers}"><i class="material-icons">add</i></button>
     </div>
 
-    <div id="chips" class="chips" v-if="invites.length > 0">
-      <div class="chip" v-for="(user, index) in invites">
-        {{fullName(user)}}
-        <i class="material-icons" @click="invites.splice(index, 1)">close</i>
-      </div>
-
-      <button class="btn-floating" @click="saveInvites()"><i class="material-icons">done</i></button>
-    </div>
+    <chips :users="new_members" v-on:removeMember="removeMember" v-on:save="save"></chips>
 
     <transition name="expand">
-      <candidates v-if="showUsers" :groupid="groupid" v-on:createInvite="createInvite"></candidates>
+      <div class="candidates_container" v-if="showUsers">
+        <candidates ref="candidates" :groupid="group.id" v-on:userSelected="addMember"></candidates>
+      </div>
     </transition>
   </div>
 </template>
@@ -28,44 +22,42 @@
 <script lang="coffee">
 import Vue from 'vue';
 import Candidates from './members/candidates.vue';
+import Chips from './members/chips.vue';
 
 export default
   props:
-    members: Array
-    groupid: String
+    group:
+      type: Object
+      required: true
 
   data: ->
     showUsers: false
-    invites: []
-    invites_to_be_accepted: []
+    new_members: []
+    members: @group.members
 
   components:
     'candidates': Candidates
+    'chips': Chips
 
   methods:
-    fullName: (user) ->
-      "#{user.first_name} #{user.last_name}"
+    addMember: (user) ->
+      if (!@new_members.includes(user)) then @new_members.push user
 
-    createInvite: (user) ->
-      if (@invites.indexOf(user) == -1)
-        @invites.push user
+    removeMember: (index) ->
+      @new_members.splice(index, 1)
 
-    saveInvites: ->
-      data = @invites.map (user) -> { user_id: user.id }
-      $.ajax(
-        url: "/groups/#{@groupid}/invites"
+    save: ->
+      data = @new_members.map (user) -> { user_id: user.id }
+      $.ajax
+        url: "/groups/#{@group.id}/members"
         type: 'POST'
-        data: JSON.stringify(invites: data)
+        data: JSON.stringify(members: data)
         dataType: 'json'
         contentType: 'application/json'
-      ).done((data) =>
-        @invites = []
-        @invites_to_be_accepted = data
-      )
-
-  created: ->
-    $.get "/groups/#{@groupid}/invites", (data) =>
-      @invites_to_be_accepted = data
+      .done (data) =>
+        @new_members = []
+        @members = data
+        @$refs.candidates.listUsers()
 
 </script>
 
@@ -74,20 +66,19 @@ export default
 .avatar
   margin-right: 10px
 
-.transparent
-  opacity: 0.3
-
-.chip
-  margin-top: 20px
-
-  i
-    float: right
-    padding-left: 8px
-    font-size: 16px
-    line-height: 32px
-    cursor: pointer
-
 .close-button
   transform: rotate(45deg)
   transition-duration: .2s
+
+.candidates_container
+  max-height: 500px
+  margin-top: 20px
+  overflow: hidden
+
+.expand-enter-active, .expand-leave-active
+  transition: max-height .4s
+
+.expand-enter, .expand-leave-to
+  max-height: 0
+
 </style>

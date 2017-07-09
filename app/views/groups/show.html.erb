@@ -11,5 +11,5 @@
 </div>
 
 <div>
-  <members groupid="<%= @group.id %>" :members="<%= render template: 'groups/members.json.jbuilder', locals: {members: @group.members} %>"></members>
+  <members :group="<%= render template: 'groups/show.json.jbuilder', locals: {group: @group} %>"></members>
 </div>
