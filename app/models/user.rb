@@ -38,7 +38,7 @@ class User < ApplicationRecord
 
   has_many :members
   has_many :groups, through: :members
-  has_many :invites, inverse_of: :user
+  has_many :join_requests, inverse_of: :user
   has_many :comments, inverse_of: :commenter
   belongs_to :last_group, class_name: "Group"
 

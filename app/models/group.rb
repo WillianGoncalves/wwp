@@ -10,7 +10,7 @@
 #
 
 class Group < ApplicationRecord
-  has_many :invites, inverse_of: :group, dependent: :destroy
+  has_many :join_requests, inverse_of: :group, dependent: :destroy
   has_many :presentations, inverse_of: :group, dependent: :destroy
   has_many :songs, dependent: :destroy
   has_many :members, dependent: :destroy
@@ -19,7 +19,7 @@ class Group < ApplicationRecord
 
   mount_uploader :image, GroupImageUploader
 
-  def invites_to_be_accepted
-    invites.where(accepted: nil)
+  def join_requests_to_be_accepted
+    join_requests.where(accepted: nil)
   end
 end

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: invites
+# Table name: join_requests
 #
 #  id         :integer          not null, primary key
 #  accepted   :boolean
@@ -11,8 +11,8 @@
 #
 # Indexes
 #
-#  index_invites_on_group_id  (group_id)
-#  index_invites_on_user_id   (user_id)
+#  index_join_requests_on_group_id  (group_id)
+#  index_join_requests_on_user_id   (user_id)
 #
 # Foreign Keys
 #
@@ -20,7 +20,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-class Invite < ApplicationRecord
+class JoinRequest < ApplicationRecord
   belongs_to :group
   belongs_to :user
   validates :group, :user, presence: true
