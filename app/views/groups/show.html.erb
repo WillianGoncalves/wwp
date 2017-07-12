@@ -10,6 +10,12 @@
   <%= image_tag @group.image.url, class: 'circle responsive-img' %>
 </div>
 
+<% if @group.join_requests_to_be_accepted.any? %>
+  <%= link_to group_join_requests_path(@group), class: 'btn btn-floating pulse' do %>
+    <i class="material-icons">person_add</i>
+  <% end %>
+<% end %>
+
 <div>
   <members :group="<%= render template: 'groups/show.json.jbuilder', locals: {group: @group} %>"></members>
 </div>

@@ -5,3 +5,6 @@ pt-BR:
     create: Salvar
     user_groups: Seus grupos
     other_groups: Outros grupos
+  join_requests:
+    accept: Aceitar
+    reject: Rejeitar

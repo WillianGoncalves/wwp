@@ -6,3 +6,9 @@ pt-BR:
         image: Imagem
         members: Membros
         songs: Músicas
+    errors:
+      models:
+        join_request:
+          attributes:
+            user:
+              taken: Você já enviou uma solicitação para participar desse grupo.

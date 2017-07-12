@@ -1,0 +1,4 @@
+pt-BR:
+  notifications:
+    join_request_received: "%{user_name} deseja se juntar ao grupo"
+    join_request_sended: "Solicitação enviada"

@@ -8,8 +8,10 @@ export default
     url:
       type: String
       required: true
-    tooltip: String
+    tooltip:
+      type: String
+      default: undefined
 
   mounted: ->
-    if (@tooltip) then $('.tooltipped').tooltip()
+    if (@tooltip) then $('.tooltipped').tooltip() else $('img').removeClass('tooltipped')
 </script>

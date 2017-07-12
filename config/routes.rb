@@ -15,6 +15,14 @@ Rails.application.routes.draw do
       get 'candidates'
     end
     resources :members, only: [:create]
+    resources :join_requests, only: [:index, :create]
+  end
+
+  resources :join_requests, only: [] do
+    member do
+      put :accept
+      put :reject
+    end
   end
 
   get '/groups', to: 'groups#show', constraints: HasLastGroupConstraint.new

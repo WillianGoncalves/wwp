@@ -7,7 +7,7 @@
       </div>
 
       <div class="card-action">
-        <a href="#" class="btn btn-flat">Entrar</a>
+        <button class="btn btn-flat" @click="sendJoinRequest">Entrar</button>
       </div>
     </div>
   </div>
@@ -17,8 +17,21 @@
 import Avatar from '../avatar.vue'
 
 export default
-  props: group: Object
+  props:
+    group:
+      type: Object
+      required: true
+
   components: 'avatar': Avatar
+
+  methods:
+    sendJoinRequest: ->
+      $.post "/groups/#{@group.id}/join_requests", { join_request: accepted: null }
+      .done (data) =>
+        Materialize.toast(data, 4000)
+      .fail (err) =>
+        messages = JSON.parse(err.responseText)
+        Materialize.toast(messages, 4000)
 </script>
 
 <style scoped lang="sass?indentedSyntax">
