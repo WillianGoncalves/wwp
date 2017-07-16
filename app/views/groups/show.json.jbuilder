@@ -1,4 +1,4 @@
-json.id @group.id
+json.(group, :id, :name)
 json.members do
-  json.partial! 'groups/members', members: @group.members
+  json.partial! 'groups/members', members: group.members
 end

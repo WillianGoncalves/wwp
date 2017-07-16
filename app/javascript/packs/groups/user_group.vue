@@ -15,11 +15,16 @@
 import Avatar from '../avatar.vue'
 
 export default
-  props: group: Object
+  props:
+    group:
+      type: Object
+      required: true
+
   components: 'avatar': Avatar
+
   computed:
     url: ->
-      "/groups/" + this.group.id
+      "/groups/" + @group.id
 </script>
 
 <style scoped lang="sass?indentedSyntax">

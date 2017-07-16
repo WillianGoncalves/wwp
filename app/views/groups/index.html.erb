@@ -2,13 +2,16 @@
   <%= link_to t('groups.new'), new_group_path, class: 'btn' %>
 </div>
 
-<groups
-  title="<%= t('groups.user_groups') %>"
-  redirecttogroup="true"
-  :groups="<%= render template: 'groups/index.json.jbuilder', locals: {groups: current_user.groups} %>">
+<groups title="<%= t('groups.user_groups') %>">
+  <% current_user.groups.each do |group| %>
+    <user-group :group="<%= render template: 'groups/show.json.jbuilder', locals: {group: group} %>"></user-group>
+  <% end %>
 </groups>
 
-<groups
-  title="<%= t('groups.other_groups') %>"
-  :groups="<%= render template: 'groups/index.json.jbuilder', locals: {groups: @groups} %>">
+<groups title="<%= t('groups.other_groups') %>">
+  <% @groups.each do |group| %>
+    <group :group="<%= render template: 'groups/show.json.jbuilder', locals: {group: group} %>"></group>
+  <% end %>
 </groups>
+
+

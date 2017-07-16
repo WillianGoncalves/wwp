@@ -4,29 +4,23 @@
       {{ title }}
       <button class="btn-floating btn-flat waves-effect waves-light right" @click="expand = !expand" :class="{ 'arrow-down': !expand }"><i class="material-icons dark-icon">expand_less</i></button>
     </div>
+
     <transition name="expand">
       <div class="row expandable" v-if="expand">
-        <user-group v-if="redirecttogroup" v-for="group in groups" :group="group" :key="group.id"></user-group>
-        <group v-if="!redirecttogroup" v-for="group in groups" :group="group" :key="group.id"></group>
+        <slot></slot>
       </div>
     </transition>
   </div>
 </template>
 
 <script lang="coffee">
-import Group from './group.vue'
-import UserGroup from './user_group.vue'
 
 export default
   props:
-    groups: Array
-    title: String
-    redirecttogroup: String
+      title: String
+
   data: ->
     expand: true
-  components:
-    'group': Group
-    'user-group': UserGroup
 </script>
 
 <style scoped lang="sass?indentedSyntax">
