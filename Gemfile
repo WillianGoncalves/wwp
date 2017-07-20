@@ -10,7 +10,6 @@ end
 gem 'rails', '~> 5.0.2'
 gem 'pg'
 gem 'pg_search'
-gem 'materialize-sass'
 gem 'devise'
 gem 'carrierwave', '~> 1.0'
 gem 'cloudinary'
