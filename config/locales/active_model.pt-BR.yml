@@ -6,6 +6,7 @@ pt-BR:
         image: Imagem
         members: Membros
         songs: Músicas
+        presentations: Apresentações
     errors:
       models:
         join_request:

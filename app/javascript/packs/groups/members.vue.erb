@@ -1,9 +1,5 @@
 <template>
   <div>
-    <p>
-      <%= I18n.t('activerecord.attributes.group.members') %>
-    </p>
-
     <div class="valign-wrapper">
       <avatar v-for="member in members" :key="member.id" :url="member.avatar_url" class="avatar" :tooltip="member.first_name"></avatar>
       <button class="btn-floating" @click="showUsers = !showUsers" :class="{'close-button': showUsers}"><i class="material-icons">add</i></button>
