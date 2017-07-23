@@ -2,7 +2,7 @@
   <div>
     <div class="header">
       {{ title }}
-      <button class="btn-floating btn-flat waves-effect waves-light right" @click="expand = !expand" :class="{ 'arrow-down': !expand }"><i class="material-icons dark-icon">expand_less</i></button>
+      <button class="btn-floating transparent no-shadow right" @click="expand = !expand" :class="{ 'arrow-down': !expand }"><i class="material-icons dark-icon">expand_less</i></button>
     </div>
 
     <transition name="expand">

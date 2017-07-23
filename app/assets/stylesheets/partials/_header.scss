@@ -1,10 +1,5 @@
 @import '../modules/_colors';
 
-nav {
-  ul a { color: $color; }
-  a { color: $color; }
-}
-
 #nav-mobile, #nav-mobile li, #nav-mobile li a {
   height: 100%;
 }
@@ -19,18 +14,6 @@ nav {
   }
 }
 
-.avatar {
-
-  img {
-    margin-top: 7px;
-  }
-
-  @media (max-width: 425px) {
-    img {
-      height: 40px;
-      width: 40px;
-      margin-top: 9px;
-    }
-  }
-
+.nav-avatar {
+  margin-top: 7px;
 }

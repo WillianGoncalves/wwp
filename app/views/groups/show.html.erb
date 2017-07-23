@@ -11,7 +11,7 @@
 </div>
 
 <% if @group.join_requests_to_be_accepted.any? %>
-  <%= link_to group_join_requests_path(@group), class: 'btn btn-floating pulse' do %>
+  <%= link_to group_join_requests_path(@group), class: 'btn-floating pulse' do %>
     <i class="material-icons">person_add</i>
   <% end %>
 <% end %>

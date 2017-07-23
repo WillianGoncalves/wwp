@@ -7,7 +7,7 @@
       </div>
 
       <div class="card-action">
-        <button class="btn btn-flat" @click="sendJoinRequest">Entrar</button>
+        <button class="btn-flat" @click="sendJoinRequest">Entrar</button>
       </div>
     </div>
   </div>
