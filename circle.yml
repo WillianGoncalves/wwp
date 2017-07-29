@@ -1,6 +1,8 @@
 machine:
   node:
     version: 6.4.0
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
 deployment:
   staging:
     branch: staging
@@ -20,8 +22,13 @@ dependencies:
   pre:
     - gem update --system
     - gem install bundler
+  override:
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn
 test:
   override:
     - bundle exec rspec --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml --format html -o $CIRCLE_ARTIFACTS/specs_report.html
+    - yarn test
   post:
     - bundle exec rake assets:precompile
