@@ -1,4 +1,6 @@
 pt-BR:
+  errors:
+    format: "%{message}"
   activerecord:
     attributes:
       group:
@@ -7,9 +9,89 @@ pt-BR:
         members: Membros
         songs: Músicas
         presentations: Apresentações
+      user:
+        first_name: Nome
+        last_name: Sobrenome
+        password: Senha
+        password_confirmation: Confirmação de senha
+        current_password: Senha atual
+        remember_me: Lembrar-me
+      created_at: Criado em
+      updated_at: Atualizado em
+    models:
+      group:
+        one: Grupo
+        other: Grupos
+      song:
+        one: Música
+        other: Músicas
+      color:
+        one: Cor
+        other: Cores
+      comment:
+        one: Comentário
+        other: Comentários
+      join_request:
+        one: Solicitação
+        other: Solicitações
+      member:
+        one: Membro
+        other: Membros
+      presentation:
+        one: Apresentação
+        other: Apresentações
+      tag:
+        one: Categoria
+        other: Categorias
     errors:
+      messages:
+        record_invalid: 'A validação falhou: %{errors}'
+        restrict_dependent_destroy:
+          has_one: Não é possível excluir o registro pois existe um %{record} dependente
+          has_many: Não é possível excluir o registro pois existem %{record} dependentes
+        accepted: "%{attribute} deve ser aceito"
+        blank: "%{attribute} não pode ficar em branco"
+        present: "%{attribute} deve ficar em branco"
+        confirmation: "%{attribute} não confirma"
+        empty: "%{attribute} não pode ficar vazio"
+        equal_to: "%{attribute} deve ser igual a %{count}"
+        even: "%{attribute} deve ser par"
+        exclusion: "%{attribute} não está disponível"
+        greater_than: "%{attribute} deve ser maior que %{count}"
+        greater_than_or_equal_to: "%{attribute} deve ser maior ou igual a %{count}"
+        inclusion: "%{attribute} não está incluído na lista"
+        invalid: "%{attribute} não é válido"
+        less_than: "%{attribute} deve ser menor que %{count}"
+        less_than_or_equal_to: "%{attribute} deve ser menor ou igual a %{count}"
+        model_invalid: 'A validação falhou: %{errors}'
+        not_a_number: "%{attribute} não é um número"
+        not_an_integer: "%{attribute} não é um número inteiro"
+        odd: "%{attribute} deve ser ímpar"
+        required: "%{attribute} é obrigatório(a)"
+        taken: "%{attribute} já está em uso"
+        too_long:
+          one: '%{attribute} deve ter no máximo 1 caracter'
+          other: '%{attribute} deve ter no máximo %{count} caracteres'
+        too_short:
+          one: '%{attribute} deve ter no mínimo 1 caracter'
+          other: '%{attribute} deve ter no mínimo %{count} caracteres'
+        wrong_length:
+          one: "%{attribute} não possui o tamanho esperado (1 caracter)"
+          other: "%{attribute} não possui o tamanho esperado (%{count} caracteres)"
+        other_than: "%{attribute} deve ser diferente de %{count}"
+
       models:
         join_request:
           attributes:
             user:
               taken: Você já enviou uma solicitação para participar desse grupo.
+        user:
+          attributes:
+            current_password:
+              blank: Informe sua senha
+
+      template:
+        body: 'Por favor, verifique o(s) seguinte(s) campo(s):'
+        header:
+          one: 'Não foi possível gravar %{model}: 1 erro'
+          other: 'Não foi possível gravar %{model}: %{count} erros'

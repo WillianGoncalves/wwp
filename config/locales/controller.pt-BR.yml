@@ -8,3 +8,11 @@ pt-BR:
   join_requests:
     accept: Aceitar
     reject: Rejeitar
+  registrations:
+    edit: Meu perfil
+  users:
+    sign_out: Sair
+    sign_in: Entrar
+    sign_up: Criar conta
+    password:
+      new: Esqueceu sua senha?

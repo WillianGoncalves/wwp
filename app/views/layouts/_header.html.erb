@@ -1,9 +1,9 @@
 <% if user_signed_in? %>
   <header>
     <ul id="dropdown1" class="dropdown-content">
-      <li><%= link_to 'My profile', edit_user_registration_path(current_user) %> </li>
+      <li><%= link_to t('registrations.edit'), edit_user_registration_path(current_user) %> </li>
       <li class="divider"></li>
-      <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+      <li><%= link_to t('users.sign_out'), destroy_user_session_path, method: :delete %></li>
     </ul>
     <nav>
       <div class="nav-wrapper">
