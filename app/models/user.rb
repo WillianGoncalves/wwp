@@ -40,7 +40,7 @@ class User < ApplicationRecord
   has_many :groups, through: :members
   has_many :join_requests, inverse_of: :user
   has_many :comments, inverse_of: :commenter
-  belongs_to :last_group, class_name: "Group"
+  belongs_to :last_group, class_name: "Group", optional: true
 
   validates :first_name, :last_name, presence: true
 
