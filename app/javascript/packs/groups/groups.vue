@@ -14,10 +14,11 @@
 </template>
 
 <script lang="coffee">
-
 export default
   props:
-      title: String
+    title:
+      type: String
+      required: true
 
   data: ->
     expand: true

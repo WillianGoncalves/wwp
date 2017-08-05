@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require materialize-css/dist/js/materialize.min
 //= require_tree .
+
+ $(document).ready(function() {
+    $('select').material_select();
+  });

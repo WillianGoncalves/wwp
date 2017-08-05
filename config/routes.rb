@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     end
     resources :members, only: [:create]
     resources :join_requests, only: [:index, :create]
+    resources :songs
   end
 
   resources :join_requests, only: [] do

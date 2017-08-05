@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col s12 m6 offset-m3">
+
+    <%= form_for [@group, @song] do |f| %>
+    <div class="input-field">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="input-field">
+      <%= f.label :author %>
+      <%= f.text_field :author %>
+    </div>
+
+    <div class="input-field">
+      <%= f.label :tone %>
+      <%= f.text_field :tone %>
+    </div>
+
+    <div class="input-field">
+      <%= f.collection_select(:tag_ids, Tag.all, :id, :name, {}, { multiple: true }) %>
+    </div>
+
+    <div class="actions">
+      <%= link_to t('actions.back'), :back, class: 'btn white grey-text text-darken-3' %>
+      <%= f.submit t('actions.create'), class: 'btn' %>
+    </div>
+    <% end %>
+
+  </div>
+</div>

@@ -1,8 +1,11 @@
 pt-BR:
+  actions:
+    back: Voltar
+    create: Salvar
+    update: Atualizar
   groups:
     index: Grupos
     new: Criar grupo
-    create: Salvar
     user_groups: Seus grupos
     other_groups: Outros grupos
   join_requests:

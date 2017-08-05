@@ -19,11 +19,8 @@
 #  fk_rails_...  (group_id => groups.id)
 #
 
-class Song < ApplicationRecord
-  belongs_to :group
-  has_and_belongs_to_many :tags
-  has_and_belongs_to_many :presentations
-  has_many :comments, as: :target
-  validates :title, :group, presence: true
-  validates :tone, format: { with: /\A[A-G](b|#)?m?\z/ }
+Fabricator(:song) do
+  title Faker::BossaNova.song
+  author Faker::Name.name
+  tone Faker::Music.key
 end

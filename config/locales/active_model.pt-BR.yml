@@ -16,6 +16,10 @@ pt-BR:
         password_confirmation: Confirmação de senha
         current_password: Senha atual
         remember_me: Lembrar-me
+      song:
+        title: Título
+        author: Autor
+        tone: Tom
       created_at: Criado em
       updated_at: Atualizado em
     models:
