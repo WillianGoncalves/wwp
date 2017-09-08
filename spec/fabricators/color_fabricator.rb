@@ -14,8 +14,7 @@
 #  index_colors_on_name  (name) UNIQUE
 #
 
-class Color < ApplicationRecord
-  has_many :tags, dependent: :restrict_with_exception
-  validates :name, :code, presence: true
-  validates :code, :name, uniqueness: true
+Fabricator(:color) do
+  name { Faker::Color.color_name }
+  code { Faker::Color.hex_color }
 end

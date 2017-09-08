@@ -20,6 +20,9 @@ pt-BR:
         title: Título
         author: Autor
         tone: Tom
+      tag:
+        name: Categoria
+        color: Cor
       created_at: Criado em
       updated_at: Atualizado em
     models:
@@ -93,6 +96,10 @@ pt-BR:
           attributes:
             current_password:
               blank: Informe sua senha
+        tag:
+          attributes:
+            color:
+              required: Escolha uma cor
 
       template:
         body: 'Por favor, verifique o(s) seguinte(s) campo(s):'

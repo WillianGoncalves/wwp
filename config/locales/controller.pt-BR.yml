@@ -3,6 +3,8 @@ pt-BR:
     back: Voltar
     create: Salvar
     update: Atualizar
+    cancel: Cancelar
+    delete: Excluir
   groups:
     index: Grupos
     new: Criar grupo
@@ -19,3 +21,10 @@ pt-BR:
     sign_up: Criar conta
     password:
       new: Esqueceu sua senha?
+  tags:
+    index: Categorias
+    delete:
+      message:
+        zero: "Tem certeza de que deseja excluir essa categoria?"
+        one: "Você possui 1 música relacionada a essa categoria. Tem certeza de que deseja excluí-la?"
+        other: "Você possui %{count} músicas relacionadas a essa categoria. Tem certeza de que deseja excluí-la?"

@@ -1,0 +1,20 @@
+@import '../../modules/_colors';
+$form-margin: 20px;
+
+#tag_form {
+  padding-bottom: $form-margin;
+  margin-bottom: $form-margin;
+  border-bottom: 1px solid $border-color;
+
+  .actions {
+    margin-top: 20px;
+  }
+
+  .color-picker {
+    margin-top: 20px;
+  }
+}
+
+.collection-item .material-icons {
+  margin-right: 10px;
+}

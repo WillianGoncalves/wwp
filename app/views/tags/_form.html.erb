@@ -1,0 +1,39 @@
+<%= form_for tag do |f| %>
+  <div class="input-field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  
+  <div class="color-picker">
+    <%= f.hidden_field :color_id %>
+    <tag-color-picker default-color="<%= tag.color&.id %>"></tag-color-picker>
+    <span class="error"><%= tag.errors[:color].first %></span>
+  </div>
+
+  <div class="actions right-align">
+    <%= link_to :back, class: 'btn white grey-text text-darken-3' do %>
+      <i class="material-icons">chevron_left</i>
+    <% end %>
+    <% if tag.persisted? %>
+      <button class="btn white red-text text-darken-3 modal-trigger" data-target="deletion_confirmation_modal" type="button">
+        <i class="material-icons">delete</i>
+      </button>
+    <% end %>
+    <%= button_tag type: 'submit', class: 'btn' do %>
+      <i class="material-icons">done</i>
+    <% end %>
+  </div>
+
+  <div id="deletion_confirmation_modal" class="modal">
+    <div class="modal-content">
+      <h4><%= t('caution') %></h4>
+      <p><%= t('tags.delete.message', count: tag.songs.count) %></p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect btn-flat"><%= t('actions.cancel') %></a>
+      <% if tag.persisted? %>
+        <%= link_to t('actions.delete'), tag_path(tag), method: :delete, class: "modal-action modal-close waves-effect btn-flat red-text text-darken-3" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

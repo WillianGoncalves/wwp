@@ -20,7 +20,7 @@ export default
       type: String
       required: true
 
-  data: ->
+  data: () ->
     expand: true
 </script>
 

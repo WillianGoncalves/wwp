@@ -26,5 +26,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :tags, except: [:new]
+  resources :colors, only: [:index]
+
   get '/groups', to: 'groups#show', constraints: HasLastGroupConstraint.new
 end

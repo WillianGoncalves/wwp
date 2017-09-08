@@ -16,5 +16,7 @@
 class Tag < ApplicationRecord
   belongs_to :color
   has_and_belongs_to_many :songs
-  validates :name, :color, presence: true
+  validates :name, presence: true
+  validates :name, uniqueness: true
+  validates :color, uniqueness: true
 end

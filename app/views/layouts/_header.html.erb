@@ -10,6 +10,7 @@
         <%= link_to (image_tag("logo.svg")), root_path, class: "logo" %>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><%= link_to t('tags.index'), tags_path %></li>
           <li><%= link_to t('groups.index'), groups_path %></li>
           <li>
             <a class="dropdown-button" href="#!" data-activates="dropdown1">
@@ -20,6 +21,7 @@
         </ul>
         <ul class="side-nav" id="mobile-demo">
           <li><%= link_to t('groups.index'), groups_path %></li>
+          <li><%= link_to t('tags.index'), tags_path %></li>
         </ul>
       </div>
     </nav>

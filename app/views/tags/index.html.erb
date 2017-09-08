@@ -1,0 +1,16 @@
+<% content_for :stylesheet do %>
+  <%= stylesheet_link_tag 'pages/tags/index' %>
+<% end %>
+
+<section id="tag_form">
+  <%= render partial: "tags/form", locals: { tag: @tag } %>
+</section>
+
+<ul class="collection">
+  <% @tags.each do |tag| %>
+    <%= link_to edit_tag_path(tag), class: "collection-item" do %>
+      <i class="material-icons tiny" style="color: <%= tag.color.code %>;">local_offer</i>
+      <%= tag.name %>
+    <% end %>
+  <% end %>
+</ul>

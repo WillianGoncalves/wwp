@@ -27,7 +27,7 @@ export default
       type: Number
       required: true
 
-  data: ->
+  data: () ->
     searchFor: ''
     users: []
 
