@@ -44,8 +44,8 @@ RSpec.describe TagsController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let!(:color1) { Fabricate :color }
-    let!(:color2) { Fabricate :color }
+    let!(:color1) { Fabricate :color, name: 'red' }
+    let!(:color2) { Fabricate :color, name: 'blue' }
 
     context 'with valid tag' do
       let!(:tag) { Fabricate :tag, color: color1 }

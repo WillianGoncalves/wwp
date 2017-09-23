@@ -98,6 +98,7 @@ RSpec.describe GroupsController, type: :controller do
       let!(:member) { Fabricate.build :member_admin, user: user }
       let!(:group) { Fabricate :group, members: [member]  }
 
+      before { assign_group(user, group) }
       before { get :candidates, params: { id: group, format: :json } }
 
       it { expect(assigns(:candidates)).to match_array [user1, user2, user3] }

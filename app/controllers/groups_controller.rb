@@ -25,8 +25,7 @@ class GroupsController < ApplicationController
   end
 
   def candidates
-    group = Group.find(params[:id])
-    users = group.members.map(&:user)
+    users = current_group.members.map(&:user)
 
     @candidates = User.all - users
 

@@ -1,0 +1,11 @@
+<div id="deletion_confirmation_modal" class="modal">
+  <div class="modal-content">
+    <h4><%= t('caution') %></h4>
+    <p><%= t('tags.delete.message', count: tag.songs.count) %></p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect btn-flat"><%= t('actions.cancel') %></a>
+    <%= link_to t('actions.delete'), tag_path(tag), method: :delete, class: "modal-action modal-close waves-effect btn-flat red-text text-darken-3" %>
+  </div>
+</div>
+

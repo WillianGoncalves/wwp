@@ -10,6 +10,10 @@ pt-BR:
     new: Criar grupo
     user_groups: Seus grupos
     other_groups: Outros grupos
+  songs:
+    index: Músicas
+    delete:
+      message: "Tem certeza de que deseja excluir essa música?"
   join_requests:
     accept: Aceitar
     reject: Rejeitar

@@ -26,12 +26,6 @@
         </a>
       </li>
       <li class="tab">
-        <a href="#songs">
-          <span class="hide-on-small-only"><%= I18n.t('activerecord.attributes.group.songs') %></span>
-          <i class="material-icons hide-on-med-and-up">music_note</i>
-        </a>
-      </li>
-      <li class="tab">
         <a href="#presentations">
           <span class="hide-on-small-only"><%= I18n.t('activerecord.attributes.group.presentations') %></span>
           <i class="material-icons hide-on-med-and-up">play_arrow</i>
@@ -43,13 +37,6 @@
 
 <div id="members" class="col s12 tab-content">
   <members :group="<%= render template: 'groups/show.json.jbuilder', locals: { group: @group } %>"></members>
-</div>
-
-<div id="songs" class="col s12 tab-content">
-  <%= link_to new_group_song_path(@group), class: 'btn-floating' do %>
-    <i class="material-icons">add</i>
-  <% end %>
-  <%= render partial: "songs/index", locals: { songs: @group.songs } %>
 </div>
 
 <div id="presentations" class="col s12 tab-content"></div>

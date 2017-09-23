@@ -1,32 +1,37 @@
 class SongsController < ApplicationController
+  def index
+    @songs = current_group.songs
+  end
+
   def new
-    @group = Group.find(params[:group_id])
     @song = Song.new
   end
 
   def edit
-    @group = Group.find(params[:group_id])
-    @song = @group.songs.find(params[:id])
+    @song = current_group.songs.find(params[:id])
   end
 
   def create
-    @group = Group.find(params[:group_id])
-    @song = @group.songs.build(song_params)
+    @song = current_group.songs.build(song_params)
     if @song.save
-      redirect_to group_path(@group)
+      redirect_to group_path(current_group)
     else
       render :new, status: :bad_request
     end
   end
 
   def update
-    @group = Group.find(params[:group_id])
-    @song = @group.songs.find(params[:id])
+    @song = current_group.songs.find(params[:id])
     if @song.update(song_params)
-      redirect_to group_path(@group)
+      redirect_to group_path(current_group)
     else
       render :edit, status: :bad_request
     end
+  end
+
+  def destroy
+    Song.destroy(params[:id])
+    redirect_to group_songs_path(current_group)
   end
 
   private

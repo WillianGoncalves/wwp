@@ -9,6 +9,17 @@ RSpec.describe SongsController, type: :controller do
     let!(:group) { Fabricate :group, members: [member]  }
 
     before { sign_in user }
+    before { assign_group(user, group) }
+
+    describe 'GET #index' do
+      let!(:song1) { Fabricate :song, group: group }
+      let!(:song2) { Fabricate :song, group: group }
+
+      before { get :index, params: { group_id: group.id } }
+
+      it { expect(response).to render_template :index }
+      it { expect(assigns(:songs)).to eq group.songs }
+    end
 
     describe 'GET #new' do
       before { get :new, params: { group_id: group.id } }
@@ -67,6 +78,16 @@ RSpec.describe SongsController, type: :controller do
         it { expect(response).to have_http_status :bad_request }
         it { expect(response).to render_template :edit }
       end
+    end
+
+    describe 'DELETE #destroy' do
+      let!(:song) { Fabricate :song, group: group }
+
+      before { delete :destroy, params: { group_id: group.id, id: song.id } }
+
+      it { expect(response).to redirect_to group_songs_path(group) }
+      it { expect(Song.count).to eq 0 }
+      it { expect(Song.with_deleted.count).to eq 1 }
     end
   end
 end

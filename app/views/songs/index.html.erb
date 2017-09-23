@@ -2,9 +2,13 @@
   <%= stylesheet_link_tag 'pages/songs/index' %>
 <% end %>
 
+<%= link_to new_group_song_path(current_group), class: 'btn-floating' do %>
+  <i class="material-icons">add</i>
+<% end %>
+
 <ul class="collection">
-  <% songs.each do |song| %>
-    <%= link_to edit_group_song_path(@group, song), class: "collection-item" do %>
+  <% @songs.each do |song| %>
+    <%= link_to edit_group_song_path(current_group, song), class: "collection-item" do %>
       <div>
         <%= song.title %>
         <span class="grey-text text-lighten-1 secondary-content"><%= song.tone %></span>
