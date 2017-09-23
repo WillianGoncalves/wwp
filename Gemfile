@@ -56,7 +56,7 @@ group :test do
   gem 'faker'
   gem 'rails-controller-testing'
   gem "rspec_junit_formatter"
-  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'database_cleaner'
 end
 
