@@ -37,6 +37,8 @@
     <% end %>
   </div>
 
-  <%= render partial: "songs/deletion_modal", locals: { song: song } %>
+  <% if song.persisted? %>
+    <%= render partial: "songs/deletion_modal", locals: { song: song } %>
+  <% end %>
 
 </div>

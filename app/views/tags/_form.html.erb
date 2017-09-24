@@ -24,6 +24,8 @@
     <% end %>
   </div>
 
-  <%= render partial: "tags/deletion_modal", locals: { tag: tag } %>
+  <% if tag.persisted? %>
+    <%= render partial: "tags/deletion_modal", locals: { tag: tag } %>
+  <% end %>
 
 <% end %>
