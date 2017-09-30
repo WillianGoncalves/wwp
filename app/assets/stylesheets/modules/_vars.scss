@@ -1,2 +1,14 @@
+@import './_colors';
+
 // button
 $button-font-size: 0.8rem !default;
+
+// side-nav
+$sidenav-font-color: $color;
+
+// tab
+$tabs-underline-color: $secondary-color !default;
+$tabs-text-color: $color !default;
+$tabs-bg-color: rgba(0, 0, 0, 0) !default;
+
+$navbar-font-color: $color !default;
