@@ -10,14 +10,14 @@ RSpec.describe TagsController, type: :controller do
   before { assign_group(user, group) }
 
   describe 'GET #index' do
-    let!(:tag1) { Fabricate :tag, name: 'foo', group: group }
-    let!(:tag2) { Fabricate :tag, name: 'bar', group: group }
+    let!(:tag1) { Fabricate :tag, group: group }
+    let!(:tag2) { Fabricate :tag, group: group }
 
     before { get :index, params: { group_id: group.id } }
 
     it { expect(response).to render_template :index }
     it { expect(assigns(:tag)).to be_a_new Tag }
-    it { expect(assigns(:tags)).to eq group.tags.order(:name) }
+    it { expect(assigns(:tags)).to eq group.tags }
   end
 
   describe 'GET #edit' do

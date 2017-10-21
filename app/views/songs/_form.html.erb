@@ -18,7 +18,7 @@
     </div>
 
     <div class="input-field">
-      <%= f.collection_select(:tag_ids, Tag.all, :id, :name, {}, { multiple: true }) %>
+      <%= f.collection_select(:tag_ids, current_group.tags, :id, :name, {}, { multiple: true }) %>
     </div>
 
     <div class="actions right-align">

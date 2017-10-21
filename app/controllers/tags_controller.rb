@@ -1,7 +1,7 @@
 class TagsController < ApplicationController
   def index
     @tag = Tag.new
-    @tags = current_group.tags.all.order(:name)
+    @tags = current_group.tags
   end
 
   def edit
@@ -13,7 +13,7 @@ class TagsController < ApplicationController
     if @tag.save
       redirect_to group_tags_path(current_group)
     else
-      @tags = current_group.tags.all.order(:name)
+      @tags = current_group.tags
       render :index, status: :bad_request
     end
   end

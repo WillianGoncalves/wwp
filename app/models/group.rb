@@ -15,7 +15,7 @@ class Group < ApplicationRecord
   has_many :songs, dependent: :destroy
   has_many :members, dependent: :destroy
   has_many :users, through: :members
-  has_many :tags
+  has_many :tags, -> { order(:name) }
   validates :name, presence: true
 
   mount_uploader :image, GroupImageUploader
