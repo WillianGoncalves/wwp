@@ -1,11 +1,11 @@
-<%= form_for tag do |f| %>
+<%= form_with(model: [ current_group, tag ]) do |f| %>
   <div class="input-field">
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   
   <div class="color-picker">
-    <%= f.hidden_field :color_id %>
+    <%= f.hidden_field :color_id, { id: 'tag_color_id' } %>
     <tag-color-picker default-color="<%= tag.color&.id %>"></tag-color-picker>
     <span class="error"><%= tag.errors[:color].first %></span>
   </div>

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :members, only: [:create]
     resources :join_requests, only: [:index, :create]
     resources :songs
+    resources :tags, except: [:new]
   end
 
   resources :join_requests, only: [] do
@@ -26,7 +27,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tags, except: [:new]
   resources :colors, only: [:index]
 
   get '/groups', to: 'groups#show', constraints: HasLastGroupConstraint.new

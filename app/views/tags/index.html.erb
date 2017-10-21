@@ -8,7 +8,7 @@
 
 <ul class="collection">
   <% @tags.each do |tag| %>
-    <%= link_to edit_tag_path(tag), class: "collection-item" do %>
+    <%= link_to edit_group_tag_path(current_group, tag), class: "collection-item" do %>
       <i class="material-icons tiny" style="color: <%= tag.color.code %>;">local_offer</i>
       <%= tag.name %>
     <% end %>

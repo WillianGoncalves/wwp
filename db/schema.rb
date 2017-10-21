@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170923184533) do
+ActiveRecord::Schema.define(version: 20171021180136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,7 +104,9 @@ ActiveRecord::Schema.define(version: 20170923184533) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "color_id", null: false
+    t.bigint "group_id"
     t.index ["color_id"], name: "index_tags_on_color_id"
+    t.index ["group_id"], name: "index_tags_on_group_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -135,5 +137,6 @@ ActiveRecord::Schema.define(version: 20170923184533) do
   add_foreign_key "members", "users"
   add_foreign_key "presentations", "groups"
   add_foreign_key "songs", "groups"
+  add_foreign_key "tags", "groups"
   add_foreign_key "users", "groups", column: "last_group_id"
 end

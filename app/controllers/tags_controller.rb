@@ -1,27 +1,27 @@
 class TagsController < ApplicationController
   def index
     @tag = Tag.new
-    @tags = Tag.all.order(:name)
+    @tags = current_group.tags.all.order(:name)
   end
 
   def edit
-    @tag = Tag.find(params[:id])
+    @tag = current_group.tags.find(params[:id])
   end
 
   def create
-    @tag = Tag.new(tag_params)
+    @tag = current_group.tags.build(tag_params)
     if @tag.save
-      redirect_to tags_path
+      redirect_to group_tags_path(current_group)
     else
-      @tags = Tag.all.order(:name)
+      @tags = current_group.tags.all.order(:name)
       render :index, status: :bad_request
     end
   end
 
   def update
-    @tag = Tag.find(params[:id])
+    @tag = current_group.tags.find(params[:id])
     if @tag.update(tag_params)
-      redirect_to tags_path
+      redirect_to group_tags_path(current_group)
     else
       render :edit, status: :bad_request
     end
@@ -29,7 +29,7 @@ class TagsController < ApplicationController
 
   def destroy
     Tag.delete(params[:id])
-    redirect_to tags_path
+    redirect_to group_tags_path(current_group)
   end
 
   private
