@@ -1,0 +1,26 @@
+#mobile-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 30px;
+
+    .divider {
+      margin: 0 0 16px 0;
+      width: 20%;
+    }
+  }
+
+  a {
+    text-transform: uppercase;
+    font-family: 'Unica One', cursive;
+  }
+
+  .mobile-logo {
+    img { width: 64px; }
+  }
+}

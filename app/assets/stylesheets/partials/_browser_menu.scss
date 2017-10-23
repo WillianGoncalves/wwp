@@ -1,0 +1,9 @@
+#browser-menu {
+  .nav-avatar {
+    margin-top: 7px;
+  }
+
+  #account_menu a {
+    &:hover { background-color: darken($primary-color, 3%); }
+  }
+}

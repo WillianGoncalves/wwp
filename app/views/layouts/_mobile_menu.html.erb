@@ -1,39 +1,46 @@
-<ul class="side-nav" id="mobile-menu">
+<div class="side-nav" id="mobile-menu">
+  <ul>
 
-  <div class="header">
-    <%= link_to edit_user_registration_path(current_user), class: 'center-align' do %>
-      <i><%= image_tag current_user.avatar.standard.url, class: 'circle responsive-img nav-avatar' %></i>
-      <%= current_user.full_name %>
-    <% end %>
+    <div class="header">
+      <%= link_to edit_user_registration_path(current_user), class: 'center-align' do %>
+        <i><%= image_tag current_user.avatar.standard.url, class: 'circle responsive-img nav-avatar' %></i>
+        <%= current_user.full_name %>
+      <% end %>
 
-    <div class="divider"></div>
+      <div class="divider"></div>
 
-    <h6><%= current_group.name %></h6>
+      <h6><%= current_group.name %></h6>
+    </div>
+
+    <!-- Song -->
+    <li>
+      <%= link_to group_songs_path(current_user.last_group) do %>
+        <i class="fa fa-music center-align"></i>
+        <%= t('songs.index') %>
+      <% end %>
+    </li>
+
+    <!-- Tags -->
+    <li>
+      <%= link_to group_tags_path(current_group) do %>
+        <i class="fa fa-tag center-align"></i>
+        <%= t('tags.index')  %>
+      <% end %>
+    </li>
+
+    <!-- Groups -->
+    <li>
+      <%= link_to groups_path do %>
+        <i class="fa fa-users center-align"></i>
+        <%= t('groups.index')  %>
+      <% end %>
+    </li>
+
+  </ul>
+
+  <!-- logo -->
+  <div class="center-align">
+    <%= link_to (image_tag("logo.svg")), root_path, class: "mobile-logo" %>
   </div>
 
-  <!-- Song -->
-  <li>
-    <%= link_to group_songs_path(current_user.last_group) do %>
-      <i class="fa fa-music center-align"></i>
-      <%= t('songs.index') %> 
-    <% end %>
-  </li>
-
-  <!-- Tags -->
-  <li>
-    <%= link_to group_tags_path(current_group) do %>
-      <i class="fa fa-tag center-align"></i>
-      <%= t('tags.index')  %> 
-    <% end %>
-  </li>
-
-  <!-- Groups -->
-  <li>
-    <%= link_to groups_path do %>
-      <i class="fa fa-users center-align"></i>
-      <%= t('groups.index')  %> 
-    <% end %>
-  </li>
-
-</ul>
-
+</div>

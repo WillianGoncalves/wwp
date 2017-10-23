@@ -1,38 +1,29 @@
-@import '../modules/_colors';
+@import './_mobile_menu.scss';
+@import './_browser_menu.scss';
 
-#browser-nav, #browser-nav li, #browser-nav li a {
-  height: 100%;
-}
+nav {
+  background-color: darken($primary-color, 3%);
+  box-shadow: none;
 
-.side-nav {
-  .header {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: 30px;
+  .menu-item {
+    height: $navbar-height;
+    border-bottom: 2px solid transparent;
+    transition: all 200ms;
 
-    .divider {
-      margin: 0 0 16px 0;
-      width: 20%;
+    &:hover {
+      background: none;
+      border-bottom: 2px solid $secondary-color;
     }
   }
 
-  li a {
+  .browser-logo {
+    margin: 0 20px;
+    &:hover { background: none; }
+    img { width: 64px; }
+  }
+
+  ul a {
     text-transform: uppercase;
     font-family: 'Unica One', cursive;
   }
-}
-
-.logo {
-  position: relative;
-  top: 7%;
-  left: 30px;
-
-  img {
-    width: 64px;
-  }
-}
-
-.nav-avatar {
-  margin-top: 7px;
 }

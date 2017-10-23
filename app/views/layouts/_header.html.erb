@@ -1,34 +1,25 @@
 <% if user_signed_in? %>
   <header>
-
-    <!-- Account menu -->
-    <ul id="account_menu" class="dropdown-content">
-
-      <!-- My account -->
-      <li><%= link_to t('registrations.edit'), edit_user_registration_path(current_user) %> </li>
-
-      <li class="divider"></li>
-
-      <!-- Logout -->
-      <li><%= link_to t('users.sign_out'), destroy_user_session_path, method: :delete %></li>
-
-    </ul>
-
     <nav>
       <div class="nav-wrapper">
-
-        <!-- logo -->
-        <%= link_to (image_tag("logo.svg")), root_path, class: "logo" %>
-
-        <!-- Menu -->
-        <%= render 'layouts/browser_menu' %>
-
         <!-- Mobile menu button -->
         <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
 
         <!-- Mobile menu -->
         <%= render 'layouts/mobile_menu' %>
 
+        <ul>
+          <li>
+            <!-- logo -->
+            <%= link_to (image_tag("logo.svg")), root_path, class: "browser-logo hide-on-med-and-down" %>
+          </li>
+          <li>
+            <%= link_to current_group.name, group_path(current_group), class: 'menu-item' %>
+          </li>
+        </ul>
+
+        <!-- Menu -->
+        <%= render 'layouts/browser_menu' %>
       </div>
     </nav>
   </header>
