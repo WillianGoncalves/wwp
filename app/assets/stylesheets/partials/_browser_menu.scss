@@ -1,9 +1,9 @@
 #browser-menu {
-  .nav-avatar {
-    margin-top: 7px;
-  }
+  .nav-avatar { margin-top: 7px; }
+
+  .dropdown-button { height: $navbar-height; }
 
   #account_menu a {
-    &:hover { background-color: darken($primary-color, 3%); }
+    &:hover { background-color: $primary-color-dark; }
   }
 }

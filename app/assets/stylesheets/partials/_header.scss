@@ -2,28 +2,22 @@
 @import './_browser_menu.scss';
 
 nav {
-  background-color: darken($primary-color, 3%);
+  background-color: $primary-color;
   box-shadow: none;
-
-  .menu-item {
-    height: $navbar-height;
-    border-bottom: 2px solid transparent;
-    transition: all 200ms;
-
-    &:hover {
-      background: none;
-      border-bottom: 2px solid $secondary-color;
-    }
-  }
 
   .browser-logo {
     margin: 0 20px;
-    &:hover { background: none; }
     img { width: 64px; }
   }
 
   ul a {
     text-transform: uppercase;
     font-family: 'Unica One', cursive;
+    transition: all 200ms;
+
+    &:hover {
+      background: none !important;
+      &, i { color: $menu-item-hover-color; }
+    }
   }
 }

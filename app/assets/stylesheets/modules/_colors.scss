@@ -1,16 +1,17 @@
 $color: #555;
 
-$primary-color: #ffffff !default;
+$primary-color: #f7f7f7 !default;
 $primary-color-light: false !default;
 $primary-color-dark: false !default;
 @if not $primary-color-light {
-  $primary-color-light: lighten($primary-color, 15%);
+  $primary-color-light: lighten($primary-color, 5%);
 }
 @if not $primary-color-dark {
-  $primary-color-dark: darken($primary-color, 15%);
+  $primary-color-dark: darken($primary-color, 3%);
 }
-$secondary-color: #292E40 !default;
+$secondary-color: #2CC990 !default;
 $success-color: color("green", "base") !default;
 $error-color: color("red", "base") !default;
 $link-color: color("light-blue", "darken-1") !default;
 $border-color: lighten($color, 50%);
+$menu-item-hover-color: $secondary-color;

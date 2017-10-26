@@ -1,28 +1,28 @@
 <div id="browser-menu" class="hide-on-med-and-down">
-  <ul class="right">
-
+  <ul>
     <!-- Song -->
-    <li><%= link_to t('songs.index'), group_songs_path(current_user.last_group), class: 'menu-item' %></li>
+    <li><%= link_to t('songs.index'), group_songs_path(current_user.last_group) %></li>
 
     <!-- Tags -->
-    <li><%= link_to t('tags.index'), group_tags_path(current_group), class: 'menu-item' %></li>
+    <li><%= link_to t('tags.index'), group_tags_path(current_group) %></li>
 
     <!-- Groups -->
-    <li><%= link_to t('groups.index'), groups_path, class: 'menu-item' %></li>
+    <li><%= link_to t('groups.index'), groups_path %></li>
+  </ul>
 
-    <!-- Account menu button -->
+  <ul class="right">
     <li>
+      <!-- Account menu button -->
       <a class="dropdown-button menu-item" href="#!" data-activates="account_menu">
         <%= image_tag current_user.avatar.standard.url, class: 'circle responsive-img nav-avatar' %>
         <i class="material-icons right">arrow_drop_down</i>
       </a>
     </li>
-
   </ul>
 </div>
 
 <!-- Account menu -->
-<ul id="account_menu" class="dropdown-content">
+<ul id="account_menu" class="dropdown-content right">
 
   <!-- My account -->
   <li><%= link_to t('registrations.edit'), edit_user_registration_path(current_user) %> </li>

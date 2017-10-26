@@ -1,7 +1,5 @@
-@import '../modules/_colors';
-
 body {
-  background-color: darken($primary-color, 3%);
+  background-color: $primary-color;
   color: $color;
 }
 

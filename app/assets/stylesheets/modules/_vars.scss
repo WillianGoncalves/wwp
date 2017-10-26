@@ -1,7 +1,15 @@
-@import './_colors';
+// These variables are NOT normally used elsewhere. Just override materialize variables.
 
 // button
 $button-font-size: 0.8rem !default;
+
+// collections
+$collection-hover-bg-color: $primary-color-dark;
+$collection-link-color: $color;
+
+// dropdown
+$dropdown-color: $color;
+$dropdown-hover-bg-color: $primary-color-dark;
 
 // side-nav
 $sidenav-font-color: $color;
