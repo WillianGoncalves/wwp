@@ -1,14 +1,12 @@
 <template>
-  <a :href="url">
-    <div class="col s12 m6">
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">{{ group.name }}</span>
-          <avatar v-for="member in group.members" :key="member.id" :url="member.avatar_url" class="avatar"></avatar>
-        </div>
+  <div class="col s12 m6">
+    <a :href="url">
+      <div class="container">
+        <p>{{ group.name }}</p>
+        <avatar v-for="member in group.members" :key="member.id" :url="member.avatar_url" class="avatar"></avatar>
       </div>
-    </div>
-  </a>
+    </a>
+  </div>
 </template>
 
 <script lang="coffee">
@@ -28,10 +26,20 @@ export default
 </script>
 
 <style scoped lang="sass?indentedSyntax">
+@import '../../../assets/stylesheets/modules/_colors';
+
+.container
+  padding: 10px 20px
+  width: 100%
+  margin: 10px 0
+  border: 1px solid $border-color
+  box-shadow: 0 2px 7px #ddd
+
 a
   cursor: pointer
   color: inherit
 
 .avatar
+  width: 32px
   margin-right: 10px
 </style>

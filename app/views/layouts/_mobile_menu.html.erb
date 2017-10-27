@@ -9,7 +9,7 @@
 
       <div class="divider"></div>
 
-      <h6><%= current_group.name %></h6>
+      <h6><%= link_to current_group.name, group_path(current_group) %></h6>
     </div>
 
     <!-- Song -->
@@ -33,6 +33,14 @@
       <%= link_to groups_path do %>
         <i class="fa fa-users center-align"></i>
         <%= t('groups.index')  %>
+      <% end %>
+    </li>
+
+    <!-- Exit -->
+    <li>
+      <%= link_to destroy_user_session_path, method: :delete do %>
+        <i class="fa fa-sign-out center-align"></i>
+        <%= t('users.sign_out')  %>
       <% end %>
     </li>
 

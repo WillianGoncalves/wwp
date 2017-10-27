@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div v-for="color in colors" class="color" :style="{ background: color.code }" @click="selectColor(color.id, $event)" :class="{ 'active-color': isDefaultColor(color.id) }">
     </div>
   </div>
@@ -32,12 +32,18 @@ export default
 <style scoped lang="sass?indentedSyntax">
 @import '../../../assets/stylesheets/modules/colors';
 
+.container
+  display: flex
+  flex-direction: row
+  justify-content: center
+  flex-wrap: wrap
+
 .color
-  position: relative
   display: inline-block
   width: 30px
   height: 30px
-  margin-right: 20px
+  margin: 10px
+  border-radius: 90px
 
 .active-color
   &:before

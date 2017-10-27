@@ -1,3 +1,5 @@
 .no-shadow {
   &, &:hover { box-shadow: none; }
 }
+
+.btn-floating { overflow: unset; }

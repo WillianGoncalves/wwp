@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="valign-wrapper">
+    <div class="members-container">
       <avatar v-for="member in members" :key="member.id" :url="member.avatar_url" class="avatar" :tooltip="member.first_name"></avatar>
       <button class="btn-floating" @click="showUsers = !showUsers" :class="{'close-button': showUsers}"><i class="material-icons">add</i></button>
     </div>
@@ -8,7 +8,7 @@
     <chips :users="new_members" v-on:removeMember="removeMember" v-on:save="save"></chips>
 
     <transition name="expand">
-      <div class="candidates_container" v-if="showUsers">
+      <div class="candidates-container" v-if="showUsers">
         <candidates ref="candidates" :groupid="group.id" v-on:userSelected="addMember"></candidates>
       </div>
     </transition>
@@ -59,14 +59,21 @@ export default
 
 <style scoped lang="sass?indentedSyntax">
 @import '../../../assets/stylesheets/modules/colors';
-.avatar
-  margin-right: 10px
 
 .close-button
   transform: rotate(45deg)
   transition-duration: .2s
 
-.candidates_container
+.members-container
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-wrap: wrap
+
+  .avatar, button
+    margin: 10px
+
+.candidates-container
   max-height: 500px
   margin-top: 20px
   overflow: hidden
