@@ -1,8 +1,4 @@
 #mobile-menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
   .header {
     display: flex;
     align-items: center;
@@ -16,6 +12,10 @@
   }
 
   .mobile-logo {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
     img { width: 64px; }
   }
 }

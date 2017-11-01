@@ -13,16 +13,18 @@
             <!-- logo -->
             <%= link_to (image_tag("logo.svg")), root_path, class: "browser-logo hide-on-med-and-down" %>
           </li>
-          <li>
-            <b><%= link_to current_group.name, group_path(current_group) %></b>
-          </li>
-          <li>
-            <% if current_group.join_requests_to_be_accepted.any? %>
-              <%= link_to group_join_requests_path(current_group), class: 'btn-floating pulse' do %>
-                <i class="material-icons">person_add</i>
+          <% unless current_group.nil? %>
+            <li>
+              <b><%= link_to current_group.name, group_path(current_group) %></b>
+            </li>
+            <li>
+              <% if current_group.join_requests_to_be_accepted.any? %>
+                <%= link_to group_join_requests_path(current_group), class: 'btn-floating pulse' do %>
+                  <i class="material-icons">person_add</i>
+                <% end %>
               <% end %>
-            <% end %>
-          </li>
+            </li>
+          <% end %>
         </ul>
 
         <!-- Menu -->

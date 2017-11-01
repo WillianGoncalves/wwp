@@ -1,10 +1,12 @@
 <div id="browser-menu" class="hide-on-med-and-down">
   <ul>
-    <!-- Song -->
-    <li><%= link_to t('songs.index'), group_songs_path(current_user.last_group) %></li>
+    <% unless current_group.nil? %>
+      <!-- Song -->
+      <li><%= link_to t('songs.index'), group_songs_path(current_user.last_group) %></li>
 
-    <!-- Tags -->
-    <li><%= link_to t('tags.index'), group_tags_path(current_group) %></li>
+      <!-- Tags -->
+      <li><%= link_to t('tags.index'), group_tags_path(current_group) %></li>
+    <% end %>
 
     <!-- Groups -->
     <li><%= link_to t('groups.index'), groups_path %></li>
