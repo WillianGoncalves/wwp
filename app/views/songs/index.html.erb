@@ -10,7 +10,7 @@
 
 <ul class="collection">
   <% @songs.each do |song| %>
-    <%= link_to edit_group_song_path(current_group, song), class: "collection-item" do %>
+    <%= link_to group_song_path(current_group, song), class: "collection-item" do %>
       <div>
         <%= song.title %>
         <span class="grey-text text-lighten-1 secondary-content"><%= song.tone %></span>

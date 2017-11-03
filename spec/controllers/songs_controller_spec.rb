@@ -21,6 +21,15 @@ RSpec.describe SongsController, type: :controller do
       it { expect(assigns(:songs)).to eq group.songs }
     end
 
+    describe 'GET #show' do
+      let!(:song) { Fabricate :song, group: group }
+
+      before { get :show, params: { group_id: group.id, id: song.id } }
+
+      it { expect(response).to render_template :show }
+      it { expect(assigns(:song)).to eq song }
+    end
+
     describe 'GET #new' do
       before { get :new, params: { group_id: group.id } }
 

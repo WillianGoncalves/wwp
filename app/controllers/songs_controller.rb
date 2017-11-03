@@ -3,6 +3,10 @@ class SongsController < ApplicationController
     @songs = current_group.songs
   end
 
+  def show
+    @song = Song.find(params[:id])
+  end
+
   def new
     @song = Song.new
   end

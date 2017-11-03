@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     resources :tags, except: [:new]
   end
 
+  resources :songs, only: [] do
+    resources :comments, except: [:index, :show]
+  end
+
   resources :join_requests, only: [] do
     member do
       put :accept
