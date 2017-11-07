@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col s12">
+    <%= form_with(model: [ target, comment ]) do |f| %>
+
+      <div class="input-field">
+        <%= f.text_area :body, { class: 'materialize-textarea', placeholder: t('activerecord.attributes.song.comments') } %>
+      </div>
+
+      <div class="right-align">
+        <%= button_tag type: 'submit', class: 'btn' do %>
+          <i class="material-icons">done</i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

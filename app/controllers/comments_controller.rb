@@ -1,10 +1,6 @@
 class CommentsController < ApplicationController
   before_action :find_target
 
-  def new
-    @comment = @target.comments.build
-  end
-
   def edit
     @comment = @target.comments.find(params[:id])
   end

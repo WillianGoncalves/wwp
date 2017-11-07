@@ -5,3 +5,20 @@
 <h6><%= @song.author %></h6>
 
 <hr>
+<p><%= t('activerecord.attributes.song.comments') %></p>
+
+<div id="comments">
+  <% @song.comments.each do |comment| %>
+    <comment :comment="<%= render template: 'comments/show.json.jbuilder', locals: { comment: comment } %>" :current-user="<%= current_user.id %>">
+      <div slot="form">
+        <%= render partial: "comments/form", locals: { target: @song, comment: comment } %>
+      </div>
+
+      <div slot="deletion_modal">
+        <%= render partial: "comments/deletion_modal", locals: { target: @song, comment: comment } %>
+      </div>
+    </comment>
+  <% end %>
+</div>
+
+<%= render partial: "comments/form", locals: { target: @song, comment: @song.comments.build } %>

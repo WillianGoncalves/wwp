@@ -5,6 +5,9 @@ pt-BR:
     update: Atualizar
     cancel: Cancelar
     delete: Excluir
+  comments:
+    delete:
+      message: "Tem certeza de que deseja excluir esse comentário?"
   groups:
     index: Grupos
     new: Criar grupo

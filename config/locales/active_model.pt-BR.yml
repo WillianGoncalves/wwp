@@ -20,9 +20,12 @@ pt-BR:
         title: Título
         author: Autor
         tone: Tom
+        comments: Comentários
       tag:
         name: Categoria
         color: Cor
+      comment:
+        body: Comentário
       created_at: Criado em
       updated_at: Atualizado em
     models:

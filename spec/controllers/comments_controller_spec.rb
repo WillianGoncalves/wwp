@@ -11,14 +11,6 @@ RSpec.describe CommentsController, type: :controller do
     before { sign_in user }
     before { assign_group(user, group) }
 
-    describe 'GET #new' do
-      before { get :new, params: { song_id: song.id } }
-
-      it { expect(response).to render_template :new }
-      it { expect(assigns(:target)).to eq song }
-      it { expect(assigns(:comment)).to be_a_new Comment }
-    end
-
     describe 'GET #edit' do
       let!(:comment) { Fabricate :comment, target: song, commenter: user }
 
