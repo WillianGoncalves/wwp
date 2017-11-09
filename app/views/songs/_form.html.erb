@@ -26,7 +26,7 @@
         <i class="material-icons">chevron_left</i>
       <% end %>
       <% if song.persisted? %>
-        <button class="btn white red-text text-darken-3 modal-trigger" data-target="deletion_confirmation_modal" type="button">
+        <button class="btn white red-text text-darken-3" @click="showModal('#deletion_confirmation_modal')" type="button">
           <i class="material-icons">delete</i>
         </button>
       <% end %>
@@ -35,10 +35,10 @@
       <% end %>
     </div>
     <% end %>
+
   </div>
-
-  <% if song.persisted? %>
-    <%= render partial: "songs/deletion_modal", locals: { song: song } %>
-  <% end %>
-
 </div>
+
+<% if song.persisted? %>
+  <%= render partial: "songs/deletion_modal", locals: { song: song } %>
+<% end %>

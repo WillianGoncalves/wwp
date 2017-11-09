@@ -9,13 +9,13 @@
 
 <div id="comments">
   <% @song.comments.each do |comment| %>
-    <comment :comment="<%= render template: 'comments/show.json.jbuilder', locals: { comment: comment } %>" :current-user="<%= current_user.id %>">
-      <div slot="form">
-        <%= render partial: "comments/form", locals: { target: @song, comment: comment } %>
+    <comment :show-options="<%= current_user.id.equal?(comment.commenter.id) %>">
+      <div slot="showView">
+        <%= render partial: "comments/show", locals: { comment: comment } %>
       </div>
 
-      <div slot="deletion_modal">
-        <%= render partial: "comments/deletion_modal", locals: { target: @song, comment: comment } %>
+      <div slot="form">
+        <%= render partial: "comments/form", locals: { target: @song, comment: comment } %>
       </div>
     </comment>
   <% end %>

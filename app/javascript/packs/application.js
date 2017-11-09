@@ -16,5 +16,11 @@ Vue.component('tag-color-picker', TagColorPicker);
 Vue.component('comment', Comment);
 
 new Vue({
-  el: '#app'
+  el: '#app',
+  methods: {
+    showModal: (modalId) => {
+      $(modalId).modal();
+      $(modalId).modal('open');
+    }
+  }
 });

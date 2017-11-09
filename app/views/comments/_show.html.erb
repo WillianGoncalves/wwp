@@ -1,0 +1,12 @@
+<% content_for :stylesheet do %>
+  <%= stylesheet_link_tag 'pages/songs/show' %>
+<% end %>
+
+<div class="main-content">
+  <%= image_tag comment.commenter.avatar.standard.url, class: 'circle responsive-img nav-avatar' %>
+
+  <div class="body">
+    <%= comment.body %>
+  </div>
+</div>
+
