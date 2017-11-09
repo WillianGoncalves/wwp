@@ -10,8 +10,8 @@ RSpec.describe TagsController, type: :controller do
   before { assign_group(user, group) }
 
   describe 'GET #index' do
-    let!(:tag1) { Fabricate :tag, group: group }
-    let!(:tag2) { Fabricate :tag, group: group }
+    let!(:tag1) { Fabricate :tag, name: 'bar', group: group }
+    let!(:tag2) { Fabricate :tag, name: 'foo', group: group }
 
     before { get :index, params: { group_id: group.id } }
 

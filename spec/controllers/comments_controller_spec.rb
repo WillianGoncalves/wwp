@@ -11,15 +11,6 @@ RSpec.describe CommentsController, type: :controller do
     before { sign_in user }
     before { assign_group(user, group) }
 
-    describe 'GET #edit' do
-      let!(:comment) { Fabricate :comment, target: song, commenter: user }
-
-      before { get :edit, params: { song_id: song.id, id: comment.id } }
-
-      it { expect(response).to render_template :edit }
-      it { expect(assigns(:comment)).to eq comment }
-    end
-
     describe 'POST #create' do
       context 'valid comment' do
         let!(:comment) { { body: 'foo' } }
@@ -36,8 +27,7 @@ RSpec.describe CommentsController, type: :controller do
 
         before { post :create, params: { song_id: song.id, comment: comment } }
 
-        it { expect(response).to have_http_status :bad_request }
-        it { expect(response).to render_template :edit }
+        it { expect(response).to redirect_to group_song_path(group, song) }
         it { expect(song.comments.count).to eq 0 }
       end
     end
@@ -59,8 +49,8 @@ RSpec.describe CommentsController, type: :controller do
 
         before { put :update, params: { song_id: song.id, id: comment.id, comment: valid_comment } }
 
-        it { expect(response).to have_http_status :bad_request }
-        it { expect(response).to render_template :edit }
+        it { expect(response).to redirect_to group_song_path(group, song) }
+        it { expect(comment.reload.body).not_to eq '' }
       end
     end
 

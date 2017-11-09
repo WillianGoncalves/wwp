@@ -1,17 +1,13 @@
 class CommentsController < ApplicationController
   before_action :find_target
 
-  def edit
-    @comment = @target.comments.find(params[:id])
-  end
-
   def create
     @comment = @target.comments.build(comment_params)
     @comment.commenter = current_user
     if @comment.save
       redirect_to target_path
     else
-      render :edit, status: :bad_request
+      redirect_back fallback_location: target_path
     end
   end
 
@@ -20,7 +16,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       redirect_to target_path
     else
-      render :edit, status: :bad_request
+      redirect_back fallback_location: target_path
     end
   end
 
