@@ -95,8 +95,8 @@ RSpec.describe SongsController, type: :controller do
       before { delete :destroy, params: { group_id: group.id, id: song.id } }
 
       it { expect(response).to redirect_to group_songs_path(group) }
-      it { expect(Song.count).to eq 0 }
-      it { expect(Song.with_deleted.count).to eq 1 }
+      it { expect(group.songs.count).to eq 0 }
+      it { expect(group.songs.with_deleted.count).to eq 1 }
     end
   end
 end

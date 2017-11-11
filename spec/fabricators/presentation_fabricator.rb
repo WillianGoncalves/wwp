@@ -21,11 +21,8 @@
 #  fk_rails_...  (group_id => groups.id)
 #
 
-class Presentation < ApplicationRecord
-  acts_as_paranoid
-
-  belongs_to :group
-  has_and_belongs_to_many :songs
-  has_many :comments, as: :target
-  validates :date, :time, :group, :songs, presence: true
+Fabricator(:presentation) do
+  date Faker::Date.forward(10)
+  time Time.now
+  local Faker::Address.city
 end

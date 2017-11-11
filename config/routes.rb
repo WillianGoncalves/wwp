@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :join_requests, only: [:index, :create]
     resources :songs
     resources :tags, except: [:new]
+    resources :presentations
   end
 
   resources :songs, only: [] do

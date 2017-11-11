@@ -12,7 +12,7 @@ class SongsController < ApplicationController
   end
 
   def edit
-    @song = current_group.songs.find(params[:id])
+    @song = Song.find(params[:id])
   end
 
   def create
