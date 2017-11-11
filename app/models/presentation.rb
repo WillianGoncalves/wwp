@@ -3,13 +3,12 @@
 # Table name: presentations
 #
 #  id         :integer          not null, primary key
-#  date       :date
-#  time       :time
 #  local      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  group_id   :integer          not null
 #  deleted_at :datetime
+#  date_time  :datetime
 #
 # Indexes
 #
@@ -27,5 +26,5 @@ class Presentation < ApplicationRecord
   belongs_to :group
   has_and_belongs_to_many :songs
   has_many :comments, as: :target
-  validates :date, :time, :group, :songs, presence: true
+  validates :date_time, :group, :songs, presence: true
 end

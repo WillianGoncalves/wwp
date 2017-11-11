@@ -3,13 +3,12 @@
 # Table name: presentations
 #
 #  id         :integer          not null, primary key
-#  date       :date
-#  time       :time
 #  local      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  group_id   :integer          not null
 #  deleted_at :datetime
+#  date_time  :datetime
 #
 # Indexes
 #
