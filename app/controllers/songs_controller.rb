@@ -18,7 +18,7 @@ class SongsController < ApplicationController
   def create
     @song = current_group.songs.build(song_params)
     if @song.save
-      redirect_to group_path(current_group)
+      redirect_to group_songs_path(current_group)
     else
       render :new, status: :bad_request
     end
@@ -27,7 +27,7 @@ class SongsController < ApplicationController
   def update
     @song = current_group.songs.find(params[:id])
     if @song.update(song_params)
-      redirect_to group_path(current_group)
+      redirect_to group_songs_path(current_group)
     else
       render :edit, status: :bad_request
     end

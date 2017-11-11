@@ -52,7 +52,7 @@ RSpec.describe SongsController, type: :controller do
 
         before { post :create, params: { group_id: group.id, song: song } }
 
-        it { expect(response).to redirect_to group_path(group) }
+        it { expect(response).to redirect_to group_songs_path(group) }
         it { expect(group.songs.count).to eq 1 }
       end
 
@@ -74,7 +74,7 @@ RSpec.describe SongsController, type: :controller do
 
         before { put :update, params: { group_id: group.id, id: song.id, song: valid_song } }
 
-        it { expect(response).to redirect_to group_path(group) }
+        it { expect(response).to redirect_to group_songs_path(group) }
         it { expect(song.reload.title).to eq 'foo' }
       end
 
