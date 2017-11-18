@@ -16,7 +16,16 @@ class PresentationsController < ApplicationController
   end
 
   def create
+    @date = params[:date]
+    @time = params[:time]
+
+    flash[:date] = flash[:time] = nil
+    flash[:date] = I18n.t('activerecord.custom_errors.presentation.date') unless @date.present?
+    flash[:time] = I18n.t('activerecord.custom_errors.presentation.time') unless @time.present?
+
     @presentation = current_group.presentations.build(presentation_params)
+    @presentation.date_time = DateTime.parse("#{@date} #{@time}") if @date.present? && @time.present?
+
     if @presentation.save
       redirect_to group_presentations_path(current_group)
     else

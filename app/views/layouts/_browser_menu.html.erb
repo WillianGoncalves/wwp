@@ -1,6 +1,9 @@
 <div id="browser-menu" class="hide-on-med-and-down">
   <ul>
     <% unless current_group.nil? %>
+      <!-- Presentations -->
+      <li><%= link_to t('presentations.index'), group_presentations_path(current_group) %></li>
+
       <!-- Song -->
       <li><%= link_to t('songs.index'), group_songs_path(current_user.last_group) %></li>
 

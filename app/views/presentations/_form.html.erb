@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col s12 m8 offset-m2">
+    <%= form_with(model: [ current_group, @presentation ]) do |f| %>
+      <div class="input-field">
+        <%= text_field_tag :date, @date, { class: 'datepicker', placeholder: t('activerecord.attributes.presentation.date') } %>
+        <% if flash[:date] %>
+          <span class="error"><%= flash[:date] %></span>
+        <% end %>
+      </div>
+
+      <div class="input-field">
+        <%= text_field_tag :time, @time, { class: 'timepicker', placeholder: t('activerecord.attributes.presentation.time') } %>
+        <% if flash[:time] %>
+          <span class="error"><%= flash[:time] %></span>
+        <% end %>
+      </div>
+
+      <div class="input-field">
+        <%= f.text_field :local, placeholder: t('activerecord.attributes.presentation.local') %>
+      </div>
+
+      <songs-selector :groupid="<%= current_group.id %>"></songs-selector>
+
+      <div class="actions right-align">
+        <%= link_to :back, class: 'btn white grey-text text-darken-3' do %>
+          <i class="material-icons">chevron_left</i>
+        <% end %>
+        <% if presentation.persisted? %>
+          <button class="btn white red-text text-darken-3" @click="showModal('#deletion_confirmation_modal')" type="button">
+            <i class="material-icons">delete</i>
+          </button>
+        <% end %>
+        <%= button_tag type: 'submit', class: 'btn' do %>
+          <i class="material-icons">done</i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

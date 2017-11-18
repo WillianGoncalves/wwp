@@ -17,4 +17,24 @@
 
  $(document).ready(function() {
    $('select').material_select();
+   $('.datepicker').pickadate({
+     selectMonths: true,
+     selectYears: 15,
+     today: 'Today',
+     clear: 'Clear',
+     close: 'Ok',
+     closeOnSelect: false
+   });
+
+   $('.timepicker').pickatime({
+     default: 'now',
+     fromnow: 0,
+     twelvehour: false,
+     donetext: 'OK',
+     cleartext: 'Clear',
+     canceltext: 'Cancel',
+     autoclose: false,
+     ampmclickable: true,
+     aftershow: function(){}
+   });
  });

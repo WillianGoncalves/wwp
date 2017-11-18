@@ -62,6 +62,7 @@ RSpec.describe PresentationsController, type: :controller do
 
         before { post :create, params: { group_id: group.id, presentation: presentation } }
 
+        it { expect(response).to have_http_status :bad_request }
         it { expect(response).to render_template :new }
         it { expect(group.presentations.count).to eq 0 }
       end
@@ -84,6 +85,7 @@ RSpec.describe PresentationsController, type: :controller do
 
         before { put :update, params: { group_id: group.id, id: presentation.id, presentation: invalid_presentation } }
 
+        it { expect(response).to have_http_status :bad_request }
         it { expect(response).to render_template :edit }
         it { expect(presentation.reload.local).not_to eq 'foo' }
       end

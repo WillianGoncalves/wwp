@@ -16,6 +16,10 @@ pt-BR:
         password_confirmation: Confirmação de senha
         current_password: Senha atual
         remember_me: Lembrar-me
+      presentation:
+        date: Data
+        time: Hora
+        local: Local
       song:
         title: Título
         author: Autor
@@ -89,6 +93,10 @@ pt-BR:
           one: "%{attribute} não possui o tamanho esperado (1 caracter)"
           other: "%{attribute} não possui o tamanho esperado (%{count} caracteres)"
         other_than: "%{attribute} deve ser diferente de %{count}"
+    custom_errors:
+      presentation:
+        date: "Informe a data da apresentação"
+        time: "Informe o horário da apresentação"
 
       models:
         join_request:

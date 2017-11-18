@@ -15,7 +15,15 @@
 
   <ul>
     <% unless current_group.nil? %>
-      <!-- Song -->
+      <!-- Presentations -->
+      <li>
+        <%= link_to group_presentations_path(current_group) do %>
+          <i class="fa fa-play center-align"></i>
+          <%= t('presentations.index') %>
+        <% end %>
+      </li>
+
+      <!-- Songs -->
       <li>
         <%= link_to group_songs_path(current_user.last_group) do %>
           <i class="fa fa-music center-align"></i>

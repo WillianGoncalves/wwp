@@ -13,6 +13,8 @@ pt-BR:
     new: Criar grupo
     user_groups: Seus grupos
     other_groups: Outros grupos
+  presentations:
+    index: Apresentações
   songs:
     index: Músicas
     delete:

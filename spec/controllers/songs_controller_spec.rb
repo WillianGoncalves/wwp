@@ -12,13 +12,24 @@ RSpec.describe SongsController, type: :controller do
     before { assign_group(user, group) }
 
     describe 'GET #index' do
-      let!(:song1) { Fabricate :song, group: group }
-      let!(:song2) { Fabricate :song, group: group }
+      context 'via browser' do
+        let!(:song1) { Fabricate :song, group: group }
+        let!(:song2) { Fabricate :song, group: group }
 
-      before { get :index, params: { group_id: group.id } }
+        before { get :index, params: { group_id: group.id } }
 
-      it { expect(response).to render_template :index }
-      it { expect(assigns(:songs)).to eq group.songs }
+        it { expect(response).to render_template :index }
+        it { expect(assigns(:songs)).to eq group.songs }
+      end
+
+      context 'via javascript' do
+        let!(:song1) { Fabricate :song, group: group }
+        let!(:song2) { Fabricate :song, group: group }
+
+        before { get :index, params: { group_id: group.id, format: :json } }
+
+        it { expect(assigns(:songs)).to match_array [song1, song2] }
+      end
     end
 
     describe 'GET #show' do
