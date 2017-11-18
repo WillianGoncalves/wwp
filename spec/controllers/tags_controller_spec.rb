@@ -10,14 +10,25 @@ RSpec.describe TagsController, type: :controller do
   before { assign_group(user, group) }
 
   describe 'GET #index' do
-    let!(:tag1) { Fabricate :tag, name: 'bar', group: group }
-    let!(:tag2) { Fabricate :tag, name: 'foo', group: group }
+    context 'via browser' do
+      let!(:tag1) { Fabricate :tag, name: 'bar', group: group }
+      let!(:tag2) { Fabricate :tag, name: 'foo', group: group }
 
-    before { get :index, params: { group_id: group.id } }
+      before { get :index, params: { group_id: group.id } }
 
-    it { expect(response).to render_template :index }
-    it { expect(assigns(:tag)).to be_a_new Tag }
-    it { expect(assigns(:tags)).to eq group.tags }
+      it { expect(response).to render_template :index }
+      it { expect(assigns(:tag)).to be_a_new Tag }
+      it { expect(assigns(:tags)).to eq group.tags }
+    end
+
+    context 'via javascript' do
+      let!(:tag1) { Fabricate :tag, name: 'bar', group: group }
+      let!(:tag2) { Fabricate :tag, name: 'foo', group: group }
+
+      before { get :index, params: { group_id: group.id, format: :json } }
+
+      it { expect(assigns(:tags)).to match_array [tag1, tag2] }
+    end
   end
 
   describe 'GET #edit' do

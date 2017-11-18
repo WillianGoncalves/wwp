@@ -2,6 +2,11 @@ class TagsController < ApplicationController
   def index
     @tag = Tag.new
     @tags = current_group.tags
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def edit
