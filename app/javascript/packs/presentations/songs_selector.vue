@@ -20,17 +20,19 @@
         </button>
       </div>
 
-      <div class="input-field" v-if="filterBy == 'text'">
-        <i class="material-icons prefix">search</i>
-        <input id="search" type="text" v-model="textFilter">
-      </div>
+      <transition name="slide-fade" mode="out-in">
+        <div class="input-field" v-if="filterBy == 'text'" key="textFilter">
+          <i class="material-icons prefix">search</i>
+          <input id="search" type="text" v-model="textFilter">
+        </div>
 
-      <div v-if="filterBy == 'tags'">
-        <button type="button" class="btn white tag-filter" v-for="tag in tags" @click="toggleTagFilter(tag.id)" :class="{'inactive': !tagFilterIsActive(tag.id)}">
-          <i class="material-icons left tiny" :style="{ color: tag.color }">local_offer</i>
-          <span>{{ tag.name }}</span>
-        </button>
-      </div>
+        <div v-else key="tagsFilter">
+          <button type="button" class="btn white tag-filter" v-for="tag in tags" @click="toggleTagFilter(tag.id)" :class="{'inactive': !tagFilterIsActive(tag.id)}">
+            <i class="material-icons left tiny" :style="{ color: tag.color }">local_offer</i>
+            <span>{{ tag.name }}</span>
+          </button>
+        </div>
+      </transition>
 
       <song-options :songs="songs" v-on:selectSong="selectSong"></song-options>
     </div>
@@ -132,4 +134,14 @@ export default
 
 .btn-small
   padding: 0 1rem
+
+.slide-fade-enter-active
+  transition: all .1s ease
+
+.slide-fade-leave-active
+  transition: all .1s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+
+.slide-fade-enter, .slide-fade-leave-to
+  transform: translateX(10px)
+  opacity: 0
 </style>
