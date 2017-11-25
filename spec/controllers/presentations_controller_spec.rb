@@ -49,7 +49,7 @@ RSpec.describe PresentationsController, type: :controller do
 
     describe 'POST #create' do
       context 'valid presentation' do
-        let!(:presentation) { { date: Date.current, time: Time.now, local: 'foo', song_ids: [ song.id ] } }
+        let!(:presentation) { { date: '31/12/2017', time: '12:00', local: 'foo', song_ids: [ song.id ] } }
 
         before { post :create, params: { group_id: group.id, presentation: presentation } }
 
@@ -58,7 +58,7 @@ RSpec.describe PresentationsController, type: :controller do
       end
 
       context 'invalid presentation' do
-        let!(:presentation) { { date: nil, time: nil, local: '', song_ids: [] } }
+        let!(:presentation) { { date_time: nil, local: '', song_ids: [] } }
 
         before { post :create, params: { group_id: group.id, presentation: presentation } }
 
@@ -71,7 +71,7 @@ RSpec.describe PresentationsController, type: :controller do
     describe 'PUT #update' do
       context 'valid presentation' do
         let!(:presentation) { Fabricate :presentation, group: group, songs: [ song ] }
-        let!(:valid_presentation) { { date: Date.current, time: Time.now, local: 'foo', song_ids: [ song.id ] } }
+        let!(:valid_presentation) { { date_time: Date.current, local: 'foo', song_ids: [ song.id ] } }
 
         before { put :update, params: { group_id: group.id, id: presentation.id, presentation: valid_presentation } }
 
@@ -81,7 +81,7 @@ RSpec.describe PresentationsController, type: :controller do
 
       context 'invalid presentation' do
         let!(:presentation) { Fabricate :presentation, group: group, songs: [ song ] }
-        let!(:invalid_presentation) { { date: nil, time: nil, local: '', song_ids: [] } }
+        let!(:invalid_presentation) { { date_time: nil, local: '', song_ids: [] } }
 
         before { put :update, params: { group_id: group.id, id: presentation.id, presentation: invalid_presentation } }
 

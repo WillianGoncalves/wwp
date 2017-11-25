@@ -1,32 +1,46 @@
 <template>
   <div>
-    <div class="row">
-      <div class="input-field col s12">
-        <i class="material-icons prefix">search</i>
-        <input id="search" type="text" v-model="searchFor">
+    <selected-songs :songs="selectedSongs" v-on:unselectSong="unselectSong" v-if="selectedSongs.length > 0"></selected-songs>
+
+    <button type="button" class="btn-flat" @click="showSelector = true" v-if="!showSelector">
+      <i class="material-icons left">add</i>
+      Músicas
+    </button>
+
+    <div v-if="showSelector" class="main-content">
+      <div>
+        <button type="button" class="btn-flat btn-small waves-effect" @click="filterBy = 'text'">
+          <i class="material-icons dark-icon">title</i>
+        </button>
+        <button type="button" class="btn-flat btn-small waves-effect" @click="filterBy = 'tags'">
+          <i class="material-icons dark-icon">local_offer</i>
+        </button>
+        <button type="button" class="btn-flat btn-small right" @click="showSelector = false">
+          <i class="material-icons dark-icon">close</i>
+        </button>
       </div>
 
-      <div class="col s12">
+      <div class="input-field" v-if="filterBy == 'text'">
+        <i class="material-icons prefix">search</i>
+        <input id="search" type="text" v-model="textFilter">
+      </div>
+
+      <div v-if="filterBy == 'tags'">
         <button type="button" class="btn white tag-filter" v-for="tag in tags" @click="toggleTagFilter(tag.id)" :class="{'inactive': !tagFilterIsActive(tag.id)}">
-          <i class="material-icons tiny" :style="{ color: tag.color }">local_offer</i>
+          <i class="material-icons left tiny" :style="{ color: tag.color }">local_offer</i>
           <span>{{ tag.name }}</span>
         </button>
       </div>
+
+      <song-options :songs="songs" v-on:selectSong="selectSong"></song-options>
     </div>
-
-    <ul class="collection">
-      <li class="collection-item" v-for="song in songs">
-        {{ song.title }}
-
-        <span v-if="song.author" class="grey-text text-lighten-1 author"> - {{ song.author }}</span>
-
-        <i class="material-icons tiny secondary-content tag" v-for="tag in song.tags" :style="{ color: tag.color }">local_offer</i>
-      </li>
-    </ul>
   </div>
 </template>
 
 <script lang="coffee">
+import SelectedSongs from './selected_songs.vue';
+import SongOptions from './song_options.vue';
+
 export default
   props:
     groupid:
@@ -34,10 +48,17 @@ export default
       required: true
 
   data: ->
-    searchFor: ''
+    textFilter: ''
     songs: []
     tags: []
-    filterByTags: []
+    tagsFilter: []
+    selectedSongs: []
+    showSelector: false
+    filterBy: 'text'
+
+  components:
+    'selected-songs': SelectedSongs
+    'song-options': SongOptions
 
   methods:
     listSongs: ->
@@ -50,26 +71,40 @@ export default
 
     toggleTagFilter: (tagId) ->
       if @tagFilterIsActive(tagId)
-        @filterByTags.splice(@filterByTags.indexOf(tagId), 1)
+        @tagsFilter.splice(@tagsFilter.indexOf(tagId), 1)
       else
-        @filterByTags.push(tagId)
+        @tagsFilter.push(tagId)
 
-      if @filterByTags.length == 0
+    tagFilterIsActive: (tagId) ->
+      @tagsFilter.includes(tagId)
+
+    selectSong: (song) ->
+      return if @selectedSongs.includes(song)
+      @selectedSongs.push(song)
+      @updateHiddenValue()
+
+    unselectSong: (song) ->
+      index = @selectedSongs.indexOf(song)
+      @selectedSongs.splice(index, 1)
+      @updateHiddenValue()
+
+    updateHiddenValue: ->
+      stringIds = @selectedSongs.map((song) => song.id).join()
+      $('#song_ids').val(stringIds)
+
+  watch:
+    textFilter: ->
+      @songs = @_songs.filter (song) =>
+        song.title.toLowerCase().includes(@textFilter.toLowerCase())
+
+    tagsFilter: ->
+      if @tagsFilter.length == 0
         @songs = @_songs
       else
         @songs = @_songs.filter (song) =>
           tagIds = song.tags.map (tag) => tag.id
-          for tagId from @filterByTags
-            if tagIds.includes(tagId)
-              return true
-
-    tagFilterIsActive: (tagId) ->
-      @filterByTags.includes(tagId)
-
-  watch:
-    searchFor: ->
-      @songs = @_songs.filter (song) =>
-        song.title.toLowerCase().includes(@searchFor.toLowerCase())
+          for tagId from @tagsFilter
+            return true if tagIds.includes(tagId)
 
   created: ->
     @listSongs()
@@ -80,21 +115,21 @@ export default
 <style scoped lang="sass?indentedSyntax">
 @import '../../../assets/stylesheets/modules/_colors.scss';
 
-.author
-  font-size: 0.7rem
+.main-content
+  border: 1px solid $border-color
+  padding: 15px
 
 .tag
   margin-top: 6px
 
 .tag-filter
-  display: inline-flex
   margin: 10px
   color: $color
   border-radius: 90px
 
-  span
-    margin-left: 10px
-
 .inactive
   filter: grayscale(1)
+
+.btn-small
+  padding: 0 1rem
 </style>

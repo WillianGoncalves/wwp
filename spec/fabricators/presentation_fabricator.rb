@@ -21,7 +21,6 @@
 #
 
 Fabricator(:presentation) do
-  date Faker::Date.forward(10)
-  time Time.now
+  date_time Faker::Date.forward(10)
   local Faker::Address.city
 end

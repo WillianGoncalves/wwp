@@ -25,6 +25,7 @@ class PresentationsController < ApplicationController
 
     @presentation = current_group.presentations.build(presentation_params)
     @presentation.date_time = DateTime.parse("#{@date} #{@time}") if @date.present? && @time.present?
+    @presentation.validate
 
     if @presentation.save
       redirect_to group_presentations_path(current_group)
@@ -48,8 +49,7 @@ class PresentationsController < ApplicationController
   end
 
   private
-
   def presentation_params
-    params.require(:presentation).permit(:date, :time, :local, song_ids: [])
+    params.require(:presentation).permit(:local, song_ids: [])
   end
 end

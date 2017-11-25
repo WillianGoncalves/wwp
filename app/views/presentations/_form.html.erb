@@ -19,7 +19,10 @@
         <%= f.text_field :local, placeholder: t('activerecord.attributes.presentation.local') %>
       </div>
 
-      <songs-selector :groupid="<%= current_group.id %>"></songs-selector>
+      <div>
+        <%= f.hidden_field :song_ids, { id: 'song_ids', multiple: true } %>
+        <songs-selector :groupid="<%= current_group.id %>"></songs-selector>
+      </div>
 
       <div class="actions right-align">
         <%= link_to :back, class: 'btn white grey-text text-darken-3' do %>
