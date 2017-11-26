@@ -22,6 +22,9 @@
       <div>
         <%= f.hidden_field :song_ids, { id: 'song_ids', multiple: true } %>
         <songs-selector :groupid="<%= current_group.id %>"></songs-selector>
+        <% if @presentation.errors[:songs].present? %>
+          <span class="error"><%= @presentation.errors[:songs].first %></span>
+        <% end %>
       </div>
 
       <div class="actions right-align">

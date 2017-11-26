@@ -94,10 +94,6 @@ pt-BR:
           one: "%{attribute} não possui o tamanho esperado (1 caracter)"
           other: "%{attribute} não possui o tamanho esperado (%{count} caracteres)"
         other_than: "%{attribute} deve ser diferente de %{count}"
-    custom_errors:
-      presentation:
-        date: "Informe a data da apresentação"
-        time: "Informe o horário da apresentação"
 
       models:
         join_request:
@@ -112,9 +108,18 @@ pt-BR:
           attributes:
             color:
               required: Escolha uma cor
+        presentation:
+          attributes:
+            songs:
+              blank: Informe as músicas
 
       template:
         body: 'Por favor, verifique o(s) seguinte(s) campo(s):'
         header:
           one: 'Não foi possível gravar %{model}: 1 erro'
           other: 'Não foi possível gravar %{model}: %{count} erros'
+
+    custom_errors:
+      presentation:
+        date: "Informe a data da apresentação"
+        time: "Informe o horário da apresentação"
