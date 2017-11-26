@@ -9,14 +9,14 @@
 
     <div v-if="showSelector" class="main-content">
       <div>
-        <button type="button" class="btn-flat btn-small waves-effect" @click="filterBy = 'text'">
+        <button type="button" class="btn-flat menu-item waves-effect" @click="filterBy = 'text'">
           <i class="material-icons dark-icon">title</i>
         </button>
-        <button type="button" class="btn-flat btn-small waves-effect" @click="filterBy = 'tags'">
+        <button type="button" class="btn-flat menu-item waves-effect" @click="filterBy = 'tags'">
           <i class="material-icons dark-icon">local_offer</i>
         </button>
-        <button type="button" class="btn-flat btn-small right" @click="showSelector = false">
-          <i class="material-icons dark-icon">close</i>
+        <button type="button" class="btn-flat menu-item right" @click="showSelector = false">
+          <i class="material-icons dark-icon">done</i>
         </button>
       </div>
 
@@ -121,9 +121,6 @@ export default
   border: 1px solid $border-color
   padding: 15px
 
-.tag
-  margin-top: 6px
-
 .tag-filter
   margin: 10px
   color: $color
@@ -132,7 +129,7 @@ export default
 .inactive
   filter: grayscale(1)
 
-.btn-small
+.menu-item
   padding: 0 1rem
 
 .slide-fade-enter-active

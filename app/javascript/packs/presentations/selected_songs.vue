@@ -1,6 +1,14 @@
 <template>
   <ul class="collection">
-    <li class="collection-item" v-for="song in songs" @click="$emit('unselectSong', song)">{{ song.title }}</li>
+    <li class="collection-item" v-for="song in songs">
+      {{ song.title }}
+
+      <span v-if="song.author" class="grey-text text-lighten-1 author"> - {{ song.author }}</span>
+
+      <a class="secondary-content" @click="$emit('unselectSong', song)" href="#!">
+        <i class="material-icons dark-icon tiny">delete</i>
+      </a>
+    </li>
   </ul>
 </template>
 
@@ -13,10 +21,6 @@ export default
 </script>
 
 <style scoped lang="sass?indentedSyntax">
-@import '../../../assets/stylesheets/modules/_colors.scss';
-
-.collection-item
-  cursor: pointer
-  &:hover
-    background: $primary-color-dark
+.author
+  font-size: 0.7rem
 </style>

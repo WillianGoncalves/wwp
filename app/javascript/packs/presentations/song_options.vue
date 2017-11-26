@@ -29,4 +29,7 @@ export default
   cursor: pointer
   &:hover
     background: $primary-color-dark
+
+.tag
+  margin-top: 6px
 </style>
