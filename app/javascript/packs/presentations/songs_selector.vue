@@ -1,6 +1,6 @@
 <template>
   <div>
-    <selected-songs :songs="selectedSongs" v-on:unselectSong="unselectSong" v-if="selectedSongs.length > 0"></selected-songs>
+    <selected-songs :songs="selectedSongs" v-on:unselectSong="unselectSong" v-on:updateSongsOrder="updateSongsOrder" v-if="selectedSongs.length > 0"></selected-songs>
 
     <button type="button" class="btn-flat" @click="showSelector = true" v-if="!showSelector">
       <i class="material-icons left">add</i>
@@ -91,8 +91,12 @@ export default
       @updateHiddenValue()
 
     updateHiddenValue: ->
-      stringIds = @selectedSongs.map((song) => song.id).join()
+      stringIds = @selectedSongs.map((song) => song.id)
       $('#song_ids').val(stringIds)
+
+    updateSongsOrder: (reorderedSongs) ->
+      @selectedSongs = reorderedSongs
+      @updateHiddenValue()
 
   watch:
     textFilter: ->

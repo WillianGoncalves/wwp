@@ -49,18 +49,18 @@ RSpec.describe PresentationsController, type: :controller do
 
     describe 'POST #create' do
       context 'valid presentation' do
-        let!(:presentation) { { date: '31/12/2017', time: '12:00', local: 'foo', song_ids: [ song.id ] } }
+        let!(:presentation) { { local: 'foo' } }
 
-        before { post :create, params: { group_id: group.id, presentation: presentation } }
+        before { post :create, params: { group_id: group.id, presentation: presentation, date: '31/12/2017', time: '12:00', song_ids: [ song.id.to_s ] } }
 
         it { expect(response).to redirect_to group_presentations_path(group) }
         it { expect(group.presentations.count).to eq 1 }
       end
 
       context 'invalid presentation' do
-        let!(:presentation) { { date_time: nil, local: '', song_ids: [] } }
+        let!(:presentation) { { local: '' } }
 
-        before { post :create, params: { group_id: group.id, presentation: presentation } }
+        before { post :create, params: { group_id: group.id, presentation: presentation, date: '', time: '', song_ids: [ song.id ] } }
 
         it { expect(response).to have_http_status :bad_request }
         it { expect(response).to render_template :new }

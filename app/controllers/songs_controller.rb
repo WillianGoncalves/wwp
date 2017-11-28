@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
   def index
-    @songs = current_group.songs
+    @songs = current_group.songs.order(:title)
 
     respond_to do |format|
       format.html
