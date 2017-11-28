@@ -24,7 +24,13 @@ class Presentation < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :group
-  has_and_belongs_to_many :songs
+  has_many :presentation_songs, -> { order(:index) }, inverse_of: :presentation
+  has_many :songs, through: :presentation_songs
   has_many :comments, as: :target
-  validates :date_time, :group, :songs, presence: true
+  validates :date_time, :group, :presentation_songs, presence: true
+
+  def add_song(song)
+    index = self.songs.count
+    self.presentation_songs.build(song: song, index: index)
+  end
 end

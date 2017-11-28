@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171111023447) do
+ActiveRecord::Schema.define(version: 20171128004416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,16 @@ ActiveRecord::Schema.define(version: 20171111023447) do
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
+  create_table "presentation_songs", force: :cascade do |t|
+    t.bigint "presentation_id"
+    t.bigint "song_id"
+    t.integer "index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["presentation_id"], name: "index_presentation_songs_on_presentation_id"
+    t.index ["song_id"], name: "index_presentation_songs_on_song_id"
+  end
+
   create_table "presentations", id: :serial, force: :cascade do |t|
     t.string "local"
     t.datetime "created_at", null: false
@@ -72,13 +82,6 @@ ActiveRecord::Schema.define(version: 20171111023447) do
     t.datetime "date_time"
     t.index ["deleted_at"], name: "index_presentations_on_deleted_at"
     t.index ["group_id"], name: "index_presentations_on_group_id"
-  end
-
-  create_table "presentations_songs", id: false, force: :cascade do |t|
-    t.integer "song_id"
-    t.integer "presentation_id"
-    t.index ["presentation_id"], name: "index_songs_presentations_on_presentation_id"
-    t.index ["song_id"], name: "index_songs_presentations_on_song_id"
   end
 
   create_table "songs", id: :serial, force: :cascade do |t|
@@ -136,6 +139,8 @@ ActiveRecord::Schema.define(version: 20171111023447) do
   add_foreign_key "join_requests", "users"
   add_foreign_key "members", "groups"
   add_foreign_key "members", "users"
+  add_foreign_key "presentation_songs", "presentations"
+  add_foreign_key "presentation_songs", "songs"
   add_foreign_key "presentations", "groups"
   add_foreign_key "songs", "groups"
   add_foreign_key "tags", "groups"

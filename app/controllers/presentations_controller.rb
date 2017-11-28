@@ -19,7 +19,7 @@ class PresentationsController < ApplicationController
   def create
     @presentation = current_group.presentations.build(presentation_params)
     @presentation.date_time = create_date_time
-    @presentation.songs = create_songs_list
+    add_songs
     @presentation.validate
 
     if @presentation.save
@@ -48,11 +48,10 @@ class PresentationsController < ApplicationController
     params.require(:presentation).permit(:local)
   end
 
-  def create_songs_list
+  def add_songs
     if params[:song_ids].present?
-      params[:song_ids].split(",").map{ |id| Song.find(id) }
-    else
-      return []
+      songs = params[:song_ids].split(",").map { |id| Song.find(id) }
+      songs.each { |song| @presentation.add_song(song) }
     end
   end
 
