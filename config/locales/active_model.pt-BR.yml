@@ -110,7 +110,7 @@ pt-BR:
               required: Escolha uma cor
         presentation:
           attributes:
-            songs:
+            presentation_songs:
               blank: Informe as músicas
 
       template:
