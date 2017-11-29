@@ -20,7 +20,7 @@
       </div>
 
       <div>
-        <%= hidden_field_tag :song_ids, nil, { id: 'song_ids', multiple: true } %>
+        <%= hidden_field_tag :song_ids, song_ids(@presentation), { id: 'song_ids', multiple: true } %>
         <songs-selector :groupid="<%= current_group.id %>"></songs-selector>
         <% if @presentation.errors[:presentation_songs].present? %>
           <span class="error"><%= @presentation.errors[:presentation_songs].first %></span>

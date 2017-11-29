@@ -66,6 +66,7 @@ export default
     listSongs: ->
       $.get "/groups/#{@groupid}/songs.json", (data) =>
         @songs = @_songs = data
+        @loadPresentationSongs()
 
     listTags: ->
       $.get "/groups/#{@groupid}/tags.json", (data) =>
@@ -97,6 +98,16 @@ export default
     updateSongsOrder: (reorderedSongs) ->
       @selectedSongs = reorderedSongs
       @updateHiddenValue()
+
+    loadPresentationSongs: ->
+      hiddenContent = $('#song_ids').val()
+      return if hiddenContent.length == 0
+      songIds = hiddenContent.split(',').map ((id) => parseInt(id))
+      for songId from songIds
+        for song from @_songs
+          if song.id == songId
+            @selectedSongs.push(song)
+            break
 
   watch:
     textFilter: ->
