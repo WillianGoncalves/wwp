@@ -13,8 +13,10 @@ RSpec.describe PresentationsController, type: :controller do
     before { assign_group(user, group) }
 
     describe 'GET #index' do
-      let!(:presentation1) { Fabricate :presentation, group: group, songs: [song] }
-      let!(:presentation2) { Fabricate :presentation, group: group, songs: [song] }
+      let!(:presentation1_song) { PresentationSong.new(song: song, index: 0) }
+      let!(:presentation2_song) { PresentationSong.new(song: song, index: 0) }
+      let!(:presentation1) { Fabricate :presentation, group: group, presentation_songs: [ presentation1_song ] }
+      let!(:presentation2) { Fabricate :presentation, group: group, presentation_songs: [ presentation2_song ] }
 
       before { get :index, params: { group_id: group.id } }
 
@@ -23,7 +25,8 @@ RSpec.describe PresentationsController, type: :controller do
     end
 
     describe 'GET #show' do
-      let!(:presentation) { Fabricate :presentation, group: group, songs: [song] }
+      let!(:presentation_song) { PresentationSong.new(song: song, index: 0) }
+      let!(:presentation) { Fabricate :presentation, group: group, presentation_songs: [ presentation_song ] }
 
       before { get :show, params: { group_id: group.id, id: presentation.id } }
 
@@ -39,7 +42,8 @@ RSpec.describe PresentationsController, type: :controller do
     end
 
     describe 'GET #edit' do
-      let!(:presentation) { Fabricate :presentation, group: group, songs: [song] }
+      let!(:presentation_song) { PresentationSong.new(song: song, index: 0) }
+      let!(:presentation) { Fabricate :presentation, group: group, presentation_songs: [ presentation_song ] }
 
       before { get :edit, params: { group_id: group.id, id: presentation.id } }
 
@@ -50,17 +54,22 @@ RSpec.describe PresentationsController, type: :controller do
     describe 'POST #create' do
       context 'valid presentation' do
         let!(:presentation) { { local: 'foo' } }
+        let!(:song2) { Fabricate :song, group: group }
+        let!(:song3) { Fabricate :song, group: group }
+        let!(:songIds) { [ song2.id, song3.id ].join(",") }
 
-        before { post :create, params: { group_id: group.id, presentation: presentation, date: '31/12/2017', time: '12:00', song_ids: [ song.id.to_s ] } }
+        before { post :create, params: { group_id: group.id, presentation: presentation, date: '31/12/2017', time: '12:00', song_ids: songIds } }
 
         it { expect(response).to redirect_to group_presentations_path(group) }
         it { expect(group.presentations.count).to eq 1 }
+        it { expect(assigns(:presentation).date_time).to_not be nil }
+        it { expect(assigns(:presentation).songs).to match_array [ song2, song3 ] }
       end
 
       context 'invalid presentation' do
         let!(:presentation) { { local: '' } }
 
-        before { post :create, params: { group_id: group.id, presentation: presentation, date: '', time: '', song_ids: [ song.id ] } }
+        before { post :create, params: { group_id: group.id, presentation: presentation, date: '', time: '', song_ids: '' } }
 
         it { expect(response).to have_http_status :bad_request }
         it { expect(response).to render_template :new }
@@ -70,20 +79,26 @@ RSpec.describe PresentationsController, type: :controller do
 
     describe 'PUT #update' do
       context 'valid presentation' do
-        let!(:presentation) { Fabricate :presentation, group: group, songs: [ song ] }
-        let!(:valid_presentation) { { date_time: Date.current, local: 'foo', song_ids: [ song.id ] } }
+        let!(:presentation_song) { PresentationSong.new(song: song, index: 0) }
+        let!(:presentation) { Fabricate :presentation, group: group, presentation_songs: [ presentation_song ] }
+        let!(:song2) { Fabricate :song, group: group }
+        let!(:song3) { Fabricate :song, group: group }
+        let!(:valid_presentation) { { local: 'foo' } }
+        let!(:songIds) { [ song2.id, song3.id ].join(",") }
 
-        before { put :update, params: { group_id: group.id, id: presentation.id, presentation: valid_presentation } }
+        before { put :update, params: { group_id: group.id, id: presentation.id, presentation: valid_presentation, date: '31/12/2017', time: '12:00', song_ids: songIds } }
 
         it { expect(response).to redirect_to group_presentations_path(group) }
         it { expect(presentation.reload.local).to eq 'foo' }
+        it { expect(presentation.songs).to match_array [ song2, song3 ] }
       end
 
       context 'invalid presentation' do
-        let!(:presentation) { Fabricate :presentation, group: group, songs: [ song ] }
-        let!(:invalid_presentation) { { date_time: nil, local: '', song_ids: [] } }
+        let!(:presentation_song) { PresentationSong.new(song: song, index: 0) }
+        let!(:presentation) { Fabricate :presentation, group: group, presentation_songs: [ presentation_song ] }
+        let!(:invalid_presentation) { { local: '' } }
 
-        before { put :update, params: { group_id: group.id, id: presentation.id, presentation: invalid_presentation } }
+        before { put :update, params: { group_id: group.id, id: presentation.id, presentation: invalid_presentation, date: '', time: '', song_ids: '' } }
 
         it { expect(response).to have_http_status :bad_request }
         it { expect(response).to render_template :edit }
@@ -92,7 +107,8 @@ RSpec.describe PresentationsController, type: :controller do
     end
 
     describe 'DELETE #destroy' do
-      let!(:presentation) { Fabricate :presentation, group: group, songs: [ song ] }
+      let!(:presentation_song) { PresentationSong.new(song: song, index: 0) }
+      let!(:presentation) { Fabricate :presentation, group: group, presentation_songs: [ presentation_song ] }
 
       before { delete :destroy, params: { group_id: group.id, id: presentation.id } }
 

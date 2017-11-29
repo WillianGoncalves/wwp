@@ -31,6 +31,10 @@ class PresentationsController < ApplicationController
 
   def update
     @presentation = Presentation.find(params[:id])
+    @presentation.date_time = create_date_time
+    @presentation.presentation_songs.destroy_all
+    add_songs
+
     if @presentation.update(presentation_params)
       redirect_to group_presentations_path(current_group)
     else
