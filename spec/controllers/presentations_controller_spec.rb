@@ -50,6 +50,8 @@ RSpec.describe PresentationsController, type: :controller do
 
       it { expect(response).to render_template :edit }
       it { expect(assigns(:presentation)).to eq presentation }
+      it { expect(assigns(:date)).to eq presentation.date_time.strftime("%d/%m/%Y") }
+      it { expect(assigns(:time)).to eq presentation.date_time.strftime("%H:%M") }
     end
 
     describe 'POST #create' do
