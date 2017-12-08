@@ -22,6 +22,7 @@ RSpec.describe PresentationsController, type: :controller do
 
       it { expect(response).to render_template :index }
       it { expect(assigns(:presentations)).to eq group.presentations }
+      it { expect(assigns(:presentations)).to match_array [ presentation1, presentation2 ] }
     end
 
     describe 'GET #show' do
@@ -62,7 +63,7 @@ RSpec.describe PresentationsController, type: :controller do
 
         it { expect(response).to redirect_to group_presentations_path(group) }
         it { expect(group.presentations.count).to eq 1 }
-        it { expect(assigns(:presentation).date_time).to_not be nil }
+        it { expect(assigns(:presentation).date_time).to eq "31/12/2017 12:00" }
         it { expect(assigns(:presentation).songs).to match_array [ song2, song3 ] }
       end
 
@@ -90,6 +91,7 @@ RSpec.describe PresentationsController, type: :controller do
 
         it { expect(response).to redirect_to group_presentations_path(group) }
         it { expect(presentation.reload.local).to eq 'foo' }
+        it { expect(assigns(:presentation).date_time).to eq "31/12/2017 12:00" }
         it { expect(presentation.songs).to match_array [ song2, song3 ] }
       end
 
@@ -102,6 +104,7 @@ RSpec.describe PresentationsController, type: :controller do
 
         it { expect(response).to have_http_status :bad_request }
         it { expect(response).to render_template :edit }
+        it { expect(presentation.reload.date_time).not_to eq '' }
         it { expect(presentation.reload.local).not_to eq 'foo' }
       end
     end
