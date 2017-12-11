@@ -14,8 +14,8 @@ class PresentationsController < ApplicationController
 
   def edit
     @presentation = Presentation.find(params[:id])
-    @date = @presentation.date_time.strftime("%d/%m/%Y")
-    @time = @presentation.date_time.strftime("%H:%M")
+    @date = @presentation.date
+    @time = @presentation.time
   end
 
   def create
