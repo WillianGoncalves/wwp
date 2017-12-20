@@ -30,7 +30,7 @@ class Presentation < ApplicationRecord
   validates :local, :date_time, :group, :presentation_songs, presence: true
 
   def add_song(song)
-    index = self.songs.count
+    index = self.presentation_songs.size + 1
     self.presentation_songs.build(song: song, index: index)
   end
 

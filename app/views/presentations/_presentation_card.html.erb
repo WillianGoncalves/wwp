@@ -1,0 +1,32 @@
+<% content_for :stylesheet do %>
+  <%= stylesheet_link_tag 'pages/presentations/presentation_card' %>
+<% end %>
+
+<!--<%= link_to group_presentation_path(current_group, presentation) do %>-->
+  <div class="presentation_card">
+    <p><span class="center-align icon"><i class="fa fa-calendar"></i></span> <%= presentation.date %></p>
+    <p><span class="center-align icon"><i class="fa fa-clock-o"></i></span> <%= presentation.time %></p>
+    <p><span class="center-align icon"><i class="fa fa-map-marker"></i></span> <%= presentation.local %></p>
+  </div>
+  <!--<% end %>-->
+        <!--<div class="card">
+
+          <div class="card-content">
+            <span class="card-title activator"><%= presentation.date %><i class="fa fa-music tiny right"></i></span>
+            <p> <%= presentation.local %> </p>
+            <p> <%= presentation.time %> </p>
+          </div>
+
+          <div class="card-action">
+            <button class="btn-flat"><i class="fa fa-info tiny left"></i>Detalhes</button>
+            <button class="btn-flat"><i class="fa fa-repeat tiny left"></i>Repetir</button>
+          </div>
+
+          <div class="card-reveal">
+            <span class="card-title"><i class="material-icons right">close</i></span>
+            <% presentation.presentation_songs.each do |presentation_song| %>
+              <p><b><%= presentation_song.index %></b> <%= presentation_song.song.title %></p>
+            <% end %>
+          </div>
+
+        </div>-->

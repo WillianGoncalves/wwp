@@ -1,0 +1,14 @@
+@import "../../modules/_colors";
+
+.presentation_card {
+  padding: 10px 20px;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid $border-color;
+  box-shadow: 0 2px 7px #ddd;
+
+  .icon { 
+    display: inline-block;
+    width: 25px;
+  }
+}
