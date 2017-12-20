@@ -6,12 +6,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
 
-  process :convert => 'png'
+  process resize_to_fill: [50, 50]
   process :tags => ['user_avatar', "env_#{Rails.env}"] if Figaro.env.cloudinary_url?
-
-  version :standard do
-    process :resize_to_fill => [50, 50]
-  end
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:

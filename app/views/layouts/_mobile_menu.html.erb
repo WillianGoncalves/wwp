@@ -2,7 +2,7 @@
 
   <div class="header">
     <%= link_to edit_user_registration_path(current_user), class: 'center-align' do %>
-      <i><%= image_tag current_user.avatar.standard.url, class: 'circle responsive-img nav-avatar' %></i>
+      <i><%= image_tag current_user.avatar.url, class: 'circle responsive-img nav-avatar' %></i>
       <%= current_user.full_name %>
     <% end %>
 
