@@ -1,0 +1,43 @@
+<% content_for :stylesheet do %>
+  <%= stylesheet_link_tag 'pages/presentations/show' %>
+<% end %>
+
+<div id="presentation_info" class="center-align">
+  <div class="info">
+    <i class="fa fa-calendar"></i><h5><%= @presentation.date %></h5>
+  </div>
+  <div class="separator hide-on-small-only"></div>
+  <div class="info">
+    <i class="fa fa-clock-o"></i><h5><%= @presentation.time %></h5>
+  </div>
+  <div class="separator hide-on-small-only"></div>
+  <div class="info">
+    <i class="fa fa-map-marker"></i><h5><%= @presentation.local %></h5>
+  </div>
+</div>
+
+<div class="row">
+  <% @presentation.presentation_songs.each do |ps| %>
+    <%= render partial: 'presentations/presentation_song_card', locals: { ps: ps } %>
+  <% end %>
+</div>
+
+<div class="center-align vertical-margin">
+  <%= link_to t('actions.edit'), edit_group_presentation_path(current_group, @presentation), class: 'btn' %>
+</div>
+
+<div id="comments">
+  <% @presentation.comments.each do |comment| %>
+    <comment :show-options="<%= current_user.id.equal?(comment.commenter.id) %>">
+      <div slot="showView">
+        <%= render partial: "comments/show", locals: { comment: comment } %>
+      </div>
+
+      <div slot="form">
+        <%= render partial: "comments/form", locals: { target: @presentation, comment: comment } %>
+      </div>
+    </comment>
+  <% end %>
+</div>
+
+<%= render partial: "comments/form", locals: { target: @presentation, comment: @presentation.comments.build } %>

@@ -1,0 +1,52 @@
+@import '../../modules/_colors.scss';
+
+#presentation_info {
+  display: flex;
+  justify-content: space-around;
+  margin: 3.5rem 0;
+
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+
+    i { margin-right: 15px; }
+  }
+
+  .separator {
+    height: 50px;
+    width: 1px;
+    background: $border-color;
+  }
+}
+
+.presentation_song_card{
+  display: flex;
+  margin-bottom: 5px;
+  border: 1px solid $border-color;
+  border-radius: 3px;
+
+  .ps-index, .ps-tone {
+    padding: 5px 30px;
+  }
+
+  .ps-info {
+    padding: 5px 0;
+  }
+
+  .ps-index, .ps-tone {
+    font-size: 1.5rem;
+  }
+
+  .ps-info {
+    width: 100%;
+  }
+
+  .ps-title .tags {
+    margin-left: 15px;
+  }
+}

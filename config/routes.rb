@@ -25,6 +25,10 @@ Rails.application.routes.draw do
     resources :comments, except: [:index, :show]
   end
 
+  resources :presentations, only: [] do
+    resources :comments, except: [:index, :show]
+  end
+
   resources :join_requests, only: [] do
     member do
       put :accept

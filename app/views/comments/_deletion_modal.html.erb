@@ -7,6 +7,8 @@
     <a href="#!" class="modal-action modal-close waves-effect btn-flat"><%= t('actions.cancel') %></a>
     <% if target.is_a? Song %>
       <%= link_to t('actions.delete'), song_comment_path(target, comment), method: :delete, class: "modal-action modal-close waves-effect btn-flat red-text text-darken-3" %>
+    <% else %>
+      <%= link_to t('actions.delete'), presentation_comment_path(target, comment), method: :delete, class: "modal-action modal-close waves-effect btn-flat red-text text-darken-3" %>
     <% end %>
   </div>
 </div>

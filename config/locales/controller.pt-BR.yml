@@ -2,6 +2,7 @@ pt-BR:
   actions:
     back: Voltar
     create: Salvar
+    edit: Editar
     update: Atualizar
     cancel: Cancelar
     delete: Excluir

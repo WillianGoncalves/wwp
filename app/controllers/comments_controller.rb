@@ -43,7 +43,7 @@ class CommentsController < ApplicationController
     if @target.is_a? Song
       group_song_path(current_group, @target)
     else
-      #TODO - group presentation path
+      group_presentation_path(current_group, @target)
     end
   end
 end
