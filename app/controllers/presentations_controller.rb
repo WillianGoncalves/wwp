@@ -51,6 +51,11 @@ class PresentationsController < ApplicationController
     redirect_to group_presentations_path(current_group)
   end
 
+  def play
+    @presentation = Presentation.find(params[:id])
+    render :play, layout: 'blank'
+  end
+
   private
   def presentation_params
     params.require(:presentation).permit(:local)

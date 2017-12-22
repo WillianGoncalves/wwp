@@ -1,0 +1,13 @@
+{{ enableNoSleep() }}
+
+<div class="right-align">
+  <%= link_to group_presentation_path(current_group, @presentation), { class: 'btn white grey-text text-darken-3', onclick: 'disableNoSleep()' } do %>
+    <i class="material-icons">close</i>
+  <% end %>
+</div>
+
+<div id="play_view" class="row">
+  <% @presentation.presentation_songs.each do |ps| %>
+    <presentation-song-card :presentation-song="<%= render template: 'presentations/_presentation_song_card.json.jbuilder', locals: { presentation_song: ps } %>"></presentation-song-card>
+  <% end %>
+</div>

@@ -8,6 +8,7 @@ import TagColorPicker from './tags/tag_color_picker.vue';
 import Comment from './comments/comment.vue';
 import SongsSelector from './presentations/songs_selector.vue';
 import PresentationSongCard from './presentations/presentation_song_card.vue';
+NoSleep = require('nosleep.js');
 
 Vue.component('user-group', UserGroup);
 Vue.component('group', Group);
@@ -21,10 +22,22 @@ Vue.component('presentation-song-card', PresentationSongCard);
 
 new Vue({
   el: '#app',
+  data: () => {
+    return {
+      noSleep: null
+    };
+  },
   methods: {
     showModal: (modalId) => {
       $(modalId).modal();
       $(modalId).modal('open');
+    },
+    enableNoSleep: () => {
+      this.noSleep.enable();
+      alert('ok');
     }
+  },
+  created: () => {
+    this.noSleep = new NoSleep();
   }
 });

@@ -121,6 +121,16 @@ RSpec.describe PresentationsController, type: :controller do
       it { expect(group.presentations.count).to eq 0 }
       it { expect(group.presentations.with_deleted.count).to eq 1 }
     end
+
+    describe 'GET #play' do
+      let!(:presentation_song) { PresentationSong.new(song: song, index: 0) }
+      let!(:presentation) { Fabricate :presentation, group: group, presentation_songs: [ presentation_song ] }
+
+      before { get :play, params: { group_id: group.id, id: presentation.id } }
+
+      it { expect(response).to render_template :play, layout: :blank }
+      it { expect(assigns(:presentation)).to eq presentation }
+    end
   end
 
 end

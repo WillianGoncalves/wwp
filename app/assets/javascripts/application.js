@@ -13,28 +13,45 @@
 //= require jquery
 //= require jquery_ujs
 //= require materialize-css/dist/js/materialize.min
+//= require nosleep.js/dist/NoSleep
 //= require_tree .
 
- $(document).ready(function() {
-   $('select').material_select();
-   $('.datepicker').pickadate({
-     selectMonths: true,
-     selectYears: 15,
-     today: 'Today',
-     clear: 'Clear',
-     close: 'Ok',
-     closeOnSelect: false
-   });
+/*var noSleep = new NoSleep();
 
-   $('.timepicker').pickatime({
-     default: 'now',
-     fromnow: 0,
-     twelvehour: false,
-     donetext: 'OK',
-     cleartext: 'Clear',
-     canceltext: 'Cancel',
-     autoclose: false,
-     ampmclickable: true,
-     aftershow: function(){}
-   });
- });
+$('#play_view').ready(function() {
+  alert('hi');
+});
+
+function enableNoSleep() {
+  noSleep.enable();
+  console.log('no sleep enabled');
+}
+
+function disableNoSleep() {
+  noSleep.disable();
+  alert('no sleep disabled');
+}*/
+
+$(document).ready(function() {
+  $('select').material_select();
+  $('.datepicker').pickadate({
+    selectMonths: true,
+    selectYears: 15,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+    closeOnSelect: false
+  });
+
+  $('.timepicker').pickatime({
+    default: 'now',
+    fromnow: 0,
+    twelvehour: false,
+    donetext: 'OK',
+    cleartext: 'Clear',
+    canceltext: 'Cancel',
+    autoclose: false,
+    ampmclickable: true,
+    aftershow: function(){}
+  });
+});

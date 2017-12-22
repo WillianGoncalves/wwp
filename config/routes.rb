@@ -27,6 +27,9 @@ Rails.application.routes.draw do
 
   resources :presentations, only: [] do
     resources :comments, except: [:index, :show]
+    member do
+      get 'play'
+    end
   end
 
   resources :join_requests, only: [] do

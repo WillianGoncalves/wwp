@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>What We Play</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_pack_tag 'application' %>
+    <%= yield :stylesheet %>
+    <%= favicon_link_tag %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+
+    <main id="app" class="container">
+      <%= yield %>
+    </main>
+
+    <%= javascript_pack_tag 'application' %>
+
+  </body>
+</html>

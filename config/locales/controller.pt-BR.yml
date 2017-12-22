@@ -16,6 +16,7 @@ pt-BR:
     other_groups: Outros grupos
   presentations:
     index: Apresentações
+    play: Play
   songs:
     index: Músicas
     delete:
