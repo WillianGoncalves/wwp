@@ -7,6 +7,7 @@ import Tag from './songs/tag.vue';
 import TagColorPicker from './tags/tag_color_picker.vue';
 import Comment from './comments/comment.vue';
 import SongsSelector from './presentations/songs_selector.vue';
+import PresentationSongCard from './presentations/presentation_song_card.vue';
 
 Vue.component('user-group', UserGroup);
 Vue.component('group', Group);
@@ -16,6 +17,7 @@ Vue.component('tag', Tag);
 Vue.component('tag-color-picker', TagColorPicker);
 Vue.component('comment', Comment);
 Vue.component('songs-selector', SongsSelector);
+Vue.component('presentation-song-card', PresentationSongCard);
 
 new Vue({
   el: '#app',

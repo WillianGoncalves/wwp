@@ -18,12 +18,13 @@
 
 <div class="row">
   <% @presentation.presentation_songs.each do |ps| %>
-    <%= render partial: 'presentations/presentation_song_card', locals: { ps: ps } %>
+    <presentation-song-card :presentation-song="<%= render template: 'presentations/_presentation_song_card.json.jbuilder', locals: { presentation_song: ps } %>"></presentation-song-card>
   <% end %>
 </div>
 
 <div class="center-align vertical-margin">
   <%= link_to t('actions.edit'), edit_group_presentation_path(current_group, @presentation), class: 'btn' %>
+  <%= link_to 'PLAY', play_presentation_path(@presentation), class: 'btn' %>
 </div>
 
 <div id="comments">
