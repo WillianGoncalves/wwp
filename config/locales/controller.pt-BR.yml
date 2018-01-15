@@ -17,6 +17,7 @@ pt-BR:
   presentations:
     index: Apresentações
     play: Play
+    enableWakeLock: Manter tela acesa
   songs:
     index: Músicas
     delete:

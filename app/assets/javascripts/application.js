@@ -16,21 +16,7 @@
 //= require nosleep.js/dist/NoSleep
 //= require_tree .
 
-/*var noSleep = new NoSleep();
-
-$('#play_view').ready(function() {
-  alert('hi');
-});
-
-function enableNoSleep() {
-  noSleep.enable();
-  console.log('no sleep enabled');
-}
-
-function disableNoSleep() {
-  noSleep.disable();
-  alert('no sleep disabled');
-}*/
+var noSleep = new NoSleep();
 
 $(document).ready(function() {
   $('select').material_select();
@@ -53,5 +39,14 @@ $(document).ready(function() {
     autoclose: false,
     ampmclickable: true,
     aftershow: function(){}
+  });
+
+  $('button[data-enable-nosleep]').on('click', function(){
+    noSleep.enable();
+    $(this).fadeOut(1500);
+  });
+
+  $('button[data-disable-nosleep]').on('click', function(){
+    noSleep.disable();
   });
 });

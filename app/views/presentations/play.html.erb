@@ -1,7 +1,14 @@
-{{ enableNoSleep() }}
+<% content_for :stylesheet do %>
+<%= stylesheet_link_tag 'pages/presentations/play' %>
+<% end %>
 
-<div class="right-align">
-  <%= link_to group_presentation_path(current_group, @presentation), { class: 'btn white grey-text text-darken-3', onclick: 'disableNoSleep()' } do %>
+<div class="menu right-align">
+  <button type="button" class="btn-flat hide-on-large-only" data-enable-nosleep>
+    <i class="material-icons left">lightbulb_outline</i>
+    <%= t('presentations.enableWakeLock') %>
+  </button>
+
+  <%= link_to group_presentation_path(current_group, @presentation), { class: 'btn-flat', 'data-disable-nosleep' => nil } do %>
     <i class="material-icons">close</i>
   <% end %>
 </div>
