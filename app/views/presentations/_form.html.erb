@@ -43,3 +43,7 @@
     <% end %>
   </div>
 </div>
+
+<% if @presentation.persisted? %>
+  <%= render partial: 'presentations/deletion_modal', locals: { presentation: @presentation } %>
+<% end %>

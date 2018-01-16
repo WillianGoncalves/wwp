@@ -18,6 +18,8 @@ pt-BR:
     index: Apresentações
     play: Play
     enableWakeLock: Manter tela acesa
+    delete:
+      message: "Tem certeza de que deseja excluir essa apresentação?"
   songs:
     index: Músicas
     delete:
