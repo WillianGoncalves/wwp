@@ -24,6 +24,6 @@ class Tag < ApplicationRecord
   belongs_to :group
   has_and_belongs_to_many :songs
   validates :name, presence: true
-  validates :name, uniqueness: true
-  validates :color, uniqueness: true
+  validates :name, uniqueness: { scope: :group }
+  validates :color, uniqueness: { scope: :group }
 end

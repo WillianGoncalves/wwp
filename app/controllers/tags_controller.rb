@@ -18,6 +18,7 @@ class TagsController < ApplicationController
     if @tag.save
       redirect_to group_tags_path(current_group)
     else
+      current_group.tags.delete(@tag)
       @tags = current_group.tags
       render :index, status: :bad_request
     end

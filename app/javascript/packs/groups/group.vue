@@ -1,6 +1,6 @@
 <template>
   <div class="col s12 m6">
-    <div class="container">
+    <div class="group-container">
       <p>{{ group.name }}</p>
       <avatar v-for="member in group.members" :key="member.id" :url="member.avatar_url" class="avatar"></avatar>
 
@@ -33,7 +33,7 @@ export default
 <style scoped lang="sass?indentedSyntax">
 @import '../../../assets/stylesheets/modules/_colors';
 
-.container
+.group-container
   position: relative
   padding: 10px 20px
   width: 100%
