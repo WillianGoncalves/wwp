@@ -103,8 +103,8 @@ export default
       hiddenContent = $('#song_ids').val()
       return if hiddenContent.length == 0
       songIds = hiddenContent.split(',').map ((id) => parseInt(id))
-      for songId from songIds
-        for song from @_songs
+      for songId in songIds
+        for song in @_songs
           if song.id == songId
             @selectedSongs.push(song)
             break
