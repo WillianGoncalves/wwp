@@ -120,7 +120,7 @@ export default
       else
         @songs = @_songs.filter (song) =>
           tagIds = song.tags.map (tag) => tag.id
-          for tagId from @tagsFilter
+          for tagId in @tagsFilter
             return true if tagIds.includes(tagId)
 
   created: ->
