@@ -15,7 +15,7 @@ nav {
     font-family: 'Unica One', cursive;
     transition: all 200ms;
 
-    &:hover {
+    &:not(.btn-floating):hover {
       background: none !important;
       &, i { color: $menu-item-hover-color; }
     }

@@ -1,7 +1,10 @@
 // These variables are NOT normally used elsewhere. Just override materialize variables.
 
 // button
-$button-font-size: 0.8rem !default;
+$button-font-size: 0.8rem;
+$button-padding: 0 1.5rem;
+$button-raised-background-hover: none;
+$button-floating-background-hover: none;
 
 // collections
 $collection-hover-bg-color: $primary-color-dark;

@@ -9,9 +9,11 @@ $primary-color-dark: false !default;
 @if not $primary-color-dark {
   $primary-color-dark: darken($primary-color, 3%);
 }
-$secondary-color: #2CC990 !default;
-$success-color: color("green", "base") !default;
-$error-color: color("red", "base") !default;
+$secondary-color: #2CC990;
+$error-color: #C82647;
 $link-color: $color;
 $border-color: lighten($color, 50%);
 $menu-item-hover-color: $secondary-color;
+
+$primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$danger-gradient: linear-gradient(135deg, #f5576c 0%, #d33257 100%);

@@ -1,5 +1,35 @@
-.no-shadow {
+.btn, .btn-flat {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.btn {
+  background-image: $primary-gradient;
+}
+
+.btn-danger {
+  @extend .btn;
+  background-image: $danger-gradient;
+}
+
+.btn-floating {
+  overflow: unset;
+  background-image: $primary-gradient;
+}
+
+.btn-floating-danger {
+  @extend .btn-floating;
+  background-image: $danger-gradient;
+}
+
+.btn-floating-transparent {
+  @extend .btn-floating;
+  background-image: none;
+  @extend .transparent;
   &, &:hover { box-shadow: none; }
 }
 
-.btn-floating { overflow: unset; }
+.pulse:before {
+  background-image: $primary-gradient;
+}

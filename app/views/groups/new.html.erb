@@ -8,7 +8,7 @@
     </div>
 
     <div class="file-field input-field">
-      <div class="btn white grey-text text-darken-3">
+      <div class="btn">
         <span><%= t('activerecord.attributes.group.image') %></span>
         <%= f.file_field :image %>
       </div>
@@ -17,7 +17,9 @@
       </div>
     </div>
 
-    <%= f.submit t('actions.create'), class: 'btn' %>
+    <div class="right-align">
+      <%= f.submit t('actions.create'), class: 'btn' %>
+    </div>
     <% end %>
 
   </div>

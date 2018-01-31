@@ -15,7 +15,7 @@
   </div>
 
   <div class="file-field input-field">
-    <div class="btn white grey-text text-darken-3">
+    <div class="btn">
       <span>Avatar</span>
       <%= f.file_field :avatar %>
     </div>
@@ -44,8 +44,7 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
-  <div class="actions">
-    <%= link_to t('actions.back'), :back, class: 'btn white grey-text text-darken-3' %>
+  <div class="actions right-align">
     <%= f.submit t('actions.update'), class: 'btn' %>
   </div>
 <% end %>

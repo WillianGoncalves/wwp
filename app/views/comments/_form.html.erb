@@ -9,11 +9,11 @@
 
       <div class="right-align">
         <% if comment.persisted? %>
-          <button class="btn white red-text text-darken-3" type="button" @click="showModal('#deletion_confirmation_modal_<%= comment.id %>')">
+          <button class="btn-floating-danger" type="button" @click="showModal('#deletion_confirmation_modal_<%= comment.id %>')">
             <i class="material-icons">delete</i>
           </button>
         <% end %>
-        <%= button_tag type: 'submit', class: 'btn' do %>
+        <%= button_tag type: 'submit', class: 'btn-floating' do %>
           <i class="material-icons">done</i>
         <% end %>
       </div>

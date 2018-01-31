@@ -28,17 +28,12 @@
       </div>
 
       <div class="actions right-align">
-        <%= link_to :back, class: 'btn white grey-text text-darken-3' do %>
-          <i class="material-icons">chevron_left</i>
-        <% end %>
         <% if presentation.persisted? %>
-          <button class="btn white red-text text-darken-3" @click="showModal('#deletion_confirmation_modal')" type="button">
-            <i class="material-icons">delete</i>
+          <button class="btn-danger" @click="showModal('#deletion_confirmation_modal')" type="button">
+            <%= t('actions.delete') %>
           </button>
         <% end %>
-        <%= button_tag type: 'submit', class: 'btn' do %>
-          <i class="material-icons">done</i>
-        <% end %>
+        <%= button_tag t('actions.create'), { class: 'btn', type: 'submit' } %>
       </div>
     <% end %>
   </div>

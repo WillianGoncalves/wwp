@@ -3,7 +3,7 @@
     <div class="main-content" v-if="!showEditForm">
       <slot name="showView"></slot>
 
-      <button class="btn-floating transparent no-shadow" v-if="showOptions" @click="showEditForm = true">
+      <button class="btn-floating-transparent" v-if="showOptions" @click="showEditForm = true">
         <i class="material-icons dark-icon">edit</i>
       </button>
     </div>

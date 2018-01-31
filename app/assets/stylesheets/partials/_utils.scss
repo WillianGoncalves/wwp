@@ -1,5 +1,5 @@
 .error {
-  @extend .red-text, .text-darken-4;
+  color: $error-color;
   margin-left: 10px;
 }
 
