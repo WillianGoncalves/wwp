@@ -30,6 +30,11 @@
   &, &:hover { box-shadow: none; }
 }
 
+.btn-flat-bordered {
+  @extend .btn-flat;
+  border: 1px solid $border-color;
+}
+
 .pulse:before {
   background-image: $primary-gradient;
 }

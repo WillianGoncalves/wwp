@@ -10,6 +10,11 @@ $button-floating-background-hover: none;
 $collection-hover-bg-color: $primary-color-dark;
 $collection-link-color: $color;
 
+// form
+$input-margin-bottom: 5px;
+$input-margin: 0 0 $input-margin-bottom 0;
+$placeholder-text-color: lighten($color, 25%);
+
 // dropdown
 $dropdown-color: $color;
 $dropdown-hover-bg-color: $primary-color-dark;
@@ -18,8 +23,7 @@ $dropdown-hover-bg-color: $primary-color-dark;
 $sidenav-font-color: $color;
 
 // tab
-$tabs-underline-color: $secondary-color !default;
-$tabs-text-color: $color !default;
-$tabs-bg-color: rgba(0, 0, 0, 0) !default;
-
-$navbar-font-color: $color !default;
+$tabs-underline-color: $secondary-color;
+$tabs-text-color: $color;
+$tabs-bg-color: rgba(0, 0, 0, 0);
+$navbar-font-color: $color;

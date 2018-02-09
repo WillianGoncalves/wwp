@@ -2,7 +2,7 @@
   <div>
     <selected-songs :songs="selectedSongs" v-on:unselectSong="unselectSong" v-on:updateSongsOrder="updateSongsOrder" v-if="selectedSongs.length > 0"></selected-songs>
 
-    <button type="button" class="btn-flat" @click="showSelector = true" v-if="!showSelector">
+    <button type="button" class="btn-flat-bordered" @click="showSelector = true" v-if="!showSelector">
       <i class="material-icons left">add</i>
       Músicas
     </button>
@@ -27,7 +27,7 @@
         </div>
 
         <div v-else key="tagsFilter">
-          <button type="button" class="btn white tag-filter" v-for="tag in tags" @click="toggleTagFilter(tag.id)" :class="{'inactive': !tagFilterIsActive(tag.id)}">
+          <button type="button" class="btn-flat-bordered tag-filter" v-for="tag in tags" @click="toggleTagFilter(tag.id)" :class="{'inactive': !tagFilterIsActive(tag.id)}">
             <i class="material-icons left tiny" :style="{ color: tag.color }">local_offer</i>
             <span>{{ tag.name }}</span>
           </button>

@@ -2,10 +2,10 @@
   <ul class="collection">
     <draggable v-model="selectedSongs" @end="$emit('updateSongsOrder', selectedSongs)">
       <li class="collection-item" v-for="song in selectedSongs">
-        <span class="index">{{ indexOf(song) }}</span>
+        <span class="song-index">{{ indexOf(song) }}</span>
         {{ song.title }}
 
-        <span v-if="song.author" class="grey-text text-lighten-1 author"> - {{ song.author }}</span>
+        <span v-if="song.author" class="light-text"><small> - {{ song.author }}</small></span>
 
         <a class="secondary-content" @click="$emit('unselectSong', song)" href="#!">
           <i class="material-icons dark-icon tiny">delete</i>
@@ -33,13 +33,6 @@ export default
 </script>
 
 <style scoped lang="sass?indentedSyntax">
-.author
-  font-size: 0.7rem
-
-.index
-  font-weight: bold
-  margin-right: 15px
-
 .collection-item
   &:hover
     cursor: grab

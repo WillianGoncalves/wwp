@@ -10,7 +10,6 @@ class PresentationsController < ApplicationController
   end
 
   def new
-    flash[:date] = flash[:time] = nil
     @presentation = current_group.presentations.build
   end
 
@@ -71,13 +70,12 @@ class PresentationsController < ApplicationController
   def create_date_time
     @date = params[:date]
     @time = params[:time]
-    flash[:date] = flash[:time] = nil
 
     if @date.present? && @time.present?
       DateTime.parse("#{@date} #{@time}")
     else
-      flash[:date] = I18n.t('activerecord.custom_errors.presentation.date') unless @date.present?
-      flash[:time] = I18n.t('activerecord.custom_errors.presentation.time') unless @time.present?
+      flash.now[:date] = I18n.t('activerecord.custom_errors.presentation.date') unless @date.present?
+      flash.now[:time] = I18n.t('activerecord.custom_errors.presentation.time') unless @time.present?
       return nil
     end
   end

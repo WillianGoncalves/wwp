@@ -3,7 +3,33 @@
   margin-left: 10px;
 }
 
+.light-text {
+  color: lighten($color, 20%);
+}
+
 .vertical-margin {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.horizontal-margin {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.song-index {
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+strong {
+  font-weight: bold;
+}
+
+@mixin on-small {
+  @media #{$small-and-down} { @content; }
+}
+
+.right-align-on-small {
+  @include on-small { text-align: right; }
 }

@@ -2,6 +2,15 @@
   <%= stylesheet_link_tag 'pages/presentations/show' %>
 <% end %>
 
+<div class="right-align">
+  <%= link_to edit_group_presentation_path(current_group, @presentation), class: 'btn-floating horizontal-margin' do %>
+    <i class="material-icons">edit</i>
+  <% end %>
+  <%= link_to play_presentation_path(@presentation), class: 'btn-floating' do %>
+    <i class="material-icons">play_arrow</i>
+  <% end %>
+</div>
+
 <div id="presentation_info" class="center-align">
   <div class="info">
     <i class="fa fa-calendar"></i><h5><%= @presentation.date %></h5>
@@ -16,15 +25,16 @@
   </div>
 </div>
 
-<div class="row">
+<div class="collection">
   <% @presentation.presentation_songs.each do |ps| %>
-    <presentation-song-card :presentation-song="<%= render template: 'presentations/_presentation_song_card.json.jbuilder', locals: { presentation_song: ps } %>"></presentation-song-card>
+    <%= link_to group_song_path(current_group, ps.song), class: "collection-item" do %>
+      <div>
+        <span class="song-index"><%= ps.index %></span>
+        <%= ps.song.title %>
+        <span class="light-text"><small><%= "- #{ ps.song.author }" if ps.song.author.present? %></small></span>
+      </div>
+    <% end %>
   <% end %>
-</div>
-
-<div class="center-align vertical-margin">
-  <%= link_to t('actions.edit'), edit_group_presentation_path(current_group, @presentation), class: 'btn' %>
-  <%= link_to t('presentations.play'), play_presentation_path(@presentation), class: 'btn' %>
 </div>
 
 <div id="comments">

@@ -1,10 +1,28 @@
-<div class="right-align">
-  <%= link_to new_group_presentation_path(current_group), class: 'btn-floating' do %>
-    <i class="material-icons">add</i>
+<div class="row">
+  <%= form_tag(group_presentations_path(current_group), method: 'get') do %>
+    <div class="col s5 m2">
+      <%= select_tag 'month', options_for_select(months, @month) %>
+    </div>
+    <div class="col s4 m2">
+      <% if years.count > 1 %>
+        <%= select_tag 'year', options_for_select(years, @year) %>
+      <% end %>
+    </div>
+    <div class="col s3 m2 right-align-on-small">
+      <%= button_tag class: 'btn-floating' do %>
+        <i class="material-icons">search</i>
+      <% end %>
+    </div>
   <% end %>
+
+  <div class="col s12 m6 right-align">
+    <%= link_to new_group_presentation_path(current_group), class: 'btn-floating' do %>
+      <i class="material-icons">add</i>
+    <% end %>
+  </div>
 </div>
 
-<%= render partial: "presentations/search_form" %>
+
 
 <div class="row">
   <% @presentations.each do |presentation| %>

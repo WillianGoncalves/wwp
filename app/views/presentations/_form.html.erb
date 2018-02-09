@@ -1,3 +1,6 @@
+<% content_for :stylesheet do %>
+  <%= stylesheet_link_tag 'pages/presentations/form' %>
+<% end %>
 <div class="row">
   <div class="col s12 m8 offset-m2">
     <%= form_with(model: [ current_group, @presentation ]) do |f| %>
@@ -21,7 +24,7 @@
 
       <div>
         <%= hidden_field_tag :song_ids, song_ids(@presentation), { id: 'song_ids', multiple: true } %>
-        <songs-selector :groupid="<%= current_group.id %>"></songs-selector>
+        <songs-selector id="songs_selector" :groupid="<%= current_group.id %>"></songs-selector>
         <% if @presentation.errors[:presentation_songs].present? %>
           <span class="error"><%= @presentation.errors[:presentation_songs].first %></span>
         <% end %>

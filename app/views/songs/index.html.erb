@@ -13,7 +13,7 @@
     <%= link_to group_song_path(current_group, song), class: "collection-item" do %>
       <div>
         <%= song.title %>
-        <span class="grey-text text-lighten-1 secondary-content"><%= song.tone %></span>
+        <span class="light-text secondary-content"><%= song.tone %></span>
         <div class="tags-container secondary-content">
           <% song.tags.each do |tag| %>
             <tag class="song-tag" :tag="<%= render template: 'songs/_tag.json.jbuilder', locals: { tag: tag } %>"></tag>
