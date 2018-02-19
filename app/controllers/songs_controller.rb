@@ -10,6 +10,8 @@ class SongsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
+    @last_presentation = @song.last_presentation
+    @next_presentation = @song.next_presentation
   end
 
   def new

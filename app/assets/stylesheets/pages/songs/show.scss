@@ -1,31 +1,30 @@
-@import '../../modules/_colors.scss';
+@import "../../modules/_colors";
 
-.main-content {
-  display: inline-flex;
-  align-items: center;
+#title {
+  border-bottom: 1px solid $border-color;
 }
 
-img { margin-right: 20px; }
+#times_played {
+  margin: 2rem 0;
+  span { font-size: 2rem; }
+}
 
-.body {
-  position: relative;
-  padding: 15px;
-  border: 1px solid $border-color;
-  border-radius: 3px;
-  background-color: $primary-color-light;
+#presentations { margin-bottom: 5rem; }
 
-  &:before {
-    content: '';
-    position: absolute;
-    top: 18px;
-    left: -8px;
-    width: 16px;
-    height: 16px;
-    border-color: $border-color;
-    border-width: 0 0 1px 1px;
-    border-style: solid;
-    background-color: $primary-color-light;
-    transform: rotate(45deg);
+#last_presentation, #next_presentation {
+  h6 { text-decoration: underline; }
+  p { margin: 5px 0; }
+  &:hover {
+    .link-title { color: $secondary-color; }
   }
 }
 
+#last_presentation {
+  padding-left: 15px;
+  border-left: 1px solid $border-color;
+}
+
+#next_presentation {
+  padding-right: 15px;
+  border-right: 1px solid $border-color;
+}

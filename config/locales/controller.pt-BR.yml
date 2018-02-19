@@ -24,6 +24,9 @@ pt-BR:
     index: Músicas
     delete:
       message: "Tem certeza de que deseja excluir essa música?"
+    last_presentation: "Última apresentação"
+    next_presentation: "Próxima apresentação"
+    played_x_times: "Tocada"
   join_requests:
     accept: Aceitar
     reject: Rejeitar

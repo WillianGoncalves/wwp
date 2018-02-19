@@ -31,4 +31,12 @@ class Song < ApplicationRecord
   has_many :comments, -> { order(:created_at) }, as: :target
   validates :title, :group, presence: true
   validates :tone, format: { with: /\A[A-G](b|#)?m?\z/ }
+
+  def last_presentation
+    self.presentations.where('DATE(date_time) < ?', DateTime.now).order(date_time: :desc).first
+  end
+
+  def next_presentation
+    self.presentations.where('DATE(date_time) > ?', DateTime.now).order(:date_time).first
+  end
 end
