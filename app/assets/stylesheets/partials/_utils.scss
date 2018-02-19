@@ -1,6 +1,13 @@
+@import "../partials/_mixins";
+
 .error {
   color: $error-color;
   margin-left: 10px;
+}
+
+.vertical-separator {
+  width: 1px;
+  background: $border-color;
 }
 
 .light-text {
@@ -24,10 +31,6 @@
 
 strong {
   font-weight: bold;
-}
-
-@mixin on-small {
-  @media #{$small-and-down} { @content; }
 }
 
 .right-align-on-small {

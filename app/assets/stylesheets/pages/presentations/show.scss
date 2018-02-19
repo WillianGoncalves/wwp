@@ -1,5 +1,3 @@
-@import '../../modules/_colors.scss';
-
 #presentation_info {
   display: flex;
   justify-content: space-around;
@@ -15,11 +13,5 @@
     align-items: center;
 
     i { margin-right: 15px; }
-  }
-
-  .separator {
-    height: 50px;
-    width: 1px;
-    background: $border-color;
   }
 }

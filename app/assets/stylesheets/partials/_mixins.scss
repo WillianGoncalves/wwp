@@ -1,0 +1,3 @@
+@mixin on-small {
+  @media #{$small-and-down} { @content; }
+}
