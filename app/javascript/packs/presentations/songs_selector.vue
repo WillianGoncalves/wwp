@@ -130,7 +130,7 @@ export default
 </script>
 
 <style scoped lang="sass?indentedSyntax">
-@import '../../../assets/stylesheets/modules/_colors.scss';
+@import '../../../assets/stylesheets/modules/_colors';
 
 .main-content
   border: 1px solid $border-color
