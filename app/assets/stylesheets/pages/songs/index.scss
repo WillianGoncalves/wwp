@@ -6,3 +6,10 @@
     margin-top: 4px;
   }
 }
+
+#legend {
+  display: flex;
+  .tag-meaning {
+    margin-right: 25px;
+  }
+}

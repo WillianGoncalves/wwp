@@ -8,6 +8,15 @@
   <% end %>
 </div>
 
+<div id="legend">
+  <% get_tags_from_songs(@songs).each do |tag| %>
+    <div class="tag-meaning">
+      <tag :tag="<%= render template: 'songs/_tag.json.jbuilder', locals: { tag: tag } %>"></tag>
+      <%= tag.name %>
+    </div>
+  <% end %>
+</div>
+
 <ul class="collection">
   <% @songs.each do |song| %>
     <%= link_to group_song_path(current_group, song), class: "collection-item" do %>
@@ -16,7 +25,7 @@
         <span class="light-text secondary-content"><%= song.tone %></span>
         <div class="tags-container secondary-content">
           <% song.tags.each do |tag| %>
-            <tag class="song-tag" :tag="<%= render template: 'songs/_tag.json.jbuilder', locals: { tag: tag } %>"></tag>
+            <tag :tag="<%= render template: 'songs/_tag.json.jbuilder', locals: { tag: tag } %>"></tag>
           <% end %>
         </div>
       </div>
