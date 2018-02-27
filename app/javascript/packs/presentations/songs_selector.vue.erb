@@ -4,7 +4,7 @@
 
     <button type="button" class="btn-flat-bordered" @click="showSelector = true" v-if="!showSelector">
       <i class="material-icons left">add</i>
-      Músicas
+      <%= I18n.t('activerecord.attributes.presentation.songs') %>
     </button>
 
     <div v-if="showSelector" class="main-content">
