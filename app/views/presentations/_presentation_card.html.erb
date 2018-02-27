@@ -5,13 +5,7 @@
 <%= link_to group_presentation_path(current_group, presentation) do %>
   <div class="presentation-card">
     <p>
-      <span class="center-align icon"><i class="fa fa-calendar"></i></span> <%= presentation.date %>
-      <span class="card-counters">
-        <span class="right"><%= presentation.songs.size %> <i class="fa fa-music"></i></span>
-        <% if presentation.comments.any? %>
-          <span class="right"><%= presentation.comments.size %> <i class="fa fa-comments"></i></span>
-        <% end %>
-      </span>
+      <span class="day"><%= presentation.date_time.day %></span><span class="month"> / <%= l(presentation.date_time, format: "%b") %></span>
     </p>
     <p><span class="center-align icon"><i class="fa fa-clock-o"></i></span> <%= presentation.time %></p>
     <p><span class="center-align icon"><i class="fa fa-map-marker"></i></span> <%= presentation.local %></p>

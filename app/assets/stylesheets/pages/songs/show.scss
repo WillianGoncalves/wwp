@@ -12,7 +12,11 @@
 #presentations { margin-bottom: 5rem; }
 
 #last_presentation, #next_presentation {
-  h6 { text-decoration: underline; }
+  .link-title { 
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    text-decoration: underline;
+  }
   p { margin: 5px 0; }
   &:hover {
     .link-title { color: $secondary-color; }

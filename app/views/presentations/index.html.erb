@@ -3,11 +3,11 @@
     <div class="col s5 m2">
       <%= select_tag 'month', options_for_select(months, @month) %>
     </div>
-    <div class="col s4 m2">
-      <% if years.count > 1 %>
+    <% if years.count > 1 %>
+      <div class="col s4 m2">
         <%= select_tag 'year', options_for_select(years, @year) %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
     <div class="col s3 m2 right-align-on-small">
       <%= button_tag class: 'btn-floating' do %>
         <i class="material-icons">search</i>
@@ -26,7 +26,7 @@
 
 <div class="row">
   <% @presentations.each do |presentation| %>
-      <div class="col s12 m6">
+      <div class="col s12 m4">
         <%= render partial: "presentations/presentation_card", locals: { presentation: presentation } %>
       </div>
   <% end %>

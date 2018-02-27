@@ -30,7 +30,7 @@ pt-BR:
         name: Categoria
         color: Cor
       comment:
-        body: Comentário
+        body: Seu comentário
       created_at: Criado em
       updated_at: Atualizado em
     models:
