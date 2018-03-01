@@ -13,9 +13,11 @@
 
 #last_presentation, #next_presentation {
   .link-title { 
+    display: flex;
+    align-items: center;
     margin-bottom: 15px;
-    font-size: 1.5rem;
-    text-decoration: underline;
+    font-size: 1.2rem;
+    font-weight: bold;
   }
   p { margin: 5px 0; }
   &:hover {
@@ -23,12 +25,13 @@
   }
 }
 
-#last_presentation {
-  padding-left: 15px;
-  border-left: 1px solid $border-color;
+#last_presentation .link-title i {
+  margin-right: 10px;
 }
 
 #next_presentation {
-  padding-right: 15px;
-  border-right: 1px solid $border-color;
+  .link-title {
+    justify-content: flex-end;
+    i { margin-left: 10px; }
+  }
 }
