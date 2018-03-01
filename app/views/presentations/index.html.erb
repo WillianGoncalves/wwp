@@ -22,12 +22,12 @@
   </div>
 </div>
 
-
-
 <div class="row">
   <% @presentations.each do |presentation| %>
       <div class="col s12 m4">
-        <%= render partial: "presentations/presentation_card", locals: { presentation: presentation } %>
+        <%= link_to group_presentation_path(current_group, presentation) do %>
+          <presentation-card :presentation="<%= render "presentation_card.json.jbuilder", presentation: presentation %>" ></presentation-card>
+        <% end %>
       </div>
   <% end %>
 </div>
