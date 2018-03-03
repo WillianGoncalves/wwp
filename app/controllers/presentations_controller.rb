@@ -1,20 +1,19 @@
 class PresentationsController < ApplicationController
+  before_action :set_presentation, only: [:show, :edit, :update, :play]
+
   def index
     @month = if params[:month].present? then params[:month] else DateTime.now.month end
     @year = if params[:year].present? then params[:year] else DateTime.now.year end
     @presentations = current_group.presentations.where('extract(month from date_time) = ?', @month).where('extract(year from date_time) = ?', @year)
   end
 
-  def show
-    @presentation = Presentation.find(params[:id])
-  end
+  def show; end
 
   def new
     @presentation = current_group.presentations.build
   end
 
   def edit
-    @presentation = Presentation.find(params[:id])
     @date = @presentation.date
     @time = @presentation.time
   end
@@ -33,7 +32,6 @@ class PresentationsController < ApplicationController
   end
 
   def update
-    @presentation = Presentation.find(params[:id])
     @presentation.date_time = create_date_time
     @presentation.presentation_songs.destroy_all
     add_songs
@@ -51,11 +49,14 @@ class PresentationsController < ApplicationController
   end
 
   def play
-    @presentation = Presentation.find(params[:id])
     render :play, layout: 'blank'
   end
 
   private
+  def set_presentation
+    @presentation = Presentation.find(params[:id])
+  end
+
   def presentation_params
     params.require(:presentation).permit(:local)
   end

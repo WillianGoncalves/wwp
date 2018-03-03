@@ -10,23 +10,23 @@ Rails.application.routes.draw do
 
   root 'groups#index'
 
-  resources :groups do
+  resources :groups, only: [:index, :show, :new, :create] do
     member do
       get 'candidates'
     end
     resources :members, only: [:create]
     resources :join_requests, only: [:index, :create]
     resources :songs
-    resources :tags, except: [:new]
+    resources :tags, except: [:new, :show]
     resources :presentations
   end
 
   resources :songs, only: [] do
-    resources :comments, except: [:index, :show]
+    resources :comments, only: [:create, :update, :destroy]
   end
 
   resources :presentations, only: [] do
-    resources :comments, except: [:index, :show]
+    resources :comments, only: [:create, :update, :destroy]
     member do
       get 'play'
     end

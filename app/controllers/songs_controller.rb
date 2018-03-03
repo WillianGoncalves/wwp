@@ -1,4 +1,6 @@
 class SongsController < ApplicationController
+  before_action :set_song, only: [:show, :edit, :update, :destroy]
+
   def index
     @songs = current_group.songs.order(:title)
 
@@ -9,7 +11,6 @@ class SongsController < ApplicationController
   end
 
   def show
-    @song = Song.find(params[:id])
     @last_presentation = @song.last_presentation
     @next_presentation = @song.next_presentation
   end
@@ -18,9 +19,7 @@ class SongsController < ApplicationController
     @song = Song.new
   end
 
-  def edit
-    @song = Song.find(params[:id])
-  end
+  def edit; end
 
   def create
     @song = current_group.songs.build(song_params)
@@ -32,7 +31,6 @@ class SongsController < ApplicationController
   end
 
   def update
-    @song = current_group.songs.find(params[:id])
     if @song.update(song_params)
       redirect_to group_songs_path(current_group)
     else
@@ -46,6 +44,10 @@ class SongsController < ApplicationController
   end
 
   private
+  def set_song
+    @song = Song.find(params[:id])
+  end
+
   def song_params
     params.require(:song).permit(:title, :author, :tone, tag_ids: [])
   end

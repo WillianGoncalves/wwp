@@ -26,7 +26,6 @@ class GroupsController < ApplicationController
 
   def candidates
     users = current_group.members.map(&:user)
-
     @candidates = User.all - users
 
     respond_to do |format|
