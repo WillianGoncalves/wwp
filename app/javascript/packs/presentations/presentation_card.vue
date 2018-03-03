@@ -1,5 +1,5 @@
 <template>
-  <div class="presentation-card">
+  <div class="card">
     <p>
       <span class="day">{{ presentation.day }}</span><span class="month"> / {{ presentation.month }}</span>
     </p>
@@ -19,23 +19,15 @@ export default
 <style scoped lang="sass?indentedSyntax">
 @import '../../../assets/stylesheets/modules/_colors';
 
-.presentation-card
-  padding: 10px 20px
-  width: 100%
-  margin: 10px 0
-  border: 1px solid $border-color
-  border-radius: 10px
-  box-shadow: 0 2px 7px #ddd
+.day
+  font-size: 3rem
 
-  .day 
-    font-size: 3rem
+.month
+  text-transform: uppercase
+  letter-spacing: 2px
+  font-size: 0.7rem
 
-  .month
-    text-transform: uppercase
-    letter-spacing: 2px
-    font-size: 0.7rem
-
-  .icon
-    display: inline-block
-    width: 25px
+.icon
+  display: inline-block
+  width: 25px
 </style>

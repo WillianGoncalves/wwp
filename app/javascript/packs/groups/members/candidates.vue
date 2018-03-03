@@ -9,7 +9,7 @@
 
     <div class="row scrollable">
       <div class="col s6 m3" v-for="user in users">
-        <div class="cell" :key="user.id" @click="$emit('userSelected', user)">
+        <div class="card center-align" :key="user.id" @click="$emit('userSelected', user)">
           <avatar :url="user.avatar_url"></avatar>
           <p>
             {{ fullName(user) }}
@@ -57,20 +57,13 @@ export default
   max-height: 300px
   overflow: auto
 
-.cell
-  height: 115px
-  padding: 10px
-  margin: 10px 0
-  text-align: center
-  cursor: pointer
-  background-color: $primary-color
-  border: 1px solid $border-color
-
+.card
   p
     margin-bottom: 0
 
   &:hover
     background-color: darken($primary-color, 5%)
+    cursor: pointer
 
   @media (max-width: 425px)
     height: 148px

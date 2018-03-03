@@ -1,6 +1,6 @@
 <template>
   <div class="col s12 m6">
-    <div class="group-container">
+    <div class="card">
       <p>{{ group.name }}</p>
       <avatar v-for="member in group.members" :key="member.id" :url="member.avatar_url" class="avatar"></avatar>
 
@@ -31,16 +31,6 @@ export default
 </script>
 
 <style scoped lang="sass?indentedSyntax">
-@import '../../../assets/stylesheets/modules/_colors';
-
-.group-container
-  position: relative
-  padding: 10px 20px
-  width: 100%
-  margin: 10px 0
-  border: 1px solid $border-color
-  box-shadow: 0 2px 7px #ddd
-
 .enter-button
   position: absolute
   right: 20px
