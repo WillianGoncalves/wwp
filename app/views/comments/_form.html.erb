@@ -23,5 +23,5 @@
 </div>
 
 <% if comment.persisted? %>
-  <%= render partial: "comments/deletion_modal", locals: { target: comment.target, comment: comment } %>
+  <%= render "comments/deletion_modal", { target: comment.target, comment: comment } %>
 <% end %>

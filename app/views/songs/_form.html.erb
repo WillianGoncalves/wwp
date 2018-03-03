@@ -22,7 +22,7 @@
     </div>
 
     <div class="actions right-align">
-      <% if song.persisted? %>
+      <% if @song.persisted? %>
         <button class="btn-danger" @click="showModal('#deletion_confirmation_modal')" type="button">
           <%= t('actions.delete') %>
         </button>
@@ -34,6 +34,6 @@
   </div>
 </div>
 
-<% if song.persisted? %>
-  <%= render partial: "songs/deletion_modal", locals: { song: song } %>
+<% if @song.persisted? %>
+  <%= render "deletion_modal" %>
 <% end %>

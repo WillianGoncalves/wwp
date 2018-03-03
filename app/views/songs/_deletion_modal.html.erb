@@ -5,7 +5,7 @@
   </div>
   <div class="modal-footer">
     <a href="#!" class="modal-action modal-close waves-effect btn-flat"><%= t('actions.cancel') %></a>
-    <%= link_to t('actions.delete'), group_song_path(current_group, song), method: :delete, class: "modal-action modal-close waves-effect btn-flat red-text text-darken-3" %>
+    <%= link_to t('actions.delete'), group_song_path(current_group, @song), method: :delete, class: "modal-action modal-close waves-effect btn-flat red-text text-darken-3" %>
   </div>
 </div>
 

@@ -31,7 +31,7 @@
       </div>
 
       <div class="actions right-align">
-        <% if presentation.persisted? %>
+        <% if @presentation.persisted? %>
           <button class="btn-danger" @click="showModal('#deletion_confirmation_modal')" type="button">
             <%= t('actions.delete') %>
           </button>
@@ -43,5 +43,5 @@
 </div>
 
 <% if @presentation.persisted? %>
-  <%= render partial: 'presentations/deletion_modal', locals: { presentation: @presentation } %>
+  <%= render 'deletion_modal' %>
 <% end %>

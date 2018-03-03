@@ -41,14 +41,14 @@
   <% @presentation.comments.each do |comment| %>
     <comment :show-options="<%= current_user.id.equal?(comment.commenter.id) %>">
       <div slot="showView">
-        <%= render partial: "comments/show", locals: { comment: comment } %>
+        <%= render "comments/show", { comment: comment } %>
       </div>
 
       <div slot="form">
-        <%= render partial: "comments/form", locals: { target: @presentation, comment: comment } %>
+        <%= render "comments/form", { target: @presentation, comment: comment } %>
       </div>
     </comment>
   <% end %>
 </div>
 
-<%= render partial: "comments/form", locals: { target: @presentation, comment: @presentation.comments.build } %>
+<%= render "comments/form", { target: @presentation, comment: @presentation.comments.build } %>
