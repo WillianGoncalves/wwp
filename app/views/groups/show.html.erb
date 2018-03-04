@@ -2,4 +2,14 @@
   <%= stylesheet_link_tag 'pages/groups/show' %>
 <% end %>
 
-<members :group="<%= render template: 'groups/show.json.jbuilder', locals: { group: @group } %>"></members>
+<h1 class="center-align"><%= @group.name %></h1>
+
+<div class="row">
+  <% @group.members.each do |member| %>
+    <div class="col s12 m3">
+      <user-card :user="<%= member.user.to_json %>"></user-card>
+    </div>
+  <% end %>
+</div>
+
+<candidates :group-id="<%= @group.id %>"></candidates>

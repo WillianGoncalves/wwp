@@ -1,39 +1,49 @@
 <template>
   <div>
-    <div class="members-container">
-      <avatar v-for="member in members" :key="member.id" :url="member.avatar_url" class="avatar" :tooltip="member.first_name"></avatar>
+    <div class="right-align">
       <button class="btn-floating" @click="showUsers = !showUsers" :class="{'close-button': showUsers}"><i class="material-icons">add</i></button>
     </div>
 
     <chips :users="new_members" v-on:removeMember="removeMember" v-on:save="save"></chips>
 
     <transition name="expand">
-      <div class="candidates-container" v-if="showUsers">
-        <candidates ref="candidates" :groupid="group.id" v-on:userSelected="addMember"></candidates>
+      <div v-if="showUsers">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">search</i>
+            <input id="search" type="text" v-model="searchFor">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m3" v-for="candidate in candidates">
+            <user-card :user="candidate" @click.native="addMember(candidate)"></user-card>
+          </div>
+        </div>
       </div>
     </transition>
   </div>
 </template>
 
 <script lang="coffee">
-import Vue from 'vue';
-import Candidates from './members/candidates.vue';
 import Chips from './members/chips.vue';
+import UserCard from './user_card.vue';
 
 export default
   props:
-    group:
-      type: Object
+    groupId:
+      type: Number
       required: true
 
   data: () ->
+    searchFor: ''
     showUsers: false
     new_members: []
-    members: @group.members
+    candidates: []
 
   components:
-    'candidates': Candidates
     'chips': Chips
+    'user-card': UserCard
 
   methods:
     addMember: (user) ->
@@ -42,46 +52,42 @@ export default
     removeMember: (index) ->
       @new_members.splice(index, 1)
 
+    listUsers: ->
+      $.get "/groups/#{@groupId}/candidates", (data) =>
+        @candidates = @_candidates = data
+
     save: ->
       data = @new_members.map (user) -> { user_id: user.id }
       $.ajax
-        url: "/groups/#{@group.id}/members"
+        url: "/groups/#{@groupId}/members"
         type: 'POST'
         data: JSON.stringify(members: data)
         dataType: 'json'
         contentType: 'application/json'
-      .done (data) =>
-        @new_members = []
-        @members = data
-        @$refs.candidates.listUsers()
+      .done () =>
+        location.reload()
 
+  watch:
+    searchFor: ->
+      @candidates = @_candidates.filter (user) =>
+        user.first_name.toLowerCase().includes(@searchFor.toLowerCase()) ||
+        user.last_name.toLowerCase().includes(@searchFor.toLowerCase())
+
+  created: ->
+    @listUsers()
 </script>
 
 <style scoped lang="sass?indentedSyntax">
-@import '../../../assets/stylesheets/modules/colors';
+.card
+  cursor: pointer
 
 .close-button
   transform: rotate(45deg)
   transition-duration: .2s
-
-.members-container
-  display: flex
-  align-items: center
-  justify-content: center
-  flex-wrap: wrap
-
-  .avatar, button
-    margin: 10px
-
-.candidates-container
-  max-height: 500px
-  margin-top: 20px
-  overflow: hidden
 
 .expand-enter-active, .expand-leave-active
   transition: max-height .4s
 
 .expand-enter, .expand-leave-to
   max-height: 0
-
 </style>

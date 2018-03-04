@@ -1,30 +1,15 @@
 class MembersController < ApplicationController
   def create
-    @members = []
     @group = Group.find(params[:group_id])
 
-    begin
-      params[:members].each do |member|
-        @member = Member.new(member_params(member))
-        @member.group = @group
-        if @member.valid?
-          @members << @member
-        else
-          raise
-        end
-      end
+    params[:members].each do |member|
+      @group.members.build(member_params(member))
+    end
 
-      @members.each do |member|
-        member.save
-      end
-
-      respond_to do |format|
-        format.json { render template: 'groups/_members.json.jbuilder', locals: { members: @group.members } }
-      end
-    rescue Exception => msg
-      respond_to do |format|
-        format.json { render json: msg, status: :bad_request }
-      end
+    if @group.save
+      head :no_content
+    else
+      render json: @group.errors.full_messages, status: :bad_request
     end
   end
 

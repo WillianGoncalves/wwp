@@ -28,9 +28,7 @@ class GroupsController < ApplicationController
     users = current_group.members.map(&:user)
     @candidates = User.all - users
 
-    respond_to do |format|
-      format.json
-    end
+    render json: @candidates
   end
 
   private
