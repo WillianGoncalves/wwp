@@ -36,4 +36,19 @@ RSpec.describe MembersController, type: :controller do
       it { expect(user2.groups.count).to eq 1 }
     end
   end
+
+  describe 'DELETE #destroy' do
+    let!(:member_admin) { Fabricate.build :member_admin, user: user }
+    let!(:user1) { Fabricate :user }
+    let!(:user2) { Fabricate :user }
+    let!(:member1) { Fabricate.build :member, user: user1 }
+    let!(:member2) { Fabricate.build :member, user: user2 }
+    let!(:group) { Fabricate :group, members: [member_admin, member1, member2] }
+
+    before { delete :destroy, params: { group_id: group, id: member1.id } }
+
+    it { expect(response).to redirect_to group_path(group) }
+    it { expect(group.reload.members).to match_array [member_admin, member2] }
+    it { expect(group.reload.members).to_not include member1 }
+  end
 end

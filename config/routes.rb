@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     member do
       get 'candidates'
     end
-    resources :members, only: [:create]
+    resources :members, only: [:create, :destroy]
     resources :join_requests, only: [:index, :create]
     resources :songs
     resources :tags, except: [:new, :show]

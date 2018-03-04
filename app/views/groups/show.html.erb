@@ -7,8 +7,16 @@
 <div class="row">
   <% @group.members.each do |member| %>
     <div class="col s12 m3">
-      <user-card :user="<%= member.user.to_json %>"></user-card>
+      <user-card :user="<%= member.user.to_json %>">
+        <% if current_user.is_admin_of(current_group) && current_user != member.user %>
+          <button class="btn-floating-transparent" slot="delete_button" @click="showModal('#member_deletion_confirmation_modal_<%= member.id %>')">
+            <i class="tiny material-icons">delete</i>
+          </button>
+        <% end %>
+      </user-card>
     </div>
+
+    <%= render "member_deletion_modal", member: member %>
   <% end %>
 </div>
 

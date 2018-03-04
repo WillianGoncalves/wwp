@@ -1,0 +1,11 @@
+<div id="member_deletion_confirmation_modal_<%= member.id %>" class="modal">
+  <div class="modal-content">
+    <h4><%= t('caution') %></h4>
+    <p><%= t('members.delete.message') %></p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect btn-flat"><%= t('actions.cancel') %></a>
+    <%= link_to t('actions.delete'), group_member_path(current_group, member), method: :delete, class: "modal-action modal-close waves-effect btn-flat red-text text-darken-3" %>
+  </div>
+</div>
+

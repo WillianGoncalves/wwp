@@ -4,13 +4,13 @@
       <slot name="showView"></slot>
 
       <button class="btn-floating-transparent" v-if="showOptions" @click="showEditForm = true">
-        <i class="material-icons dark-icon">edit</i>
+        <i class="material-icons">edit</i>
       </button>
     </div>
 
     <div class="right-align" v-if="showEditForm">
-      <button class="btn-flat" @click="showEditForm = false">
-        <i class="material-icons dark-icon">close</i>
+      <button class="btn-floating-transparent" @click="showEditForm = false">
+        <i class="material-icons">close</i>
       </button>
     </div>
 

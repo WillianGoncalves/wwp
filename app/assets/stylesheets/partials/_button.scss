@@ -28,6 +28,7 @@
   background-image: none;
   @extend .transparent;
   &, &:hover { box-shadow: none; }
+  i { color: $color; }
 }
 
 .btn-flat-bordered {

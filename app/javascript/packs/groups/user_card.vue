@@ -1,5 +1,8 @@
 <template>
   <div class="card center-align">
+    <div class="delete-button">
+      <slot name="delete_button"></slot>
+    </div>
     <avatar :url="user.avatar.url" class="avatar"></avatar>
     <p>{{ fullName(user) }}</p>
     <p class="email">{{ user.email }}</p>
@@ -20,10 +23,18 @@ export default
 
 <style scoped lang="sass?indentedSyntax">
 @import '../../../assets/stylesheets/modules/colors';
+.delete-button
+  position: absolute
+  right: 8px
+  i
+    font-size: 1.2rem
+
 .avatar
   margin: 10px 0
+
 p
   margin: 5px 0
+
 .email
   color: lighten($color, 20%)
 </style>

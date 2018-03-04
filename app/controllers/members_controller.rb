@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
-  def create
-    @group = Group.find(params[:group_id])
+  before_action :set_group
 
+  def create
     params[:members].each do |member|
       @group.members.build(member_params(member))
     end
@@ -13,7 +13,16 @@ class MembersController < ApplicationController
     end
   end
 
+  def destroy
+    @group.members.destroy(params[:id])
+    redirect_to group_path(@group)
+  end
+
   private
+  def set_group
+    @group = Group.find(params[:group_id])
+  end
+
   def member_params(params)
     params.permit(:user_id)
   end

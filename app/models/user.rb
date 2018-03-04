@@ -49,4 +49,9 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def is_admin_of(group)
+    admins = group.members.where("admin = ?", true).map(&:user)
+    admins.include?(self)
+  end
 end
