@@ -74,7 +74,7 @@ jobs:
                             $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
       # Save test results for timing analysis
       - store_test_results:
-        path: test_results
+          path: test_results
 
       - add_ssh_keys:
           fingerprints:
