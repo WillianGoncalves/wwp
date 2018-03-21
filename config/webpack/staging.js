@@ -12,6 +12,12 @@ module.exports = merge(sharedConfig, {
   devtool: 'source-map',
   stats: 'normal',
 
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.min'
+    } 
+  },
+
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
