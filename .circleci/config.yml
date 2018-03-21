@@ -80,7 +80,7 @@ jobs:
           name: Deploy to staging
           command: |
             if [ "${CIRCLE_BRANCH}" == "staging" ]; then
-              git push git@heroku.com:staging-wwp.git
+              git push git@heroku.com:staging-wwp.git $CIRCLE_SHA1:refs/heads/master
               heroku run rails db:migrate
               heroku run db:seed
               heroku restart
@@ -90,7 +90,7 @@ jobs:
           name: Deploy to production
           command: |
             if [ "${CIRCLE_BRANCH}" == "production" ]; then
-              git push git@heroku.com:wwp.git
+              git push git@heroku.com:wwp.git $CIRCLE_SHA1:refs/heads/master
               heroku run rails db:migrate
               heroku run db:seed
               heroku restart
