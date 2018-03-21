@@ -87,8 +87,8 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "staging" ]; then
               git push git@heroku.com:staging-wwp.git $CIRCLE_SHA1:refs/heads/master
-              heroku run rails db:migrate
-              heroku run db:seed
+              heroku run rails db:migrate --app staging-wwp --exit-code
+              heroku run db:seed --app staging-wwp
               heroku restart
             fi
 
@@ -97,7 +97,7 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "production" ]; then
               git push git@heroku.com:wwp.git $CIRCLE_SHA1:refs/heads/master
-              heroku run rails db:migrate
-              heroku run db:seed
+              heroku run rails db:migrate --app wwp --exit-code
+              heroku run db:seed --app wwp
               heroku restart
             fi
