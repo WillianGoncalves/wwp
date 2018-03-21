@@ -76,6 +76,8 @@ jobs:
       - store_test_results:
           path: test_results
 
+      - run: bash .circleci/setup-heroku.sh
+
       - add_ssh_keys:
           fingerprints:
             - "8b:48:5e:67:0e:c9:16:47:32:f2:87:0c:1f:c8:60:ad"
