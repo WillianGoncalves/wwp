@@ -12,6 +12,26 @@
 * `rails db:migrate`
 * `yarn install`
 
+## Run
 
+To run the app, execute the following commands in separate consoles:
+* `rails s`
+* `./bin/webpack-dev-server`
+
+## Annotate
 * annotate fabricators:
 `annotate --exclude tests,fixtures,serializers`
+
+## Deploy
+
+### Heroku
+
+In production, you don't use the webpack server. Instead, Heroku automatically detects the **webpacker gem**,
+installs the **nodejs buildpack**, runs `yarn install` for you and, when `rails assets:precompile` runs, it will also
+executes `yarn run`, which will pre-compile all the assets.
+
+So, for Heroku, you basically don't have to do anything.
+
+### CircleCI
+
+You must set the Heroku API Key on CircleCI settings. You also have to register CircleCI SSH Key on Heroku.

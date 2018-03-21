@@ -74,4 +74,24 @@ jobs:
                             $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
       # Save test results for timing analysis
       - store_test_results:
-          path: test_results
+        path: test_results
+
+      - deploy:
+          name: Deploy to staging
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "staging" ]; then
+              git push git@heroku.com:staging-wwp.git
+              heroku run rails db:migrate
+              heroku run db:seed
+              heroku restart
+            fi
+
+      - deploy:
+          name: Deploy to production
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "production" ]; then
+              git push git@heroku.com:wwp.git
+              heroku run rails db:migrate
+              heroku run db:seed
+              heroku restart
+            fi
