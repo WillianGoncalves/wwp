@@ -34,7 +34,7 @@ module.exports = merge(sharedConfig, {
 
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"staging"'
+        NODE_ENV: '"production"'
       }
     })
   ]
