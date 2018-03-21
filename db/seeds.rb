@@ -15,6 +15,7 @@ color_list = [
   ["brown", "#5D4037"]
 ]
 
+#TODO executar apenas se não houver colors
 color_list.each do |name, code|
   Color.create(name: name, code: code)
 end
