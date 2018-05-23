@@ -1,37 +1,36 @@
 @import "../../modules/_colors";
 
 #title {
-  border-bottom: 1px solid $border-color;
+  margin: 3rem 0;
+}
+
+#author {
+  color: lighten($color, 15%);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 2px
 }
 
 #times_played {
-  margin: 2rem 0;
-  span { font-size: 2rem; }
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid $border-color;
+  border-radius: 25px;
+  i {
+    padding: 5px;
+    border: 1px solid $border-color;
+    border-left: none;
+    border-radius: 25px;
+  }
+  span {
+    margin: 0 20px 0 10px;
+  }
 }
 
 #presentations { margin-bottom: 5rem; }
 
-#last_presentation, #next_presentation {
-  .link-title { 
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  p { margin: 5px 0; }
-  &:hover {
-    .link-title { color: $secondary-color; }
-  }
-}
-
-#last_presentation .link-title i {
-  margin-right: 10px;
-}
-
-#next_presentation {
-  .link-title {
-    justify-content: flex-end;
-    i { margin-left: 10px; }
-  }
+.card .card-title {
+  margin-bottom: 15px;
+  font-size: 1rem;
+  font-weight: bold;
 }

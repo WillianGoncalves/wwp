@@ -26,7 +26,6 @@ pt-BR:
       message: "Tem certeza de que deseja excluir essa música?"
     last_presentation: "Última apresentação"
     next_presentation: "Próxima apresentação"
-    played_x_times: "Tocada"
     time_ago_prefix: "Há"
     from_now_prefix: "Daqui a"
   join_requests:

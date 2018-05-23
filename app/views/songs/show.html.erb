@@ -9,20 +9,25 @@
 </div>
 
 <div id="title" class="center-align">
-  <h2><%= @song.title %></h2>
-  <h5><%= @song.author %></h5>
+  <h4><%= @song.title %></h4>
+  <p id="author"><%= @song.author %></p>
 </div>
 
-<p class="center-align" id="times_played">
-  <%= t('songs.played_x_times') %> <span><%= @song.presentations.size %></span>x
-</p>
+<div class="center-align vertical-margin">
+  <div id="times_played">
+    <i class="material-icons">play_arrow</i>
+    <span>
+      <%= @song.presentations.size %>
+    </span>
+  </div>
+</div>
 
 <div class="row" id="presentations">
   <div class="col s12 m6">
     <% if @last_presentation.present? %>
       <%= link_to group_presentation_path(current_group, @last_presentation) do %>
-        <div id="last_presentation">
-          <p class="link-title"><i class="material-icons">fast_rewind</i><%= t('songs.last_presentation') %></p>
+        <div class="card">
+          <p class="card-title"><%= t('songs.last_presentation') %></p>
           <p><%= I18n.l(@last_presentation.date_time, format: "%A") %>, <%= I18n.l(@last_presentation.date_time, format: "%d/%m/%Y") %></p>
           <p><%= "#{ t('songs.time_ago_prefix') } #{ time_ago_in_words(@last_presentation.date_time) }" %></p>
         </div>
@@ -33,8 +38,8 @@
   <div class="col s12 m6">
     <% if @next_presentation.present? %>
       <%= link_to group_presentation_path(current_group, @next_presentation) do %>
-        <div class="right-align" id="next_presentation">
-          <p class="link-title"><%= t('songs.next_presentation') %><i class="material-icons">fast_forward</i></p>
+        <div class="card">
+          <p class="card-title"><%= t('songs.next_presentation') %></p>
           <p><%= I18n.l(@next_presentation.date_time, format: "%A") %>, <%= I18n.l(@next_presentation.date_time, format: "%d/%m/%Y") %></p>
           <p><%= "#{ t('songs.from_now_prefix') } #{ distance_of_time_in_words(DateTime.now, @next_presentation.date_time) }" %></p>
         </div>

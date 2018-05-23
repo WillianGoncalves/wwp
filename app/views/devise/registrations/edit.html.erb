@@ -1,16 +1,16 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <div class="input-field">
-    <%= f.label :email %><br />
+    <%= f.label :email %>
     <%= f.email_field :email, autofocus: true %>
   </div>
 
   <div class="input-field">
-    <%= f.label :first_name %><br />
+    <%= f.label :first_name %>
     <%= f.text_field :first_name %>
   </div>
 
   <div class="input-field">
-    <%= f.label :last_name %><br />
+    <%= f.label :last_name %>
     <%= f.text_field :last_name %>
   </div>
 
@@ -29,18 +29,18 @@
   <% end %>
 
   <div class="input-field">
-    <%= f.label :password %><br />
+    <%= f.label :password %>
     <%= f.password_field :password, { autocomplete: "off", minlength: 6 } %>
     <span><%= t('devise.registrations.optional_editing') %></span>
   </div>
 
   <div class="input-field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
   <div class="input-field">
-    <%= f.label :current_password %><br />
+    <%= f.label :current_password %>
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
