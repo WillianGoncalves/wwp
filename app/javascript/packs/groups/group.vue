@@ -1,11 +1,9 @@
 <template>
-  <div class="col s12 m6">
-    <div class="card">
-      <p>{{ group.name }}</p>
-      <avatar v-for="member in group.members" :key="member.id" :url="member.avatar_url" class="avatar"></avatar>
+  <div class="card">
+    <p>{{ group.name }}</p>
+    <avatar v-for="member in group.members" :key="member.id" :url="member.avatar_url" class="avatar"></avatar>
 
-      <button class="btn enter-button" @click="sendJoinRequest">Entrar</button>
-    </div>
+    <button class="btn enter-button" @click="sendJoinRequest">Entrar</button>
   </div>
 </template>
 

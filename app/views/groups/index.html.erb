@@ -23,12 +23,16 @@
 
 <div id="user_groups" class="row">
   <% current_user.groups.each do |group| %>
-    <user-group :group="<%= render template: 'groups/show.json.jbuilder', locals: {group: group} %>"></user-group>
+    <div class="col s12 m6">
+      <user-group :group="<%= render template: 'groups/show.json.jbuilder', locals: {group: group} %>"></user-group>
+    </div>
   <% end %>
 </div>
 
 <div id="other_groups" class="row">
   <% @groups.each do |group| %>
-    <group :group="<%= render template: 'groups/show.json.jbuilder', locals: {group: group} %>"></group>
+    <div class="col s12 m6">
+      <group :group="<%= render template: 'groups/show.json.jbuilder', locals: {group: group} %>"></group>
+    </div>
   <% end %>
 </div>

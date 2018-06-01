@@ -30,4 +30,8 @@
         <% end %>
       </div>
   <% end %>
+
+  <% if @presentations.empty? %>
+    <p class="center-align"><%= "#{ t('presentations.no_presentations_in') } #{ t('date.month_names')[@month] }" %></p>
+  <% end %>
 </div>

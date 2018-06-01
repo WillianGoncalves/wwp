@@ -20,6 +20,7 @@ pt-BR:
     enableWakeLock: Manter tela acesa
     delete:
       message: "Tem certeza de que deseja excluir essa apresentação?"
+    no_presentations_in: Nenhuma apresentação em
   songs:
     index: Músicas
     delete:

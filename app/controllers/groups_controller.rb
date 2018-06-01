@@ -27,6 +27,7 @@ class GroupsController < ApplicationController
   def candidates
     users = current_group.members.map(&:user)
     @candidates = User.all - users
+    @candidates.sort_by! { |user| user.first_name }
 
     render json: @candidates
   end

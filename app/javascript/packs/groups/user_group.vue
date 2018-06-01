@@ -1,12 +1,10 @@
 <template>
-  <div class="col s12 m6">
-    <a :href="url">
-      <div class="card">
-        <p>{{ group.name }}</p>
-        <avatar v-for="member in group.members" :key="member.id" :url="member.avatar_url" class="avatar"></avatar>
-      </div>
-    </a>
-  </div>
+  <a :href="url">
+    <div class="card">
+      <p>{{ group.name }}</p>
+      <avatar v-for="member in group.members" :key="member.id" :url="member.avatar_url" class="avatar"></avatar>
+    </div>
+  </a>
 </template>
 
 <script lang="coffee">

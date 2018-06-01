@@ -2,7 +2,8 @@
   <%= stylesheet_link_tag 'pages/groups/show' %>
 <% end %>
 
-<h1 class="center-align"><%= @group.name %></h1>
+<h3 class="center-align hide-on-small-only"><%= @group.name %></h3>
+<h5 class="center-align hide-on-med-and-up"><%= @group.name %></h5>
 
 <div class="row">
   <% @group.members.each do |member| %>
