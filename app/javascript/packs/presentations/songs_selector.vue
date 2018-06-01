@@ -2,40 +2,41 @@
   <div>
     <selected-songs :songs="selectedSongs" v-on:unselectSong="unselectSong" v-on:updateSongsOrder="updateSongsOrder" v-if="selectedSongs.length > 0"></selected-songs>
 
-    <button type="button" class="btn-flat-bordered" @click="showSelector = true" v-if="!showSelector">
-      <i class="material-icons left">add</i>
-      <%= I18n.t('activerecord.attributes.presentation.songs') %>
-    </button>
+    <transition name="fade" mode="out-in">
+      <button type="button" class="btn-floating" @click="showSelector = true" v-if="!showSelector">
+        <i class="fa fa-music"></i>
+      </button>
 
-    <div v-if="showSelector" class="main-content">
-      <div>
-        <button type="button" class="btn-flat menu-item waves-effect" @click="filterBy = 'text'">
-          <i class="material-icons dark-icon">title</i>
-        </button>
-        <button type="button" class="btn-flat menu-item waves-effect" @click="filterBy = 'tags'">
-          <i class="material-icons dark-icon">local_offer</i>
-        </button>
-        <button type="button" class="btn-flat menu-item right" @click="showSelector = false">
-          <i class="material-icons dark-icon">done</i>
-        </button>
-      </div>
-
-      <transition name="slide-fade" mode="out-in">
-        <div class="input-field" v-if="filterBy == 'text'" key="textFilter">
-          <i class="material-icons prefix">search</i>
-          <input id="search" type="text" v-model="textFilter">
-        </div>
-
-        <div v-else key="tagsFilter">
-          <button type="button" class="btn-flat-bordered tag-filter" v-for="tag in tags" @click="toggleTagFilter(tag.id)" :class="{'inactive': !tagFilterIsActive(tag.id)}">
-            <i class="material-icons left tiny" :style="{ color: tag.color }">local_offer</i>
-            <span>{{ tag.name }}</span>
+      <div v-if="showSelector" class="main-content">
+        <div>
+          <button type="button" class="btn-flat menu-item waves-effect" @click="filterBy = 'text'">
+            <i class="material-icons dark-icon">title</i>
+          </button>
+          <button type="button" class="btn-flat menu-item waves-effect" @click="filterBy = 'tags'">
+            <i class="material-icons dark-icon">local_offer</i>
+          </button>
+          <button type="button" class="btn-flat menu-item right" @click="showSelector = false">
+            <i class="material-icons dark-icon">done</i>
           </button>
         </div>
-      </transition>
 
-      <song-options :songs="songs" v-on:selectSong="selectSong"></song-options>
-    </div>
+        <transition name="slide-fade" mode="out-in">
+          <div class="input-field" v-if="filterBy == 'text'" key="textFilter">
+            <i class="material-icons prefix">search</i>
+            <input id="search" type="text" v-model="textFilter">
+          </div>
+
+          <div v-else key="tagsFilter">
+            <button type="button" class="btn-flat-bordered tag-filter" v-for="tag in tags" @click="toggleTagFilter(tag.id)" :class="{'inactive': !tagFilterIsActive(tag.id)}">
+              <i class="material-icons left tiny" :style="{ color: tag.color }">local_offer</i>
+              <span>{{ tag.name }}</span>
+            </button>
+          </div>
+        </transition>
+
+        <song-options :songs="songs" v-on:selectSong="selectSong"></song-options>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -146,6 +147,12 @@ export default
 
 .menu-item
   padding: 0 1rem
+
+.fade-enter-active, .fade-leave-active
+  transition: opacity .2s
+
+.fade-enter, .fade-leave-to
+  opacity: 0
 
 .slide-fade-enter-active
   transition: all .1s ease

@@ -6,7 +6,7 @@
 
     <chips :users="new_members" v-on:removeMember="removeMember" v-on:save="save"></chips>
 
-    <transition name="expand">
+    <transition name="fade">
       <div v-if="showUsers">
         <div class="row">
           <div class="input-field col s12">
@@ -15,8 +15,8 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col s12 m3" v-for="candidate in candidates">
+        <div class="row" id="candidates">
+          <div class="col s12 m4" v-for="candidate in candidates">
             <user-card :user="candidate" @click.native="addMember(candidate)"></user-card>
           </div>
         </div>
@@ -85,9 +85,13 @@ export default
   transform: rotate(45deg)
   transition-duration: .2s
 
-.expand-enter-active, .expand-leave-active
-  transition: max-height .4s
+.fade-enter-active, .fade-leave-active
+  transition: opacity .2s
 
-.expand-enter, .expand-leave-to
-  max-height: 0
+.fade-enter, .fade-leave-to
+  opacity: 0
+
+#candidates
+  height: 300px
+  overflow: auto
 </style>
