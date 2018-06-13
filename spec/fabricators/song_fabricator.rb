@@ -25,4 +25,5 @@ Fabricator(:song) do
   title Faker::BossaNova.song
   author Faker::Name.name
   tone Faker::Music.key
+  group
 end

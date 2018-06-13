@@ -24,4 +24,5 @@ class PresentationSong < ApplicationRecord
   belongs_to :presentation
   belongs_to :song
   validates :index, numericality: { only_integer: true }
+  validates :song, uniqueness: { scope: :presentation_id }
 end

@@ -1,10 +1,18 @@
 class GroupsController < ApplicationController
+  before_action :set_group, only: [:show, :edit, :update, :candidates]
+  before_action only: [:edit, :update] do
+    require_group_admin(@group)
+  end
+  before_action only: [:candidates] do
+    require_group_member(@group)
+  end
+
   def index
-    @groups = Group.all - current_user.groups
+    @user_groups = current_user.groups
+    @other_groups = Group.all - @user_groups
   end
 
   def show
-    @group = Group.find(params[:id])
     current_user.update(last_group: @group) if current_user.groups.include?(@group)
   end
 
@@ -12,20 +20,29 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
+  def edit; end
+
   def create
     @group = Group.new(group_params)
-    group_admin = Member.new(user: current_user, admin: true)
-    @group.members << group_admin
+    @group.add_admin(current_user)
     if @group.save
       current_user.update(last_group: @group)
       redirect_to group_path(@group)
     else
-      render :new, status: :bad_request
+      render :new
+    end
+  end
+
+  def update
+    if @group.update(group_params)
+      redirect_to group_path(@group)
+    else
+      render :edit
     end
   end
 
   def candidates
-    users = current_group.members.map(&:user)
+    users = @group.members.map(&:user)
     @candidates = User.all - users
     @candidates.sort_by! { |user| user.first_name }
 
@@ -36,5 +53,9 @@ class GroupsController < ApplicationController
 
   def group_params
     params.require(:group).permit(:name, :image)
+  end
+
+  def set_group
+    @group = Group.find(params[:id])
   end
 end

@@ -23,4 +23,10 @@
 Fabricator(:presentation) do
   date_time Faker::Date.forward(10)
   local Faker::Address.city
+  after_build do |presentation|
+    rand(1..4).times do
+      song = Fabricate(:song, group: presentation.group)
+      presentation.add_song(song)
+    end
+  end
 end

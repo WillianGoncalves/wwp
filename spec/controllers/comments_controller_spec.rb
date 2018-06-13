@@ -1,66 +1,235 @@
 require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
-
-  context 'authenticated user' do
-    let!(:user) { Fabricate :user }
-    let!(:member) { Fabricate.build :member_admin, user: user }
-    let!(:group) { Fabricate :group, members: [member]  }
-    let!(:song) { Fabricate :song, group: group }
-
-    before { sign_in user }
-    before { assign_group(user, group) }
-
+  context 'with unauthenticated user' do
     describe 'POST #create' do
-      context 'valid comment' do
-        let!(:comment) { { body: 'foo' } }
+      let!(:song) { Fabricate :song }
+      let!(:comment) { { body: 'foo' } }
 
-        before { post :create, params: { song_id: song.id, comment: comment } }
+      before { post :create, params: { song_id: song, comment: comment } }
 
-        it { expect(response).to redirect_to group_song_path(group, song) }
-        it { expect(song.comments.count).to eq 1 }
-        it { expect(user.comments.count).to eq 1 }
-      end
-
-      context 'invalid comment' do
-        let!(:comment) { { body: '' } }
-
-        before { post :create, params: { song_id: song.id, comment: comment } }
-
-        it { expect(response).to redirect_to group_song_path(group, song) }
-        it { expect(song.comments.count).to eq 0 }
+      it 'redirects to login page' do
+        expect(response).to redirect_to user_session_path
       end
     end
 
     describe 'PUT #update' do
-      context 'valid comment' do
-        let!(:comment) { Fabricate :comment, target: song, commenter: user }
-        let!(:valid_comment) { { body: 'foo' } }
+      let!(:comment) { Fabricate :song_comment }
+      let!(:valid_comment) { { body: 'foo' } }
 
-        before { put :update, params: { song_id: song.id, id: comment.id, comment: valid_comment } }
+      before { put :update, params: { id: comment, comment: valid_comment } }
 
-        it { expect(response).to redirect_to group_song_path(group, song) }
-        it { expect(comment.reload.body).to eq 'foo' }
-      end
-
-      context 'invalid comment' do
-        let!(:comment) { Fabricate :comment, target: song, commenter: user }
-        let!(:valid_comment) { { body: '' } }
-
-        before { put :update, params: { song_id: song.id, id: comment.id, comment: valid_comment } }
-
-        it { expect(response).to redirect_to group_song_path(group, song) }
-        it { expect(comment.reload.body).not_to eq '' }
+      it 'redirects to login page' do
+        expect(response).to redirect_to user_session_path
       end
     end
 
     describe 'DELETE #destroy' do
-      let!(:comment) { Fabricate :comment, target: song, commenter: user }
+      let!(:comment) { Fabricate :song_comment }
 
-      before { delete :destroy, params: { song_id: song.id, id: comment.id } }
+      before { delete :destroy, params: { id: comment } }
 
-      it { expect(response).to redirect_to group_song_path(group, song) }
-      it { expect(song.comments.count).to eq 0 }
+      it 'redirects to login page' do
+        expect(response).to redirect_to user_session_path
+      end
+    end
+  end
+
+  context 'with authenticated user' do
+    let!(:user) { Fabricate :user }
+
+    before { sign_in user }
+
+    describe 'POST #create' do
+      context 'when the user is a member' do
+        let!(:group) { Fabricate :group, member: user }
+
+        context 'commenting a song' do
+          let!(:song) { Fabricate :song, group: group }
+
+          context 'with valid data' do
+            let!(:comment) { { body: 'foo' } }
+
+            before { post :create, params: { song_id: song, comment: comment } }
+
+            it 'creates a comment' do
+              expect(response).to redirect_to group_song_path(group, song)
+              expect(song.comments.count).to eq 1
+              expect(user.comments.count).to eq 1
+            end
+          end
+
+          context 'with invalid data' do
+            let!(:comment) { { body: '' } }
+
+            before { post :create, params: { song_id: song, comment: comment } }
+
+            it 'does not create a comment' do
+              expect(response).to redirect_to group_song_path(group, song)
+              expect(flash[:error]).to be_present
+              expect(song.comments.count).to eq 0
+            end
+          end
+        end
+
+        context 'commenting a presentation' do
+          let!(:presentation) { Fabricate :presentation, group: group }
+
+          context 'with valid data' do
+            let!(:comment) { { body: 'foo' } }
+
+            before { post :create, params: { presentation_id: presentation, comment: comment } }
+
+            it 'creates a comment' do
+              expect(response).to redirect_to group_presentation_path(group, presentation)
+              expect(presentation.comments.count).to eq 1
+              expect(user.comments.count).to eq 1
+            end
+          end
+
+          context 'with invalid data' do
+            let!(:comment) { { body: '' } }
+
+            before { post :create, params: { presentation_id: presentation, comment: comment } }
+
+            it 'does not create a comment' do
+              expect(response).to redirect_to group_presentation_path(group, presentation)
+              expect(flash[:error]).to be_present
+              expect(presentation.comments.count).to eq 0
+            end
+          end
+        end
+      end
+
+      context 'when the user is not a member' do
+        let!(:group) { Fabricate :group }
+        let!(:song) { Fabricate :song }
+        let!(:comment) { { body: 'foo' } }
+
+        before { post :create, params: { song_id: song, comment: comment } }
+
+        it 'creates a comment' do
+          expect(response).to redirect_to root_path
+          expect(flash[:alert]).to be_present
+          expect(song.comments.count).to eq 0
+          expect(user.comments.count).to eq 0
+        end
+      end
+    end
+
+    describe 'PUT #update' do
+      context 'when the user is the commenter' do
+        let!(:group) { Fabricate :group, member: user }
+
+        context 'editing a song comment' do
+          let!(:song) { Fabricate :song, group: group }
+          let!(:comment) { Fabricate :song_comment, target: song, commenter: user }
+
+          context 'with valid data' do
+            let!(:valid_data) { { body: 'foo' } }
+
+            before { put :update, params: { id: comment, comment: valid_data } }
+
+            it 'updates the comment' do
+              expect(response).to redirect_to group_song_path(group, song)
+              expect(comment.reload.body).to eq 'foo'
+            end
+          end
+
+          context 'with invalid data' do
+            let!(:invalid_data) { { body: '' } }
+
+            before { put :update, params: { id: comment, comment: invalid_data } }
+
+            it 'does not update the comment' do
+              expect(response).to redirect_to group_song_path(group, song)
+              expect(flash[:error]).to be_present
+              expect(comment.reload.body).not_to eq ''
+            end
+          end
+        end
+
+        context 'editing a presentation comment' do
+          let!(:presentation) { Fabricate :presentation, group: group }
+          let!(:comment) { Fabricate :presentation_comment, target: presentation, commenter: user }
+
+          context 'with valid data' do
+            let!(:valid_data) { { body: 'foo' } }
+
+            before { put :update, params: { id: comment, comment: valid_data } }
+
+            it 'updates the comment' do
+              expect(response).to redirect_to group_presentation_path(group, presentation)
+              expect(comment.reload.body).to eq 'foo'
+            end
+          end
+
+          context 'with invalid data' do
+            let!(:invalid_data) { { body: '' } }
+
+            before { put :update, params: { id: comment, comment: invalid_data } }
+
+            it 'does not update the comment' do
+              expect(response).to redirect_to group_presentation_path(group, presentation)
+              expect(flash[:error]).to be_present
+              expect(comment.reload.body).not_to eq ''
+            end
+          end
+        end
+      end
+
+      context 'when the user is not the commenter' do
+        let!(:comment) { Fabricate :song_comment }
+        let!(:valid_data) { { body: 'foo' } }
+
+        before { put :update, params: { id: comment, comment: valid_data } }
+
+        it 'does not update the comment' do
+          expect(response).to redirect_to root_path
+        end
+      end
+    end
+
+    describe 'DELETE #destroy' do
+      context 'when the user is the commenter' do
+        let!(:group) { Fabricate :group, member: user }
+
+        context 'deleting a song comment' do
+          let!(:song) { Fabricate :song, group: group }
+          let!(:comment) { Fabricate :song_comment, target: song, commenter: user }
+
+          before { delete :destroy, params: { id: comment } }
+
+          it 'deletes a comment' do
+            expect(response).to redirect_to group_song_path(group, song)
+            expect(song.comments.count).to eq 0
+          end
+        end
+
+        context 'deleting a presentation comment' do
+          let!(:presentation) { Fabricate :presentation, group: group }
+          let!(:comment) { Fabricate :presentation_comment, target: presentation, commenter: user }
+
+          before { delete :destroy, params: { id: comment } }
+
+          it 'deletes a comment' do
+            expect(response).to redirect_to group_presentation_path(group, presentation)
+            expect(presentation.comments.count).to eq 0
+          end
+        end
+      end
+
+      context 'when the user is not the commenter' do
+        let!(:comment) { Fabricate :song_comment }
+
+        before { delete :destroy, params: { id: comment } }
+
+        it 'does not update the comment' do
+          expect(response).to redirect_to root_path
+        end
+      end
+
+
     end
   end
 end

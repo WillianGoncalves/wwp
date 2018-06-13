@@ -112,6 +112,8 @@ pt-BR:
           attributes:
             presentation_songs:
               blank: Informe as músicas
+            date_time:
+              invalid_date_time: Data inválida
 
       template:
         body: 'Por favor, verifique o(s) seguinte(s) campo(s):'

@@ -20,6 +20,14 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-Fabricator(:comment) do
+Fabricator(:song_comment, from: :comment) do
   body { Faker::Lorem.sentences }
+  commenter { Fabricate :user }
+  target { Fabricate :song }
+end
+
+Fabricator(:presentation_comment, from: :comment) do
+  body { Faker::Lorem.sentences }
+  commenter { Fabricate :user }
+  target { Fabricate :presentation }
 end

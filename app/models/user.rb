@@ -50,8 +50,13 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def is_admin_of(group)
-    admins = group.members.where("admin = ?", true).map(&:user)
-    admins.include?(self)
+  def is_admin_of?(group)
+    return false if group.nil?
+    group.members.where("admin = ? and user_id = ?", true, id).any?
+  end
+
+  def is_member_of?(group)
+    return false if group.nil?
+    group.members.where("user_id = ?", id).any?
   end
 end

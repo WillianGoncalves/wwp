@@ -1,107 +1,199 @@
 require 'rails_helper'
 
 RSpec.describe GroupsController, type: :controller do
-  before { request.env['devise.mapping'] = Devise.mappings[:user] }
-
   context 'unauthenticated user' do
     describe 'GET #index' do
       before { get :index }
-      it { expect(response).to redirect_to user_session_path }
+
+      it 'redirects the user to login page' do
+        expect(response).to redirect_to user_session_path
+      end
     end
 
     describe 'GET #show' do
       before { get :show, params: { id: 1 } }
-      it { expect(response).to redirect_to user_session_path }
+
+      it 'redirects the user to login page' do
+        expect(response).to redirect_to user_session_path
+      end
     end
 
     describe 'GET #new' do
       before { get :new }
-      it { expect(response).to redirect_to user_session_path }
+
+      it 'redirects the user to login page' do
+        expect(response).to redirect_to user_session_path
+      end
     end
   end
 
   context 'authenticated user' do
-
     let!(:user) { Fabricate :user }
 
     before { sign_in user }
 
     describe 'GET #index' do
-      let!(:member) { Fabricate.build :member_admin, user: user }
-      let!(:group1) { Fabricate :group, members: [member]  }
-      let!(:group2) { Fabricate :group }
+      let!(:user_groups) { Fabricate :group, member: user }
+      let!(:other_groups) { Fabricate.times 2, :group }
 
       before { get :index }
 
-      it { expect(response.status).to render_template :index }
-      it { expect(user.groups).to match_array [group1] }
-      it { expect(assigns(:groups)).to match_array [group2] }
+      it 'lists all groups' do
+        expect(response.status).to render_template :index
+        expect(assigns(:user_groups)).to match_array [ user_groups ]
+        expect(assigns(:other_groups)).to match_array other_groups
+      end
     end
 
     describe 'GET #show' do
-      context 'with a group that includes current user' do
-        let!(:member) { Fabricate.build :member_admin, user: user }
-        let!(:group) { Fabricate :group, members: [member]  }
+      context 'when the user is a member' do
+        let!(:group) { Fabricate :group, member: user }
 
         before { get :show, params: { id: group } }
 
-        it { expect(response).to render_template :show }
-        it { expect(assigns(:group)).to eq group }
-        it { expect(user.reload.last_group).to eq group }
+        it 'shows the group page' do
+          expect(response).to render_template :show
+          expect(assigns(:group)).to eq group
+          expect(user.reload.last_group).to eq group
+        end
       end
 
-      context 'with a group that does not include current user' do
+      context 'when the user is not a member' do
         let!(:group) { Fabricate :group }
 
         before { get :show, params: { id: group } }
 
-        it { expect(response).to render_template :show }
-        it { expect(assigns(:group)).to eq group }
-        it { expect(user.reload.last_group).to eq nil }
+        it 'show the group page but does not set last group' do
+          expect(response).to render_template :show
+          expect(assigns(:group)).to eq group
+          expect(user.reload.last_group).to eq nil
+        end
       end
     end
 
     describe 'GET #new' do
       before { get :new }
 
-      it{ expect(response).to render_template :new }
-      it{ expect(assigns(:group)).to be_a_new Group }
+      it 'shows the groups form' do
+        expect(response).to render_template :new
+        expect(assigns(:group)).to be_a_new Group
+      end
+    end
+
+    describe 'GET #edit' do
+      context 'when the user is the admin' do
+        let!(:group) { Fabricate :group, admin: user }
+
+        before { get :edit, params: { id: group } }
+
+        it 'shows the groups form' do
+          expect(response).to render_template :edit
+          expect(assigns(:group)).to eq group
+        end
+      end
+
+      context 'when the user is not the admin' do
+        let!(:group) { Fabricate :group, member: user }
+
+        before { get :edit, params: { id: group } }
+
+        it 'does not show the groups form' do
+          expect(response).to redirect_to root_path
+          expect(flash[:alert]).to be_present
+        end
+      end
     end
 
     describe 'POST #create' do
-      context 'with invalid values' do
+      context 'with invalid data' do
         let(:group) { { name: ''} }
 
         before { post :create, params: { group: group } }
 
-        it { expect(response).to have_http_status :bad_request }
-        it { expect(response).to render_template :new }
+        it 'does not create a group' do
+          expect(response).to render_template :new
+          expect(user.groups.count).to eq 0
+        end
       end
 
-      context 'with valid values' do
+      context 'with valid data' do
         let(:group) { { name: 'foo'} }
 
         before { post :create, params: { group: group } }
 
-        it { expect(response).to redirect_to group_path(assigns(:group)) }
-        it { expect(user.reload.last_group).to eq assigns(:group) }
-        it { expect(assigns(:group).members).to_not be_empty }
-        it { expect(assigns(:group).members.first.user).to eq user }
-        it { expect(assigns(:group).members.first.admin).to eq true }
+        it 'creates a group' do
+          expect(response).to redirect_to group_path(assigns(:group))
+          expect(user.reload.last_group).to eq assigns(:group)
+          expect(assigns(:group).members).to_not be_empty
+          expect(assigns(:group).members.first.user).to eq user
+          expect(assigns(:group).members.first.admin).to eq true
+        end
+      end
+    end
+
+    describe 'PUT #update' do
+      context 'when the user is the admin' do
+        let!(:group) { Fabricate :group, admin: user }
+
+        context 'with invalid data' do
+          let(:invalid_data) { { name: ''} }
+
+          before { put :update, params: { id: group, group: invalid_data } }
+
+          it 'does not update the group' do
+            expect(response).to render_template :edit
+            expect(group.reload.name).to_not eq ''
+          end
+        end
+
+        context 'with valid data' do
+          let(:valid_data) { { name: 'foo'} }
+
+          before { put :update, params: { id: group, group: valid_data } }
+
+          it 'updates the group' do
+            expect(response).to redirect_to group_path(group)
+            expect(group.reload.name).to eq 'foo'
+          end
+        end
+      end
+
+      context 'when the user is not the admin' do
+        let!(:group) { Fabricate :group, member: user }
+        let(:valid_data) { { name: 'foo'} }
+
+        before { put :update, params: { id: group, group: valid_data } }
+
+        it 'does not update the group' do
+          expect(response).to redirect_to root_path
+          expect(flash[:alert]).to be_present
+        end
       end
     end
 
     describe 'GET #candidates' do
-      let!(:user1) { Fabricate :user }
-      let!(:user2) { Fabricate :user }
-      let!(:user3) { Fabricate :user }
-      let!(:member) { Fabricate.build :member_admin, user: user }
-      let!(:group) { Fabricate :group, members: [member]  }
+      let!(:users) { Fabricate.times 3, :user }
 
-      before { assign_group(user, group) }
-      before { get :candidates, params: { id: group, format: :json } }
+      context 'when the user is a member' do
+        let!(:group) { Fabricate :group, member: user }
 
-      it { expect(assigns(:candidates)).to match_array [user1, user2, user3] }
+        before { get :candidates, params: { id: group, format: :json } }
+
+        it 'lists all candidates' do
+          expect(response).to have_http_status :ok
+          expect(assigns(:candidates)).to match_array users
+        end
+      end
+
+      context 'when the user is not a member' do
+        let!(:group) { Fabricate :group }
+
+        before { get :candidates, params: { id: group, format: :json } }
+
+        it 'does not list the candidates' do
+          expect(response).to have_http_status :bad_request
+        end
+      end
     end
   end
 end

@@ -21,9 +21,6 @@
 #
 
 Fabricator(:member) do
+  user
   admin false
-end
-
-Fabricator(:member_admin, from: :member) do
-  admin true
 end

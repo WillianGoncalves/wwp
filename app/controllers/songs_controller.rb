@@ -1,8 +1,12 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
+  before_action :set_group
+  before_action do
+    require_group_member(@group)
+  end
 
   def index
-    @songs = current_group.songs.order(:title)
+    @songs = @group.songs.order(:title)
 
     respond_to do |format|
       format.html
@@ -22,9 +26,9 @@ class SongsController < ApplicationController
   def edit; end
 
   def create
-    @song = current_group.songs.build(song_params)
+    @song = @group.songs.build(song_params)
     if @song.save
-      redirect_to group_songs_path(current_group)
+      redirect_to group_songs_path(@group)
     else
       render :new, status: :bad_request
     end
@@ -32,7 +36,7 @@ class SongsController < ApplicationController
 
   def update
     if @song.update(song_params)
-      redirect_to group_songs_path(current_group)
+      redirect_to group_songs_path(@group)
     else
       render :edit, status: :bad_request
     end
@@ -40,7 +44,7 @@ class SongsController < ApplicationController
 
   def destroy
     Song.destroy(params[:id])
-    redirect_to group_songs_path(current_group)
+    redirect_to group_songs_path(@group)
   end
 
   private

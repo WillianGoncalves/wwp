@@ -1,7 +1,12 @@
 class TagsController < ApplicationController
+  before_action :set_group
+  before_action do
+    require_group_member(@group)
+  end
+
   def index
     @tag = Tag.new
-    @tags = current_group.tags
+    @tags = @group.tags
 
     respond_to do |format|
       format.html
@@ -10,32 +15,31 @@ class TagsController < ApplicationController
   end
 
   def edit
-    @tag = current_group.tags.find(params[:id])
+    @tag = @group.tags.find(params[:id])
   end
 
   def create
-    @tag = current_group.tags.build(tag_params)
+    @tag = @group.tags.build(tag_params)
     if @tag.save
-      redirect_to group_tags_path(current_group)
+      redirect_to group_tags_path(@group)
     else
-      current_group.tags.delete(@tag)
-      @tags = current_group.tags
-      render :index, status: :bad_request
+      @tags = @group.tags
+      render :index
     end
   end
 
   def update
-    @tag = current_group.tags.find(params[:id])
+    @tag = @group.tags.find(params[:id])
     if @tag.update(tag_params)
-      redirect_to group_tags_path(current_group)
+      redirect_to group_tags_path(@group)
     else
-      render :edit, status: :bad_request
+      render :edit
     end
   end
 
   def destroy
-    Tag.delete(params[:id])
-    redirect_to group_tags_path(current_group)
+    @group.tags.delete(params[:id])
+    redirect_to group_tags_path(@group)
   end
 
   private

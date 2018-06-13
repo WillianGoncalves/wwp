@@ -1,16 +1,20 @@
 class PresentationsController < ApplicationController
   before_action :set_presentation, only: [:show, :edit, :update, :play]
+  before_action :set_group
+  before_action do
+    require_group_member(@group)
+  end
 
   def index
     @month = if params[:month].present? then params[:month] else DateTime.now.month end
     @year = if params[:year].present? then params[:year] else DateTime.now.year end
-    @presentations = current_group.presentations.where('extract(month from date_time) = ?', @month).where('extract(year from date_time) = ?', @year)
+    @presentations = @group.presentations.where('extract(month from date_time) = ?', @month).where('extract(year from date_time) = ?', @year)
   end
 
   def show; end
 
   def new
-    @presentation = current_group.presentations.build
+    @presentation = @group.presentations.build
   end
 
   def edit
@@ -19,15 +23,15 @@ class PresentationsController < ApplicationController
   end
 
   def create
-    @presentation = current_group.presentations.build(presentation_params)
+    @presentation = @group.presentations.build(presentation_params)
     @presentation.date_time = create_date_time
     add_songs
     @presentation.validate
 
     if @presentation.save
-      redirect_to group_presentations_path(current_group)
+      redirect_to group_presentations_path(@group)
     else
-      render :new, status: :bad_request
+      render :new
     end
   end
 
@@ -37,7 +41,7 @@ class PresentationsController < ApplicationController
     add_songs
 
     if @presentation.update(presentation_params)
-      redirect_to group_presentations_path(current_group)
+      redirect_to group_presentations_path(@group)
     else
       render :edit, status: :bad_request
     end
@@ -45,7 +49,7 @@ class PresentationsController < ApplicationController
 
   def destroy
     Presentation.destroy(params[:id])
-    redirect_to group_presentations_path(current_group)
+    redirect_to group_presentations_path(@group)
   end
 
   def play
@@ -63,7 +67,7 @@ class PresentationsController < ApplicationController
 
   def add_songs
     if params[:song_ids].present?
-      songs = params[:song_ids].split(",").map { |id| Song.find(id) }
+      songs = params[:song_ids].split(",").map { |id| @group.songs.find(id) }
       songs.each { |song| @presentation.add_song(song) }
     end
   end

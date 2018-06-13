@@ -7,7 +7,7 @@
     <% @join_requests.each do |join_request| %>
       <div class="card center-align">
         <div class="card-content">
-          <p><%= t('notifications.join_request_received', user_name: join_request.user.full_name) %></p>
+          <p><%= t('messages.join_request_received', user_name: join_request.user.full_name) %></p>
         </div>
         <div class="card-action">
           <div class="row">

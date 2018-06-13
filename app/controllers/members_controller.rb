@@ -1,5 +1,8 @@
 class MembersController < ApplicationController
   before_action :set_group
+  before_action do
+    require_group_admin(@group)
+  end
 
   def create
     params[:members].each do |member|
@@ -7,7 +10,7 @@ class MembersController < ApplicationController
     end
 
     if @group.save
-      head :no_content
+      head :ok
     else
       render json: @group.errors.full_messages, status: :bad_request
     end
@@ -19,10 +22,6 @@ class MembersController < ApplicationController
   end
 
   private
-  def set_group
-    @group = Group.find(params[:group_id])
-  end
-
   def member_params(params)
     params.permit(:user_id)
   end

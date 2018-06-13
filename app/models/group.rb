@@ -16,9 +16,17 @@ class Group < ApplicationRecord
   has_many :members, dependent: :destroy
   has_many :users, through: :members
   has_many :tags, -> { order(:name) }
-  validates :name, presence: true
+  validates :name, :members, presence: true
 
   mount_uploader :image, GroupImageUploader
+
+  def add_admin(user)
+    members.build(user: user, admin: true)
+  end
+
+  def add_member!(user)
+    members.create(user: user, admin: false)
+  end
 
   def join_requests_to_be_accepted
     join_requests.where(accepted: nil)
