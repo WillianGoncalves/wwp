@@ -1,5 +1,33 @@
+@import '../modules/colors';
+
 form .actions {
   margin-top: 40px;
 }
 
-.input-field { margin-top: $input-field-margin-top; }
+.input-field {
+  margin-top: $input-field-margin-top;
+
+  input[type], textarea {
+    box-sizing: border-box;
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    border-radius: 3px;
+    padding: 0 10px;
+  }
+
+  label {
+    margin-left: 10px;
+  }
+
+  label:not(.label-icon).active {
+    transform: translate(-10px, -22px) scale(0.8);
+  }
+
+  .select-wrapper span.caret {
+    color: $color;
+    z-index: 1;
+    margin-right: 20px;
+  }
+
+  textarea { padding: 10px; }
+}
