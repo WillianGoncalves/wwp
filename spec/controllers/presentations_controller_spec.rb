@@ -337,7 +337,7 @@ RSpec.describe PresentationsController, type: :controller do
         let!(:group) { Fabricate :group, member: user }
         let!(:presentation) { Fabricate :presentation, group: group }
 
-        before { get :play, params: { group_id: group, id: presentation } }
+        before { get :play, params: { id: presentation } }
 
         it 'shows the play page' do
           expect(response).to render_template :play, layout: :blank
@@ -349,7 +349,7 @@ RSpec.describe PresentationsController, type: :controller do
         let!(:group) { Fabricate :group }
         let!(:presentation) { Fabricate :presentation, group: group }
 
-        before { get :play, params: { group_id: group, id: presentation } }
+        before { get :play, params: { id: presentation } }
 
         it 'does not show the play page' do
           expect(response).to redirect_to root_path

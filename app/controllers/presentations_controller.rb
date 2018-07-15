@@ -1,8 +1,8 @@
 class PresentationsController < ApplicationController
   before_action :set_presentation, only: [:show, :edit, :update, :play]
-  before_action :set_group
+  before_action :set_group, except: [:play]
   before_action do
-    require_group_member(@group)
+    require_group_member(@group || @presentation.group)
   end
 
   def index
