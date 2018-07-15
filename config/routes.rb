@@ -15,13 +15,11 @@ Rails.application.routes.draw do
   end
 
   resources :songs, only: [] do
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :update, :destroy]
   end
 
-  resources :comments, only: [:update, :destroy]
-
   resources :presentations, only: [] do
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :update, :destroy]
     member do
       get 'play'
     end

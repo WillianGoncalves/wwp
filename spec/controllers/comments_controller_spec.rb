@@ -17,7 +17,7 @@ RSpec.describe CommentsController, type: :controller do
       let!(:comment) { Fabricate :song_comment }
       let!(:valid_comment) { { body: 'foo' } }
 
-      before { put :update, params: { id: comment, comment: valid_comment } }
+      before { put :update, params: { song_id: comment.target, id: comment, comment: valid_comment } }
 
       it 'redirects to login page' do
         expect(response).to redirect_to user_session_path
@@ -27,7 +27,7 @@ RSpec.describe CommentsController, type: :controller do
     describe 'DELETE #destroy' do
       let!(:comment) { Fabricate :song_comment }
 
-      before { delete :destroy, params: { id: comment } }
+      before { delete :destroy, params: { song_id: comment.target, id: comment } }
 
       it 'redirects to login page' do
         expect(response).to redirect_to user_session_path
@@ -128,7 +128,7 @@ RSpec.describe CommentsController, type: :controller do
           context 'with valid data' do
             let!(:valid_data) { { body: 'foo' } }
 
-            before { put :update, params: { id: comment, comment: valid_data } }
+            before { put :update, params: { song_id: song, id: comment, comment: valid_data } }
 
             it 'updates the comment' do
               expect(response).to redirect_to group_song_path(group, song)
@@ -139,7 +139,7 @@ RSpec.describe CommentsController, type: :controller do
           context 'with invalid data' do
             let!(:invalid_data) { { body: '' } }
 
-            before { put :update, params: { id: comment, comment: invalid_data } }
+            before { put :update, params: { song_id: song, id: comment, comment: invalid_data } }
 
             it 'does not update the comment' do
               expect(response).to redirect_to group_song_path(group, song)
@@ -156,7 +156,7 @@ RSpec.describe CommentsController, type: :controller do
           context 'with valid data' do
             let!(:valid_data) { { body: 'foo' } }
 
-            before { put :update, params: { id: comment, comment: valid_data } }
+            before { put :update, params: { presentation_id: presentation, id: comment, comment: valid_data } }
 
             it 'updates the comment' do
               expect(response).to redirect_to group_presentation_path(group, presentation)
@@ -167,7 +167,7 @@ RSpec.describe CommentsController, type: :controller do
           context 'with invalid data' do
             let!(:invalid_data) { { body: '' } }
 
-            before { put :update, params: { id: comment, comment: invalid_data } }
+            before { put :update, params: { presentation_id: presentation, id: comment, comment: invalid_data } }
 
             it 'does not update the comment' do
               expect(response).to redirect_to group_presentation_path(group, presentation)
@@ -182,7 +182,7 @@ RSpec.describe CommentsController, type: :controller do
         let!(:comment) { Fabricate :song_comment }
         let!(:valid_data) { { body: 'foo' } }
 
-        before { put :update, params: { id: comment, comment: valid_data } }
+        before { put :update, params: { song_id: comment.target, id: comment, comment: valid_data } }
 
         it 'does not update the comment' do
           expect(response).to redirect_to root_path
@@ -198,7 +198,7 @@ RSpec.describe CommentsController, type: :controller do
           let!(:song) { Fabricate :song, group: group }
           let!(:comment) { Fabricate :song_comment, target: song, commenter: user }
 
-          before { delete :destroy, params: { id: comment } }
+          before { delete :destroy, params: { song_id: song, id: comment } }
 
           it 'deletes a comment' do
             expect(response).to redirect_to group_song_path(group, song)
@@ -210,7 +210,7 @@ RSpec.describe CommentsController, type: :controller do
           let!(:presentation) { Fabricate :presentation, group: group }
           let!(:comment) { Fabricate :presentation_comment, target: presentation, commenter: user }
 
-          before { delete :destroy, params: { id: comment } }
+          before { delete :destroy, params: { presentation_id: presentation, id: comment } }
 
           it 'deletes a comment' do
             expect(response).to redirect_to group_presentation_path(group, presentation)
@@ -222,14 +222,12 @@ RSpec.describe CommentsController, type: :controller do
       context 'when the user is not the commenter' do
         let!(:comment) { Fabricate :song_comment }
 
-        before { delete :destroy, params: { id: comment } }
+        before { delete :destroy, params: { song_id: comment.target, id: comment } }
 
-        it 'does not update the comment' do
+        it 'does not delete the comment' do
           expect(response).to redirect_to root_path
         end
       end
-
-
     end
   end
 end
