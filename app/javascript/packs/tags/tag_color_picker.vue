@@ -30,7 +30,7 @@ export default
 </script>
 
 <style scoped lang="sass?indentedSyntax">
-@import '../../../assets/stylesheets/modules/colors';
+@import '../../../assets/stylesheets/variables/colors';
 
 .colors-container
   display: flex

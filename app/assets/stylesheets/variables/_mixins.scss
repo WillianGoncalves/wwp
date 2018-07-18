@@ -1,0 +1,5 @@
+$small-screen: 600px;
+$small-and-down: "only screen and (max-width : #{$small-screen})";
+@mixin on-small {
+  @media #{$small-and-down} { @content; }
+}

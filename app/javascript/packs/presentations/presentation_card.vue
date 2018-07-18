@@ -17,7 +17,7 @@ export default
 </script>
 
 <style scoped lang="sass?indentedSyntax">
-@import '../../../assets/stylesheets/modules/_colors';
+@import '../../../assets/stylesheets/variables/colors';
 
 .day
   font-size: 3rem

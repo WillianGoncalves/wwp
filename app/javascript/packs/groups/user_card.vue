@@ -22,7 +22,7 @@ export default
 </script>
 
 <style scoped lang="sass?indentedSyntax">
-@import '../../../assets/stylesheets/modules/colors';
+@import '../../../assets/stylesheets/variables/colors';
 .delete-button
   position: absolute
   right: 8px

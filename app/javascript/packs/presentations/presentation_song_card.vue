@@ -33,7 +33,7 @@ export default
 </script>
 
 <style scoped lang="sass?indentedSyntax">
-@import '../../../assets/stylesheets/modules/_colors';
+@import '../../../assets/stylesheets/variables/colors';
 
 .presentation_song_card
   display: flex
