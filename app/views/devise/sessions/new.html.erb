@@ -7,18 +7,18 @@
     <h5 class="center-align" id="title">what we play</h5>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'devise-form'}) do |f| %>
-      <div class="field vertical-margin">
-        <%= f.label :email %><br />
+      <div class="input-field vertical-margin">
+        <%= f.label :email %>
         <%= f.email_field :email, autofocus: true %>
       </div>
 
-      <div class="field vertical-margin">
-        <%= f.label :password %><br />
+      <div class="input-field vertical-margin">
+        <%= f.label :password %>
         <%= f.password_field :password, autocomplete: "off" %>
       </div>
 
       <% if devise_mapping.rememberable? -%>
-        <div class="field vertical-margin">
+        <div class="input-field vertical-margin">
           <%= f.check_box :remember_me %>
           <%= f.label :remember_me %>
         </div>
