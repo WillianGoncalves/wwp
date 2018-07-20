@@ -29,6 +29,7 @@ pt-BR:
     next_presentation: "Próxima apresentação"
     time_ago_prefix: "Há"
     from_now_prefix: "Daqui a"
+    search_by: "Título ou autor"
   join_requests:
     accept: Aceitar
     reject: Rejeitar

@@ -1,0 +1,22 @@
+<div id="results">
+  <ul class="collection">
+    <% @songs.each do |song| %>
+      <%= link_to group_song_path(current_group, song), class: "collection-item" do %>
+        <div class="song">
+          <%= song.title %>
+        </div>
+        <div class="author">
+          <% if song.author.present? %>
+            <span class="light-text"><small><%= song.author %></small></span>
+          <% end %>
+        </div>
+        <div class="light-text tone"><%= song.tone %></div>
+        <div class="tags">
+          <% song.tags.each do |tag| %>
+            <tag :tag="<%= render template: 'songs/_tag.json.jbuilder', locals: { tag: tag } %>"></tag>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

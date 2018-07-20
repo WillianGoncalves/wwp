@@ -10,6 +10,7 @@ import SongsSelector from './presentations/songs_selector.vue';
 import PresentationSongCard from './presentations/presentation_song_card.vue';
 import PresentationCard from './presentations/presentation_card.vue';
 import UserCard from './groups/user_card.vue';
+import TagsFilter from './songs/tags_filter.vue';
 
 Vue.component('user-group', UserGroup);
 Vue.component('group', Group);
@@ -22,6 +23,14 @@ Vue.component('songs-selector', SongsSelector);
 Vue.component('presentation-song-card', PresentationSongCard);
 Vue.component('presentation-card', PresentationCard);
 Vue.component('user-card', UserCard);
+Vue.component('tags-filter', TagsFilter);
+
+var replaceHtml = function(element, content) {
+  var Component = Vue.extend({});
+  new Component({
+    template: content
+  }).$mount(element);
+};
 
 new Vue({
   el: '#app',
@@ -29,6 +38,7 @@ new Vue({
     showModal: (modalId) => {
       $(modalId).modal();
       $(modalId).modal('open');
-    }
+    },
+    replaceHtml: (element, content) => replaceHtml(element, content)
   }
 });

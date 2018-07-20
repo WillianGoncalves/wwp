@@ -8,9 +8,20 @@ class SongsController < ApplicationController
   def index
     @songs = @group.songs.order(:title)
 
+    if search_params[:tags_ids].present?
+      tags_ids = (search_params[:tags_ids]).split(',')
+      @songs = @songs.joins(:tags).where('tags.id IN (?)', tags_ids).distinct
+    end
+
+    if search_params[:query].present?
+      q = "%#{search_params[:query].downcase}%"
+      @songs = @songs.where('lower(title) LIKE ? OR lower(author) LIKE ?', q, q)
+    end
+
     respond_to do |format|
       format.html
       format.json
+      format.js { render partial: 'songs/songs_list' }
     end
   end
 
@@ -54,5 +65,9 @@ class SongsController < ApplicationController
 
   def song_params
     params.require(:song).permit(:title, :author, :tone, tag_ids: [])
+  end
+
+  def search_params
+    params.permit(:tags_ids, :query)
   end
 end
