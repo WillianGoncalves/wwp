@@ -1,6 +1,7 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
   before_action :set_group
+  before_action :pagination_params, only: [:index]
   before_action do
     require_group_member(@group)
   end
@@ -17,6 +18,10 @@ class SongsController < ApplicationController
       q = "%#{search_params[:query].downcase}%"
       @songs = @songs.where('lower(title) LIKE ? OR lower(author) LIKE ?', q, q)
     end
+
+    calculate_page_count(@songs.count)
+
+    @songs = @songs.limit(@items_per_page).offset((@page - 1) * @items_per_page)
 
     respond_to do |format|
       format.html
@@ -68,6 +73,6 @@ class SongsController < ApplicationController
   end
 
   def search_params
-    params.permit(:tags_ids, :query)
+    params.permit(:tags_ids, :query, :page, :items_per_page)
   end
 end

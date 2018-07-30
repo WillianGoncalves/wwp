@@ -4811,6 +4811,10 @@ vuedraggable@^2.15.0:
   dependencies:
     sortablejs "^1.7.0"
 
+vuejs-paginate@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/vuejs-paginate/-/vuejs-paginate-2.0.1.tgz#373ed6d692dec4113d37aa9467f945da3a2bd9af"
+
 watchpack@^1.3.1:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.4.0.tgz#4a1472bcbb952bd0a9bb4036801f954dfb39faac"

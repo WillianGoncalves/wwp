@@ -1,5 +1,8 @@
-<%= form_tag group_songs_path(@group), remote: true, method: :get do %>
+<%= form_tag group_songs_path(@group), remote: true, method: :get, id: 'songs_list_form' do %>
   <%= hidden_field_tag 'tags_ids', @tags_ids, id: 'tags_ids' %>
+  <%= hidden_field_tag 'page', @page, id: 'page' %>
+  <%= hidden_field_tag 'items_per_page', @items_per_page, id: 'items_per_page' %>
+
   <tags-filter :tags="<%= render template: 'songs/_tags.json.jbuilder', locals: { tags: @group.tags } %>"></tags-filter>
 
   <div class="input-field">

@@ -11,6 +11,7 @@ import PresentationSongCard from './presentations/presentation_song_card.vue';
 import PresentationCard from './presentations/presentation_card.vue';
 import UserCard from './groups/user_card.vue';
 import TagsFilter from './songs/tags_filter.vue';
+import SongsListPaginator from './songs/songs_list_paginator.vue';
 
 Vue.component('user-group', UserGroup);
 Vue.component('group', Group);
@@ -24,6 +25,7 @@ Vue.component('presentation-song-card', PresentationSongCard);
 Vue.component('presentation-card', PresentationCard);
 Vue.component('user-card', UserCard);
 Vue.component('tags-filter', TagsFilter);
+Vue.component('songs-list-paginator', SongsListPaginator);
 
 var replaceHtml = function(element, content) {
   var Component = Vue.extend({});

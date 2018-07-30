@@ -54,4 +54,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :avatar])
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :avatar])
   end
+
+  def pagination_params
+    @page = if params[:page].present? then params[:page].to_i else 1 end
+    @items_per_page = if params[:items_per_page].present? then params[:items_per_page].to_i else 5 end
+  end
+
+  def calculate_page_count(total_items)
+    @page_count = (total_items / @items_per_page.to_f).ceil
+    @page = 1 if @page > @page_count
+  end
 end
