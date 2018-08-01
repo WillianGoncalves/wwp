@@ -63,6 +63,11 @@ class SongsController < ApplicationController
     redirect_to group_songs_path(@group)
   end
 
+  def authors
+    @authors = @group.songs.map(&:author).uniq.sort
+    render json: @authors
+  end
+
   private
   def set_song
     @song = Song.find(params[:id])

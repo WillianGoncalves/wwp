@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col s12 m6 offset-m3">
 
-    <%= form_for [current_group, @song] do |f| %>
+    <%= form_for [@group, @song] do |f| %>
     <div class="input-field">
       <%= f.label :title %>
       <%= f.text_field :title %>
@@ -9,7 +9,7 @@
 
     <div class="input-field">
       <%= f.label :author %>
-      <%= f.text_field :author %>
+      <%= f.text_field :author, { "data-group_id": @group.id, autocomplete: "off", class: "autocomplete" } %>
     </div>
 
     <div class="input-field">
@@ -18,7 +18,7 @@
     </div>
 
     <div class="input-field">
-      <%= f.collection_select(:tag_ids, current_group.tags, :id, :name, {}, { multiple: true }) %>
+      <%= f.collection_select(:tag_ids, @group.tags, :id, :name, {}, { multiple: true }) %>
     </div>
 
     <div class="actions right-align">

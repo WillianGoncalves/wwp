@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     end
     resources :members, only: [:create, :destroy]
     resources :join_requests, only: [:index, :create]
-    resources :songs
+    resources :songs do
+      collection do
+        get 'authors'
+      end
+    end
     resources :tags, except: [:new, :show]
     resources :presentations
   end
