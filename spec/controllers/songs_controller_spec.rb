@@ -91,11 +91,10 @@ RSpec.describe SongsController, type: :controller do
     describe 'GET #index' do
       context 'when the user is a member' do
         let!(:group) { Fabricate :group, member: user }
+        let!(:songs) { Fabricate.times 10, :song, group: group }
 
         context 'through browser' do
-          let!(:songs) { Fabricate.times 2, :song, group: group }
-
-          before { get :index, params: { group_id: group } }
+          before { get :index, params: { group_id: group, items_per_page: 10 } }
 
           it 'lists all group songs' do
             expect(response).to render_template :index
@@ -104,13 +103,36 @@ RSpec.describe SongsController, type: :controller do
         end
 
         context 'through javascript' do
-          let!(:songs) { Fabricate.times 2, :song, group: group }
+          context 'without filters' do
+            before { get :index, params: { group_id: group, items_per_page: 10, format: :json } }
 
-          before { get :index, params: { group_id: group, format: :json } }
+            it 'lists all group songs' do
+              expect(response).to have_http_status :ok
+              expect(assigns(:songs)).to match_array songs
+            end
+          end
 
-          it 'lists all group songs' do
-            expect(response).to have_http_status :ok
-            expect(assigns(:songs)).to match_array songs
+          context 'filtering' do
+            let!(:tag) { Fabricate :tag, group: group }
+            let!(:song) { Fabricate :song, title: 'example', author: 'example', tags: [ tag ], group: group }
+
+            context 'by tag' do
+              before { get :index, params: { group_id: group, tags_ids: tag.id , format: :json } }
+
+              it 'lists only songs with the tag' do
+                expect(response).to have_http_status :ok
+                expect(assigns(:songs)).to match_array [ song ]
+              end
+            end
+
+            context 'by title or author' do
+              before { get :index, params: { group_id: group, query: 'example' , format: :json } }
+
+              it 'lists only songs with the term' do
+                expect(response).to have_http_status :ok
+                expect(assigns(:songs)).to match_array [ song ]
+              end
+            end
           end
         end
       end

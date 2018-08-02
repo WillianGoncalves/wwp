@@ -20,6 +20,6 @@
 #
 
 Fabricator(:tag) do
-  name { Faker::Lorem.word }
+  name { Faker::Lorem.characters(8) }
   color
 end
