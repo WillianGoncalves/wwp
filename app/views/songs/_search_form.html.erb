@@ -5,7 +5,7 @@
 
   <tags-filter :tags="<%= render template: 'songs/_tags.json.jbuilder', locals: { tags: @group.tags } %>"></tags-filter>
 
-  <div class="input-field">
+  <div id="search_input_container" class="input-field">
     <%= text_field_tag 'query', nil, placeholder: t('songs.search_by') %>
   </div>
 
