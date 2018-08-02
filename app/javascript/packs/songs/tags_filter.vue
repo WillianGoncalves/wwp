@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="tags_container">
     <button type="button" class="btn-flat-bordered tag-filter" v-for="tag in tags" @click="toggleTagFilter(tag.id)" :class="{'inactive': !tagFilterIsActive(tag.id)}">
       <i class="material-icons left tiny" :style="{ color: tag.color }">local_offer</i>
       <span>{{ tag.name }}</span>
@@ -34,6 +34,11 @@ export default
 
 <style scoped lang="sass?indentedSyntax">
 @import '../../../assets/stylesheets/variables/colors';
+
+#tags_container
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
 
 .tag-filter
   margin: 10px
