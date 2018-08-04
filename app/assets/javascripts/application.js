@@ -54,7 +54,7 @@ $(document).ready(function() {
 
 // Initializes autocomplete for the "author" field, on songs form.
 $('#song_author').ready(function() {
-  let input = $('#song_author');
+  var input = $('#song_author');
   let groupId = input.data('group_id');
 
   $.get(`/groups/${ groupId }/songs/authors`, (data) => {
