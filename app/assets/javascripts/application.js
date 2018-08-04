@@ -57,9 +57,7 @@ $('#song_author').ready(function() {
   let input = $('#song_author');
   let groupId = input.data('group_id');
 
-  $.get(`/groups/${ groupId }/songs/authors`, initializeAutocomplete);
-
-  function initializeAutocomplete(data) {
+  $.get(`/groups/${ groupId }/songs/authors`, (data) => {
     let authors = {};
 
     for(let author of data) {
@@ -70,5 +68,5 @@ $('#song_author').ready(function() {
       data: authors,
       limit: 5
     });
-  }
+  });
 });
