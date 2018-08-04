@@ -57,7 +57,7 @@ $('#song_author').ready(function() {
   var input = $('#song_author');
   var groupId = input.data('group_id');
 
-  $.get(`/groups/${ groupId }/songs/authors`, (data) => {
+  $.get("/groups/" + groupId + "/songs/authors", (data) => {
     let authors = {};
 
     for(let author of data) {
