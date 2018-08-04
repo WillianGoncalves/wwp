@@ -134,6 +134,15 @@ RSpec.describe SongsController, type: :controller do
               end
             end
           end
+
+          context 'paging' do
+            before { get :index, params: { group_id: group, items_per_page: 5, page: 2, format: :json } }
+
+            it 'lists all group songs' do
+              expect(response).to have_http_status :ok
+              expect(assigns(:songs)).to match_array songs.last(5)
+            end
+          end
         end
       end
 
@@ -346,6 +355,33 @@ RSpec.describe SongsController, type: :controller do
         it 'does not delete the song' do
           expect(response).to redirect_to root_path
           expect(flash[:alert]).to be_present
+        end
+      end
+    end
+
+    describe 'GET #authors' do
+      context 'when the user is a member' do
+        let!(:group) { Fabricate :group, member: user }
+        let!(:song1) { Fabricate :song, group: group, author: 'foo' }
+        let!(:song2) { Fabricate :song, group: group, author: 'bar' }
+        let!(:song3) { Fabricate :song, author: 'baz' }
+
+        before { get :authors, params: { group_id: group, format: :json } }
+
+        it 'get all the songs authors' do
+          expect(response).to have_http_status :ok
+          expect(assigns(:authors)).to match_array ['foo', 'bar']
+        end
+      end
+
+      context 'when the user is not a member' do
+        let!(:group) { Fabricate :group }
+        let!(:song) { Fabricate :song, group: group, author: 'foo' }
+
+        before { get :authors, params: { group_id: group, format: :json } }
+
+        it 'does not get the songs authors' do
+          expect(response).to have_http_status :bad_request
         end
       end
     end
