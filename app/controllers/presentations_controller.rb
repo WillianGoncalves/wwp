@@ -6,10 +6,10 @@ class PresentationsController < ApplicationController
   end
 
   def index
-    @year  = params[:year].to_i || DateTime.now.year
-    @month = params[:month].to_i || DateTime.now.month
+    @year  = params[:year] || DateTime.now.year
+    @month = params[:month] || DateTime.now.month
 
-    if (1..12).to_a.include?(@month)
+    if (1..12).to_a.include?(@month.to_i)
       @presentations = @group.presentations.where('extract(month from date_time) = ?', @month).where('extract(year from date_time) = ?', @year).order(:date_time)
     else
       @presentations = @group.presentations.where('extract(year from date_time) = ?', @year).order(:date_time)

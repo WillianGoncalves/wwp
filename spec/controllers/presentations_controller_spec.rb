@@ -87,9 +87,11 @@ RSpec.describe PresentationsController, type: :controller do
         context 'without date params' do
           before { get :index, params: { group_id: group } }
 
-          it 'lists all presentations in current month' do
+          it 'lists all presentations in the current month' do
             expect(response).to render_template :index
             expect(assigns(:presentations)).to match_array [ presentation1 ]
+            expect(assigns(:month)).to eq DateTime.now.month
+            expect(assigns(:year)).to eq DateTime.now.year
           end
         end
 
