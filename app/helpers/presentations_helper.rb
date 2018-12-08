@@ -6,7 +6,8 @@ module PresentationsHelper
 
   def months
     months = I18n.t('date.month_names').to_a.compact
-    months.each_with_index.map{ |month, index| [month, index + 1] }
+    months.unshift(I18n.t('date.all_months'))
+    months.each_with_index.map{ |month, index| [month, index] }
   end
 
   def years
