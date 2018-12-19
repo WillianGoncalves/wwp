@@ -18,6 +18,16 @@
   background-image: $primary-gradient;
 }
 
+.btn-floating-sm {
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  i {
+    line-height: 30px;
+    font-size: 1.3em;
+  }
+}
+
 .btn-floating-danger {
   @extend .btn-floating;
   background-image: $danger-gradient;

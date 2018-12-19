@@ -11,7 +11,7 @@
 }
 
 .light-text {
-  color: lighten($color, 20%);
+  color: $light-text-color;
 }
 
 .vertical-margin {

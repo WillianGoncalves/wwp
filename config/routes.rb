@@ -19,15 +19,17 @@ Rails.application.routes.draw do
   end
 
   resources :songs, only: [] do
-    resources :comments, only: [:create, :update, :destroy]
+    resources :comments, only: [:create]
   end
 
   resources :presentations, only: [] do
-    resources :comments, only: [:create, :update, :destroy]
+    resources :comments, only: [:create]
     member do
       get 'play'
     end
   end
+
+  resources :comments, only: [:update, :destroy]
 
   resources :join_requests, only: [] do
     member do
