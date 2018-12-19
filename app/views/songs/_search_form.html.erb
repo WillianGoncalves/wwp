@@ -3,7 +3,7 @@
   <%= hidden_field_tag 'page', @page, id: 'page' %>
   <%= hidden_field_tag 'items_per_page', @items_per_page, id: 'items_per_page' %>
 
-  <tags-filter :tags="<%= render template: 'songs/_tags.json.jbuilder', locals: { tags: @group.tags } %>"></tags-filter>
+  <tags-filter :tags="<%= render 'components/tags_filter.json.jbuilder', tags: @group.tags %>"></tags-filter>
 
   <div id="search_input_container" class="input-field">
     <%= text_field_tag 'query', nil, placeholder: t('songs.search_by') %>

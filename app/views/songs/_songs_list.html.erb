@@ -13,7 +13,7 @@
         <div class="light-text tone"><%= song.tone %></div>
         <div class="tags">
           <% song.tags.each do |tag| %>
-            <tag :tag="<%= render template: 'songs/_tag.json.jbuilder', locals: { tag: tag } %>"></tag>
+            <tag :tag="<%= render 'components/tag.json.jbuilder', tag: tag %>"></tag>
           <% end %>
         </div>
       <% end %>

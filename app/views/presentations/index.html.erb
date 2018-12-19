@@ -11,7 +11,7 @@
   <% @presentations.each do |presentation| %>
       <div class="col s12 m4">
         <%= link_to group_presentation_path(current_group, presentation) do %>
-          <presentation-card :presentation="<%= render "presentation_card.json.jbuilder", presentation: presentation %>" ></presentation-card>
+          <presentation-card :presentation="<%= render "components/presentation_card.json.jbuilder", presentation: presentation %>" ></presentation-card>
         <% end %>
       </div>
   <% end %>
