@@ -6,6 +6,7 @@ import Candidates from './groups/candidates.vue';
 import Tag from './songs/tag.vue';
 import TagColorPicker from './tags/tag_color_picker.vue';
 import Comment from './comments/comment.vue';
+import CommentKebabMenu from './comments/comment_kebab_menu.vue';
 import SongsSelector from './presentations/songs_selector.vue';
 import PresentationSongCard from './presentations/presentation_song_card.vue';
 import PresentationCard from './presentations/presentation_card.vue';
@@ -26,6 +27,7 @@ Vue.component('presentation-card', PresentationCard);
 Vue.component('user-card', UserCard);
 Vue.component('tags-filter', TagsFilter);
 Vue.component('songs-list-paginator', SongsListPaginator);
+Vue.component('comment-kebabk-menu', CommentKebabMenu);
 
 var replaceHtml = function(element, content) {
   var Component = Vue.extend({});

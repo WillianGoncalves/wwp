@@ -1,47 +1,32 @@
 <template>
-  <div>
-    <div class="comment">
-      <avatar :url="comment.commenter.avatar_url" class="avatar"></avatar>
+  <div class="comment">
+    <avatar :url="comment.commenter.avatar_url" class="avatar"></avatar>
 
-      <div class="body">
-        <p :contentEditable="editing" :class="{ 'editable-body': editing }" ref="editable_body">
-          {{ comment.body }}
-        </p>
+    <div class="body">
+      <p :contentEditable="editing" :class="{ 'editable': editing }" ref="editable_body">
+        {{ comment.body }}
+      </p>
 
-        <div class="menu">
-          <button class="btn-floating btn-floating-sm" v-if="canEdit && !editing" @click="edit()">
-            <i class="material-icons">edit</i>
-          </button>
+      <comment-kebab-menu v-if="canEdit" class="menu" v-on:edit="edit()" v-on:cancel="cancel()" v-on:save="save()"></comment-kebab-menu>
+    </div>
 
-          <button class="btn-floating-transparent btn-floating-sm" v-if="editing" @click="cancel()">
-            <i class="material-icons">close</i>
-          </button>
-
-          <button class="btn-floating btn-floating-sm" v-if="editing" @click="save()">
-            <i class="material-icons">done</i>
-          </button>
-
-          <button class="btn-floating-danger btn-floating-sm" v-if="editing" @click="cancel()">
-            <i class="material-icons">delete</i>
-          </button>
-        </div>
-      </div>
-
-      <div class="comment-info">
-        {{ comment.commenter.full_name }} - {{ comment.created_at }}
-      </div>
+    <div class="comment-info">
+      {{ comment.commenter.full_name }} - {{ comment.created_at }}
     </div>
   </div>
 </template>
 
 <script lang="coffee">
 import Avatar from '../avatar.vue'
+import CommentKebabMenu from './comment_kebab_menu.vue'
 
 export default
   data: () ->
     editing: false
 
-  components: 'avatar': Avatar
+  components:
+    'avatar': Avatar
+    'comment-kebab-menu': CommentKebabMenu
 
   props:
     comment:
@@ -122,17 +107,14 @@ $body-padding: 15px
     align-self: center
     margin: 0
     text-align: justify
-  .menu
-    display: flex
-    flex-direction: column
-    margin-left: $body-padding
-    button:not(:last-child)
-      margin-bottom: 10px
+    transition: all .2s linear
+    &.editable
+      align-self: stretch !important
+      background: $primary-color
+      padding: $body-padding
 
-.editable-body
-  align-self: stretch !important
-  background: $primary-color
-  padding: $body-padding
+  .menu
+    margin-left: $body-padding
 
 .comment-info
   grid-area: info

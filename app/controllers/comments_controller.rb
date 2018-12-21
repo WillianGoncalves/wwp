@@ -20,7 +20,8 @@ class CommentsController < ApplicationController
     return redirect_to root_path if @comment.commenter != current_user
 
     if @comment.update(comment_params)
-      redirect_to polymorphic_path([ @target.group, @target ])
+      #redirect_to polymorphic_path([ @target.group, @target ])
+      render json: @comment
     else
       flash[:error] = @comment.errors.full_messages
       redirect_back fallback_location: polymorphic_path([ @target.group, @target ])
