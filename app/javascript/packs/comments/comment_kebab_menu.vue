@@ -32,7 +32,12 @@
 export default
   data: () ->
     showMenu: false
-    editing: false
+
+  props:
+    editing:
+      type: Boolean
+      required: true
+      default: false
 
   methods:
     toggleMenu: () ->
@@ -41,11 +46,9 @@ export default
     enterEditingMode: () ->
       @$emit('edit')
       @showMenu = false
-      @editing = true
 
     leaveEditingMode: () -> 
       @$emit('cancel')
-      @editing = false
 
     save: () ->
       @$emit('save')

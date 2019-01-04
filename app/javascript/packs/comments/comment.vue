@@ -7,7 +7,7 @@
         {{ comment.body }}
       </p>
 
-      <comment-kebab-menu v-if="canEdit" class="menu" v-on:edit="edit()" v-on:cancel="cancel()" v-on:save="save()"></comment-kebab-menu>
+      <comment-kebab-menu v-if="canEdit" class="menu" v-on:edit="edit()" v-on:cancel="cancel()" v-on:save="save()" :editing="editing"></comment-kebab-menu>
     </div>
 
     <div class="comment-info">
@@ -41,13 +41,16 @@ export default
       @editing = true
       @trimCommentBody()
 
-    cancel: () ->
-      @editing = false
+    reset: () ->
       @$refs.editable_body.innerHTML = @comment.body
 
+    cancel: () ->
+      @editing = false
+      @reset()
+
     save: () ->
-      @comment.body = @trimCommentBody()
-      data = comment: body: @comment.body
+      body = @trimCommentBody()
+      data = comment: body: body
 
       $.ajax
         url: "/comments/#{@comment.id}"
@@ -57,6 +60,11 @@ export default
         contentType: 'application/json'
       .done () =>
         @editing = false
+        @comment.body = body
+      .fail (err) =>
+        messages = JSON.parse(err.responseText)
+        Materialize.toast(messages, 4000)
+        @reset()
 
     trimCommentBody: () ->
       @$refs.editable_body.innerHTML = @$refs.editable_body.innerHTML.trim()
