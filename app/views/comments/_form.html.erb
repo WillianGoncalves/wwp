@@ -1,28 +1,16 @@
 <div class="row">
   <div class="col s12">
-
     <%= form_with(model: [ target, comment ]) do |f| %>
-
       <div class="input-field">
         <%= f.label :body %>
         <%= f.text_area :body, class: 'materialize-textarea' %>
       </div>
 
       <div class="right-align">
-        <% if comment.persisted? %>
-          <button class="btn-floating-danger" type="button" @click="showModal('#deletion_confirmation_modal_<%= comment.id %>')">
-            <i class="material-icons">delete</i>
-          </button>
-        <% end %>
         <%= button_tag type: 'submit', class: 'btn-floating' do %>
           <i class="material-icons">done</i>
         <% end %>
       </div>
     <% end %>
-
   </div>
 </div>
-
-<% if comment.persisted? %>
-  <%= render "comments/deletion_modal", { target: comment.target, comment: comment } %>
-<% end %>

@@ -9,10 +9,10 @@ class CommentsController < ApplicationController
     @comment = @target.comments.build(comment_params)
     @comment.commenter = current_user
     if @comment.save
-      redirect_to polymorphic_path([ @target.group, @target ])
+      redirect_to polymorphic_path([@target.group, @target])
     else
       flash[:error] = @comment.errors.full_messages
-      redirect_back fallback_location: polymorphic_path([ @target.group, @target ])
+      redirect_back fallback_location: polymorphic_path([@target.group, @target])
     end
   end
 

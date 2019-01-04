@@ -10,7 +10,7 @@
           <i class="material-icons">edit</i>
         </button>
 
-        <button class="btn-floating-danger btn-floating-sm" @click="cancel()">
+        <button class="btn-floating-danger btn-floating-sm" @click="destroy()">
           <i class="material-icons">delete</i>
         </button>
       </div>
@@ -52,6 +52,9 @@ export default
 
     save: () ->
       @$emit('save')
+
+    destroy: () ->
+      @$emit('destroy')
 </script>
 
 <style scoped lang="sass?indentedSyntax">

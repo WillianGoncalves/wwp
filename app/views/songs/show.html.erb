@@ -54,6 +54,7 @@
       :comment="<%= render 'components/comment.json.jbuilder', comment: comment %>"
       :can-edit="<%= current_user.id.equal?(comment.commenter.id) %>">
     </comment>
+    <%= render "comments/deletion_modal", comment: comment %>
   <% end %>
 </div>
 

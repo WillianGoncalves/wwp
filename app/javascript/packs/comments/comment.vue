@@ -7,7 +7,15 @@
         {{ comment.body }}
       </p>
 
-      <comment-kebab-menu v-if="canEdit" class="menu" v-on:edit="edit()" v-on:cancel="cancel()" v-on:save="save()" :editing="editing"></comment-kebab-menu>
+      <comment-kebab-menu
+        v-if="canEdit"
+        class="menu"
+        v-on:edit="edit()"
+        v-on:cancel="cancel()"
+        v-on:save="save()"
+        v-on:destroy="destroy()"
+        :editing="editing">
+      </comment-kebab-menu>
     </div>
 
     <div class="comment-info">
@@ -65,6 +73,9 @@ export default
         messages = JSON.parse(err.responseText)
         Materialize.toast(messages, 4000)
         @reset()
+
+    destroy: () ->
+      @$root.showModal('#deletion_confirmation_modal_' + @comment.id)
 
     trimCommentBody: () ->
       @$refs.editable_body.innerHTML = @$refs.editable_body.innerHTML.trim()
