@@ -17,10 +17,10 @@ RSpec.describe CommentsController, type: :controller do
       let!(:comment) { Fabricate :song_comment }
       let!(:valid_comment) { { body: 'foo' } }
 
-      before { put :update, params: { song_id: comment.target, id: comment, comment: valid_comment } }
+      before { put :update, params: { id: comment, comment: valid_comment, format: :json } }
 
       it 'redirects to login page' do
-        expect(response).to redirect_to user_session_path
+        expect(response).to have_http_status :unauthorized
       end
     end
 
@@ -128,10 +128,10 @@ RSpec.describe CommentsController, type: :controller do
           context 'with valid data' do
             let!(:valid_data) { { body: 'foo' } }
 
-            before { put :update, params: { song_id: song, id: comment, comment: valid_data } }
+            before { put :update, params: { id: comment, comment: valid_data, format: :json } }
 
             it 'updates the comment' do
-              expect(response).to redirect_to group_song_path(group, song)
+              expect(response).to have_http_status :ok
               expect(comment.reload.body).to eq 'foo'
             end
           end
@@ -139,11 +139,10 @@ RSpec.describe CommentsController, type: :controller do
           context 'with invalid data' do
             let!(:invalid_data) { { body: '' } }
 
-            before { put :update, params: { song_id: song, id: comment, comment: invalid_data } }
+            before { put :update, params: { id: comment, comment: invalid_data, format: :json } }
 
             it 'does not update the comment' do
-              expect(response).to redirect_to group_song_path(group, song)
-              expect(flash[:error]).to be_present
+              expect(response).to have_http_status :bad_request
               expect(comment.reload.body).not_to eq ''
             end
           end
@@ -156,10 +155,10 @@ RSpec.describe CommentsController, type: :controller do
           context 'with valid data' do
             let!(:valid_data) { { body: 'foo' } }
 
-            before { put :update, params: { presentation_id: presentation, id: comment, comment: valid_data } }
+            before { put :update, params: { id: comment, comment: valid_data, format: :json } }
 
             it 'updates the comment' do
-              expect(response).to redirect_to group_presentation_path(group, presentation)
+              expect(response).to have_http_status :ok
               expect(comment.reload.body).to eq 'foo'
             end
           end
@@ -167,11 +166,10 @@ RSpec.describe CommentsController, type: :controller do
           context 'with invalid data' do
             let!(:invalid_data) { { body: '' } }
 
-            before { put :update, params: { presentation_id: presentation, id: comment, comment: invalid_data } }
+            before { put :update, params: { id: comment, comment: invalid_data, format: :json } }
 
             it 'does not update the comment' do
-              expect(response).to redirect_to group_presentation_path(group, presentation)
-              expect(flash[:error]).to be_present
+              expect(response).to have_http_status :bad_request
               expect(comment.reload.body).not_to eq ''
             end
           end
