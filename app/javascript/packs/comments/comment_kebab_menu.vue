@@ -17,11 +17,11 @@
     </div>
 
     <div class="editing-menu" v-if="editing">
-      <button class="btn-floating-transparent btn-floating-sm delayed" @click="leaveEditingMode()">
+      <button class="btn-floating-transparent btn-floating-sm" @click="leaveEditingMode()">
         <i class="material-icons">close</i>
       </button>
 
-      <button class="btn-floating btn-floating-sm delayed" @click="save()">
+      <button class="btn-floating btn-floating-sm" @click="save()">
         <i class="material-icons">done</i>
       </button>
     </div>
@@ -69,6 +69,8 @@ export default
 .editing-menu
   display: flex
   flex-direction: column
+  justify-content: space-between
+  height: 100%
 
 .popup
   display: flex
@@ -78,7 +80,9 @@ export default
   visibility: hidden
   button
     margin: 5px
-    animation: scaleOut .3s
+    animation: scaleOut .1s
+    animation-timing-function: ease
+    animation-fill-mode: forwards
 .popup-visible
   visibility: visible
   button
