@@ -1,4 +1,6 @@
 class PresentationsController < ApplicationController
+  include PresentationsHelper
+
   before_action :set_presentation, only: [:show, :edit, :update, :play]
   before_action :set_group, except: [:play]
   before_action do
@@ -23,8 +25,8 @@ class PresentationsController < ApplicationController
   end
 
   def edit
-    @date = @presentation.date
-    @time = @presentation.time
+    @date = presentation_date(@presentation)
+    @time = presentation_time(@presentation)
   end
 
   def create

@@ -53,6 +53,8 @@ pt-BR:
     - :day
     - :month
     - :year
+    time_ago_prefix: "Há"
+    from_now_prefix: "Daqui a"
   datetime:
     distance_in_words:
       about_x_hours:

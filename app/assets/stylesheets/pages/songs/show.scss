@@ -1,36 +1,70 @@
 @import "../../variables/colors";
+@import "../../variables/mixins";
 
-#title {
-  margin: 3rem 0;
+#song {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 50% 50%;
+  grid-row-gap: 5rem;
+  grid-column-gap: 2rem;
+  grid-template-areas:
+    "general presentations"
+    "comments comments";
+
+    @include on-small {
+      grid-template-rows: repeat(3, auto);
+      grid-template-columns: 1fr;
+      grid-row-gap: 3rem;
+      grid-template-areas:
+        "general"
+        "presentations"
+        "comments";
+    }
 }
 
-#author {
-  color: lighten($color, 15%);
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 2px
-}
+#general {
+  grid-area: general;
 
-#times_played {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid $border-color;
-  border-radius: 25px;
-  i {
-    padding: 5px;
-    border: 1px solid $border-color;
-    border-left: none;
-    border-radius: 25px;
+  #times_played {
+    color: lighten($color, 15%);
+    font-size: 1.1rem;
+    margin-left: 10px;
   }
-  span {
-    margin: 0 20px 0 10px;
+
+  #author {
+    color: lighten($color, 15%);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 2px
+  }
+
+  #tags {
+    margin-top: 3rem;
+
+    div {
+      display: flex;
+
+      &:not(:last-child) { margin-bottom: 15px; }
+
+      .tag-name {
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        margin-left: 10px;
+      }
+    }
   }
 }
 
-#presentations { margin-bottom: 5rem; }
+#presentations {
+  grid-area: presentations;
 
-.card .card-title {
-  margin-bottom: 15px;
-  font-size: 1rem;
-  font-weight: bold;
+  .presentation-info {
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    span { align-self: center; }
+  }
 }
+
+#comments { grid-area: comments; }

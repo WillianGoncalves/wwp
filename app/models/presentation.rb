@@ -31,20 +31,12 @@ class Presentation < ApplicationRecord
   validate :validate_date_time
 
   def add_song(song)
-    index = self.presentation_songs.size + 1
-    self.presentation_songs.build(song: song, index: index)
-  end
-
-  def date()
-    self.date_time.strftime("%d/%m/%Y")
-  end
-
-  def time()
-    self.date_time.strftime("%H:%M")
+    index = presentation_songs.size + 1
+    presentation_songs.build(song: song, index: index)
   end
 
   def validate_date_time
-    if self.date_time and self.date_time < DateTime.now
+    if date_time && date_time < DateTime.now
       errors.add(:date_time, :invalid_date_time)
     end
   end

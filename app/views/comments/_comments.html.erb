@@ -1,0 +1,13 @@
+<div id="comments">
+  <div class="section-title"><%= t('comments.index') %></div>
+
+  <% target.comments.each do |comment| %>
+    <comment
+      :comment="<%= render 'components/comment.json.jbuilder', comment: comment %>"
+      :can-edit="<%= current_user.id.equal?(comment.commenter.id) %>">
+    </comment>
+    <%= render "comments/deletion_modal", comment: comment %>
+  <% end %>
+
+  <%= render "comments/form", { target: target, comment: target.comments.build } %>
+</div>

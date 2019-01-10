@@ -179,8 +179,8 @@ RSpec.describe PresentationsController, type: :controller do
         it 'shows the presentations form' do
           expect(response).to render_template :edit
           expect(assigns(:presentation)).to eq presentation
-          expect(assigns(:date)).to eq presentation.date_time.strftime("%d/%m/%Y")
-          expect(assigns(:time)).to eq presentation.date_time.strftime("%H:%M")
+          expect(assigns(:date)).to eq presentation.date_time.strftime('%d/%m/%Y')
+          expect(assigns(:time)).to eq presentation.date_time.strftime('%H:%M')
         end
       end
 

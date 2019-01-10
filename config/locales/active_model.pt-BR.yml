@@ -32,7 +32,6 @@ pt-BR:
         color: Cor
       comment:
         body: Seu comentário
-        you: Você # used when the current user is the commenter
       created_at: Criado em
       updated_at: Atualizado em
     models:

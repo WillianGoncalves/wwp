@@ -7,6 +7,8 @@ pt-BR:
     cancel: Cancelar
     delete: Excluir
   comments:
+    index: Comentários
+    you: Você # used when the current user is the commenter
     delete:
       message: "Tem certeza de que deseja excluir esse comentário?"
   groups:
@@ -25,10 +27,11 @@ pt-BR:
     index: Músicas
     delete:
       message: "Tem certeza de que deseja excluir essa música?"
-    last_presentation: "Última apresentação"
-    next_presentation: "Próxima apresentação"
-    time_ago_prefix: "Há"
-    from_now_prefix: "Daqui a"
+    show:
+      last_presentation: "Última apresentação"
+      next_presentation: "Próxima apresentação"
+      presentations: "Apresentações"
+      no_presentations: "Essa música ainda não foi apresentada"
     search_by: "Título ou autor"
   join_requests:
     accept: Aceitar

@@ -36,3 +36,13 @@ strong {
 .right-align-on-small {
   @include on-small { text-align: right; }
 }
+
+.section-title {
+  border-bottom: 1px;
+  border-bottom-color: $border-color;
+  border-bottom-style: solid;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.8rem;
+}
