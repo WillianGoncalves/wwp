@@ -1,3 +1,0 @@
-FROM node:boron
-COPY package.json yarn.lock ./
-RUN yarn
