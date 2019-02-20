@@ -29,7 +29,7 @@ export default
     @listColors()    
 </script>
 
-<style scoped lang="sass?indentedSyntax">
+<style scoped lang="sass">
 @import '../../../assets/stylesheets/variables/colors';
 
 .colors-container

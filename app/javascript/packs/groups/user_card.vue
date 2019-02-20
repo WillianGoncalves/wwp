@@ -21,7 +21,7 @@ export default
       "#{user.first_name} #{user.last_name}"
 </script>
 
-<style scoped lang="sass?indentedSyntax">
+<style scoped lang="sass">
 @import '../../../assets/stylesheets/variables/colors';
 .delete-button
   position: absolute

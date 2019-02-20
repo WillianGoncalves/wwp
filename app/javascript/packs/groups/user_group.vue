@@ -1,8 +1,8 @@
 <template>
-  <a :href="url">
+  <a :href="url" class="group">
     <div class="card">
-      <p>{{ group.name }}</p>
-      <avatar v-for="member in group.members" :key="member.id" :url="member.avatar_url" class="avatar"></avatar>
+      <p class="group__name">{{ group.name }}</p>
+      <avatar v-for="member in group.members" :key="member.id" :url="member.avatar_url" class="group__member"></avatar>
     </div>
   </a>
 </template>
@@ -23,12 +23,12 @@ export default
       "/groups/" + @group.id
 </script>
 
-<style scoped lang="sass?indentedSyntax">
+<style scoped lang="sass">
 a
   cursor: pointer
   color: inherit
 
-.avatar
+.group__member
   width: 32px
   margin-right: 10px
 </style>

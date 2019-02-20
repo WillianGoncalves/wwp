@@ -28,7 +28,7 @@ export default
         Materialize.toast(messages, 4000)
 </script>
 
-<style scoped lang="sass?indentedSyntax">
+<style scoped lang="sass">
 .enter-button
   position: absolute
   right: 20px

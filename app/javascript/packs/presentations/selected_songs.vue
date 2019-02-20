@@ -32,7 +32,7 @@ export default
       @selectedSongs.indexOf(song) + 1
 </script>
 
-<style scoped lang="sass?indentedSyntax">
+<style scoped lang="sass">
 .collection-item
   &:hover
     cursor: grab

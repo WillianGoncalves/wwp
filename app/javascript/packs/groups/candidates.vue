@@ -77,7 +77,7 @@ export default
     @listUsers()
 </script>
 
-<style scoped lang="sass?indentedSyntax">
+<style scoped lang="sass">
 .card
   cursor: pointer
 

@@ -32,7 +32,7 @@ export default
       required: true
 </script>
 
-<style scoped lang="sass?indentedSyntax">
+<style scoped lang="sass">
 @import '../../../assets/stylesheets/variables/colors';
 
 .presentation_song_card

@@ -57,7 +57,7 @@ export default
       @$emit('destroy')
 </script>
 
-<style scoped lang="sass?indentedSyntax">
+<style scoped lang="sass">
 @import '../../../assets/stylesheets/variables/colors';
 
 .main-menu

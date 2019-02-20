@@ -32,7 +32,7 @@ export default
       $('#tags_ids').val(@selectedTags)
 </script>
 
-<style scoped lang="sass?indentedSyntax">
+<style scoped lang="sass">
 @import '../../../assets/stylesheets/variables/colors';
 
 #tags_container
