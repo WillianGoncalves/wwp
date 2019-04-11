@@ -13,6 +13,10 @@ import PresentationCard from './presentations/presentation_card.vue';
 import UserCard from './groups/user_card.vue';
 import TagsFilter from './songs/tags_filter.vue';
 import SongsListPaginator from './songs/songs_list_paginator.vue';
+import Member from './groups/members/member.vue.erb';
+import GroupPresentation from './groups/group_presentation/group_presentation.vue';
+import GroupPresentationSongs from './groups/group_presentation/group_presentation_songs.vue';
+import GroupPresentationSongsItem from './groups/group_presentation/group_presentation_songs_item.vue';
 
 Vue.component('user-group', UserGroup);
 Vue.component('group', Group);
@@ -28,6 +32,10 @@ Vue.component('user-card', UserCard);
 Vue.component('tags-filter', TagsFilter);
 Vue.component('songs-list-paginator', SongsListPaginator);
 Vue.component('comment-kebabk-menu', CommentKebabMenu);
+Vue.component('member', Member)
+Vue.component('group-presentation', GroupPresentation)
+Vue.component('group-presentation-songs', GroupPresentationSongs)
+Vue.component('group-presentation-songs-item', GroupPresentationSongsItem)
 
 var replaceHtml = function(element, content) {
   var Component = Vue.extend({});

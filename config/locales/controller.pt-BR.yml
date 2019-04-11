@@ -16,6 +16,8 @@ pt-BR:
     new: Criar grupo
     user_groups: Seus grupos
     other_groups: Outros grupos
+    show:
+      members: Membros
   presentations:
     index: Apresentações
     play: Play

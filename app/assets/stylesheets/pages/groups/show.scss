@@ -1,3 +1,21 @@
+@import "../../variables/mixins";
+
+#group {
+  display: flex;
+  flex-direction: row;
+
+  #next_presentation, #members { flex: 1; }
+  #next_presentation { margin-right: 10px; }
+  #members { margin-left: 10px; }
+
+  @include on-small {
+    flex-direction: column;
+
+    #next_presentation { margin: 0 0 10px 0; }
+    #members { margin: 10px 0 0 0; }
+  }
+}
+
 .avatar {
   margin: 0 5px;
 }

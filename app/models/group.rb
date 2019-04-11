@@ -31,4 +31,8 @@ class Group < ApplicationRecord
   def join_requests_to_be_accepted
     join_requests.where(accepted: nil)
   end
+
+  def next_presentation
+    presentations.where('DATE(date_time) > ?', DateTime.now).order(:date_time).first
+  end
 end

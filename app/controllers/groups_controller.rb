@@ -13,6 +13,7 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @next_presentation = @group.next_presentation
     current_user.update(last_group: @group) if current_user.groups.include?(@group)
   end
 
