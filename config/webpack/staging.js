@@ -4,6 +4,7 @@
 
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin');
 const sharedConfig = require('./shared.js');
 
@@ -18,20 +19,11 @@ module.exports = merge(sharedConfig, {
     } 
   },
 
+  optimization: {
+    minimizer: [ new UglifyJsPlugin() ]
+  }
+
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      sourceMap: true,
-
-      compress: {
-        warnings: false
-      },
-
-      output: {
-        comments: false
-      }
-    }),
-
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
