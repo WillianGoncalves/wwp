@@ -21,7 +21,7 @@ module.exports = merge(sharedConfig, {
 
   optimization: {
     minimizer: [ new UglifyJsPlugin() ]
-  }
+  },
 
   plugins: [
     new CompressionPlugin({
