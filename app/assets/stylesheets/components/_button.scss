@@ -1,7 +1,12 @@
+$button-height: 32px;
+
 .btn, .btn-flat {
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   letter-spacing: 2px;
+  line-height: $button-height;
+  height: $button-height;
+  padding: 0 15px;
 }
 
 .btn {
@@ -16,6 +21,7 @@
 .btn-floating {
   overflow: unset;
   background-image: $primary-gradient;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-floating-sm {

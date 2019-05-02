@@ -34,7 +34,7 @@ strong {
 }
 
 .right-align-on-small {
-  @include on-small { text-align: right; }
+  @include on-small { text-align: right !important; }
 }
 
 .section-title {

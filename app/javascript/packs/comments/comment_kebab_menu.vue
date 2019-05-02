@@ -74,9 +74,9 @@ export default
 
 .popup
   display: flex
+  flex-direction: column
   position: absolute
-  top: -6px
-  left: 30px
+  top: 32px
   visibility: hidden
   button
     margin: 5px
