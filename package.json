@@ -37,6 +37,7 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
+    "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack-dev-server": "^3.1.14"
   }
 }
