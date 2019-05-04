@@ -13,7 +13,7 @@ import PresentationCard from './presentations/presentation_card.vue';
 import UserCard from './groups/user_card.vue';
 import TagsFilter from './songs/tags_filter.vue';
 import SongsListPaginator from './songs/songs_list_paginator.vue';
-import Member from './groups/members/member.vue.erb';
+import Member from './groups/members/member.vue';
 import GroupPresentation from './groups/group_presentation/group_presentation.vue';
 import GroupPresentationSongs from './groups/group_presentation/group_presentation_songs.vue';
 import GroupPresentationSongsItem from './groups/group_presentation/group_presentation_songs_item.vue';
