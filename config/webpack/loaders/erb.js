@@ -6,4 +6,11 @@ module.exports = {
   options: {
     runner: 'bin/rails runner'
   }
+  /*{
+      loader: 'rails-erb-loader',
+      options: {
+        runner: '../bin/rails runner',
+        dependenciesRoot: '../app'
+      }
+    }*/
 }

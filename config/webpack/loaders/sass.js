@@ -7,7 +7,7 @@ module.exports = {
 
   use: [
     devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-    { loader: 'css-loader', options: { minimize: env.NODE_ENV === 'production' } },
+    { loader: 'css-loader' },
     { loader: 'postcss-loader', options: { sourceMap: true } },
     { loader: 'sass-loader', options: { sourceMap: true, indentedSyntax: true } }
   ],
