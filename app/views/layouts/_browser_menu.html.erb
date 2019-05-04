@@ -1,6 +1,23 @@
 <div id="browser-menu" class="hide-on-med-and-down">
   <ul>
+    <li>
+      <!-- logo -->
+      <%= link_to (image_tag("logo.svg")), root_path, class: "browser-logo hide-on-med-and-down" %>
+    </li>
+
     <% unless current_group.nil? %>
+      <!-- Logo -->
+      <li><b><%= link_to current_group.name, group_path(current_group) %></b></li>
+
+      <!-- Join requests -->
+      <li>
+        <% if current_group.join_requests_to_be_accepted.any? %>
+          <%= link_to group_join_requests_path(current_group), class: 'btn-floating pulse' do %>
+            <i class="material-icons">person_add</i>
+          <% end %>
+        <% end %>
+      </li>
+
       <!-- Presentations -->
       <li><%= link_to t('presentations.index'), group_presentations_path(current_group) %></li>
 

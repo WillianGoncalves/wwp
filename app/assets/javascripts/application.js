@@ -12,42 +12,50 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require materialize-css/dist/js/materialize.min
+//= require materialize-css/dist/js/materialize
 //= require nosleep.js/dist/NoSleep
 //= require_tree .
 
 var noSleep = new NoSleep();
 
-$(document).ready(function() {
-  $('select').material_select();
+const initializeSidenavs = () => {
+  const sidenavs = document.querySelectorAll('.sidenav')
+  M.Sidenav.init(sidenavs)
+}
 
-  $('.datepicker').pickadate({
-    selectMonths: true,
-    selectYears: 15,
-    today: 'Today',
-    clear: 'Clear',
-    close: 'Ok',
-    closeOnSelect: false
-  });
+const initializeSelects = () => {
+  const selects = document.querySelectorAll('select');
+  M.FormSelect.init(selects);
+}
 
-  $('.timepicker').pickatime({
-    default: 'now',
-    fromnow: 0,
-    twelvehour: false,
-    donetext: 'OK',
-    cleartext: 'Clear',
-    canceltext: 'Cancel',
-    autoclose: false,
-    ampmclickable: true,
-    aftershow: function(){}
-  });
+const initializeDatepickers = () => {
+  // TODO: install https://github.com/fnando/i18n-js to use i18n
+  // For datepicker options, see: https://materializecss.com/pickers.html
+  const datepickers = document.querySelectorAll('.datepicker')
+  M.Datepicker.init(datepickers)
+}
 
-  $('button[data-enable-nosleep]').on('click', function(){
+const initializeTimepickers = () => {
+  // TODO: install https://github.com/fnando/i18n-js to use i18n
+  // For timepicker options, see: https://materializecss.com/pickers.html
+  const timepickers = document.querySelectorAll('.timepicker');
+  M.Timepicker.init(timepickers);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initializeSidenavs()
+  initializeSelects()
+  initializeDatepickers()
+  initializeTimepickers()
+});
+
+$(document).ready(() => {
+  $('button[data-enable-nosleep]').on('click', () => {
     noSleep.enable();
     $(this).fadeOut(1500);
   });
 
-  $('button[data-disable-nosleep]').on('click', function(){
+  $('button[data-disable-nosleep]').on('click', () => {
     noSleep.disable();
   });
 });
@@ -57,16 +65,18 @@ $('#song_author').ready(function() {
   var input = $('#song_author');
   var groupId = input.data('group_id');
 
-  $.get("/groups/" + groupId + "/songs/authors", function(data) {
-    var authors = {};
+  if (groupId) {
+    $.get("/groups/" + groupId + "/songs/authors", function(data) {
+      var authors = {};
 
-    data.forEach(function(author) {
-      authors[author] = null;
-    });
+      data.forEach(function(author) {
+        authors[author] = null;
+      });
 
-    input.autocomplete({
-      data: authors,
-      limit: 5
+      input.autocomplete({
+        data: authors,
+        limit: 5
+      });
     });
-  });
+  }
 });

@@ -1,5 +1,8 @@
-<div class="side-nav" id="mobile-menu">
+<!-- Mobile menu button -->
+<a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
+<!-- Mobile menu -->
+<div class="sidenav" id="mobile-menu">
   <div class="header">
     <%= link_to edit_user_registration_path(current_user), class: 'center-align' do %>
       <i><%= image_tag current_user.avatar.url, class: 'circle responsive-img nav-avatar' %></i>
