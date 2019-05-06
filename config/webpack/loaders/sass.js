@@ -2,6 +2,8 @@ const MiniCssExtractPlugin = require(`mini-css-extract-plugin`);
 const { env } = require('../configuration.js')
 const devMode = process.env.NODE_ENV !== 'production'
 
+// this will apply to both plain `.css` files
+// AND `<style>` blocks in `.vue` files
 module.exports = {
   test: /\.(scss|sass|css)$/i,
 
