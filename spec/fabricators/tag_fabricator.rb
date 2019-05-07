@@ -7,7 +7,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  color_id   :integer          not null
-#  group_id   :integer
+#  group_id   :bigint(8)
 #
 # Indexes
 #

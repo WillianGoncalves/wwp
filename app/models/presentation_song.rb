@@ -2,9 +2,9 @@
 #
 # Table name: presentation_songs
 #
-#  id              :integer          not null, primary key
-#  presentation_id :integer
-#  song_id         :integer
+#  id              :bigint(8)        not null, primary key
+#  presentation_id :bigint(8)
+#  song_id         :bigint(8)
 #  index           :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

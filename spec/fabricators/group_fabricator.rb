@@ -11,7 +11,7 @@
 
 Fabricator(:group) do
   transient :admin, :member
-  name { Faker::RockBand.name }
+  name { Faker::Music::RockBand.name }
 
   before_validation do |group, transients|
     group_admin = transients[:admin] || Fabricate(:user)
