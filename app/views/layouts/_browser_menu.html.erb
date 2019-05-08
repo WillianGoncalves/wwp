@@ -35,7 +35,7 @@
   <ul class="right">
     <li>
       <!-- Account menu button -->
-      <a class="dropdown-button menu-item" href="#!" data-activates="account_menu">
+      <a class="dropdown-trigger menu-item" href="#!" data-target="account_menu">
         <%= image_tag current_user.avatar.url, class: 'circle responsive-img nav-avatar' %>
         <i class="material-icons right">arrow_drop_down</i>
       </a>
@@ -44,7 +44,7 @@
 </div>
 
 <!-- Account menu -->
-<ul id="account_menu" class="dropdown-content right">
+<ul id="account_menu" class="dropdown-content">
 
   <!-- My account -->
   <li><%= link_to t('registrations.edit'), edit_user_registration_path(current_user) %> </li>
