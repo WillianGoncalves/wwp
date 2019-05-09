@@ -7,12 +7,17 @@ form .actions {
 .input-field {
   margin-top: $input-field-margin-top;
 
+  &.no-margin-top {
+    margin-top: 0;
+  }
+
   input[type], textarea {
     box-sizing: border-box;
     border: 1px solid #e5e5e5;
     background: #fff;
     border-radius: 5px;
     padding: 0 10px;
+    color: $color;
   }
 
   label {
@@ -27,6 +32,7 @@ form .actions {
     color: $color;
     z-index: 1;
     margin-right: 20px;
+    pointer-events: none;
   }
 
   textarea { padding: 10px; }

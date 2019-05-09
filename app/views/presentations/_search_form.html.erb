@@ -1,9 +1,9 @@
 <%= form_tag(group_presentations_path(current_group), method: 'get') do %>
-  <div class="col s5 m2">
+  <div class="col s5 m2 input-field no-margin-top">
     <%= select_tag 'month', options_for_select(months, @month) %>
   </div>
   <% if years.count > 1 %>
-    <div class="col s4 m2">
+    <div class="col s4 m2 input-field no-margin-top">
       <%= select_tag 'year', options_for_select(years, @year) %>
     </div>
   <% end %>

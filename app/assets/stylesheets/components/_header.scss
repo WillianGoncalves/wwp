@@ -2,8 +2,9 @@
 @import './_browser_menu';
 
 nav {
-  background-color: $primary-color;
+  background: $primary-color-light;
   box-shadow: none;
+  border-bottom: 1px solid $border-color;
 
   .browser-logo {
     margin: 0 20px;
@@ -14,6 +15,8 @@ nav {
     text-transform: uppercase;
     font-family: 'Unica One', cursive;
     transition: all 200ms;
+    font-size: 1rem;
+    letter-spacing: 1px;
 
     &:not(.btn-floating):hover {
       background: none !important;

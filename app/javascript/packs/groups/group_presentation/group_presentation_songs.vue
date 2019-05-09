@@ -37,7 +37,7 @@ $flip-animation-time: .5s
   width: 30px
   height: 30px
   border-radius: 50%
-  background: $bg-highlighted
+  background: $primary-color-light
   i
     transition: transform $flip-animation-time
 

@@ -2,10 +2,14 @@
   padding: 10px 20px;
   width: 100%;
   margin: 10px 0;
-  background-color: $bg-highlighted;
+  background-color: $primary-color-light;
   border: 1px solid $border-color;
-  border-radius: 10px;
-  box-shadow: $shadow;
+  border-radius: 1px;
+  box-shadow: none;
+
+  &:hover {
+    box-shadow: $shadow;
+  }
 
   @include on-small {
     padding: 15px !important;

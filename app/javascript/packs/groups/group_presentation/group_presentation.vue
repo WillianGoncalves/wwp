@@ -21,7 +21,7 @@ export default
 @import '../../../../assets/stylesheets/variables/colors';
 
 .presentation
-  background-color: $bg-highlighted
+  background-color: $primary-color-light
   padding: 20px 30px
   z-index: 0
 

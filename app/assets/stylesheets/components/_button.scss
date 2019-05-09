@@ -1,12 +1,13 @@
-$button-height: 32px;
+$button-height: 36px;
 
 .btn, .btn-flat {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Unica One', cursive;
   font-weight: 500;
-  letter-spacing: 2px;
-  line-height: $button-height;
+  font-size: 1rem;
+  letter-spacing: 1px;
   height: $button-height;
-  padding: 0 15px;
+  box-shadow: none;
+  border-radius: 1px;
 }
 
 .btn {
