@@ -3,6 +3,7 @@
 <% end %>
 
 <div class="right-align">
+  <%= link_to t('tags.index'), group_tags_path(current_group), class: 'btn' %>
   <%= link_to new_group_song_path(current_group), class: 'btn-floating' do %>
     <i class="material-icons">add</i>
   <% end %>
