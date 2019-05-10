@@ -6,17 +6,17 @@
     </li>
 
     <% unless current_group.nil? %>
-      <!-- Logo -->
-      <li><b><%= link_to current_group.name, group_path(current_group) %></b></li>
+      <!-- Group name -->
+      <li class="group-name"><b><%= current_group.name %></b></li>
 
       <!-- Join requests -->
-      <li>
-        <% if current_group.join_requests_to_be_accepted.any? %>
-          <%= link_to group_join_requests_path(current_group), class: 'btn-floating pulse' do %>
+      <% if current_group.join_requests_to_be_accepted.any? %>
+        <%= link_to group_join_requests_path(current_group), class: 'btn-floating pulse' do %>
+          <li>
             <i class="material-icons">person_add</i>
-          <% end %>
+          </li>
         <% end %>
-      </li>
+      <% end %>
 
       <!-- Presentations -->
       <li><%= link_to t('presentations.index'), group_presentations_path(current_group) %></li>
@@ -24,9 +24,13 @@
       <!-- Song -->
       <li><%= link_to t('songs.index'), group_songs_path(current_user.last_group) %></li>
 
-      <!-- Tags -->
-      <li><%= link_to t('tags.index'), group_tags_path(current_group) %></li>
+      <!-- Membros -->
+      <li><%= link_to t('groups.members'), group_path(current_group) %></li>
     <% end %>
+
+    <li>
+      <div class="vertical-separator"></div>
+    </li>
 
     <!-- Groups -->
     <li><%= link_to t('groups.index'), groups_path %></li>

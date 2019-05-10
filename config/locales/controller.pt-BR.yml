@@ -16,17 +16,16 @@ pt-BR:
     new: Criar grupo
     user_groups: Seus grupos
     other_groups: Outros grupos
-    show:
-      members: Membros
+    members: Membros
   presentations:
-    index: Apresentações
+    index: Agenda
     play: Play
     enableWakeLock: Manter tela acesa
     delete:
       message: "Tem certeza de que deseja excluir essa apresentação?"
     no_presentations_in: Nenhuma apresentação em
   songs:
-    index: Músicas
+    index: Repertório
     delete:
       message: "Tem certeza de que deseja excluir essa música?"
     show:

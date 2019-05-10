@@ -12,52 +12,27 @@
     <div class="divider"></div>
 
     <% unless current_group.nil? %>
-      <h6><%= link_to current_group.name, group_path(current_group) %></h6>
+      <h6><%= current_group.name %></h6>
     <% end %>
   </div>
 
   <ul>
     <% unless current_group.nil? %>
       <!-- Presentations -->
-      <li>
-        <%= link_to group_presentations_path(current_group) do %>
-          <i class="fa fa-play center-align"></i>
-          <%= t('presentations.index') %>
-        <% end %>
-      </li>
+      <li> <%= link_to t('presentations.index'), group_presentations_path(current_group) %> </li>
 
       <!-- Songs -->
-      <li>
-        <%= link_to group_songs_path(current_user.last_group) do %>
-          <i class="fa fa-music center-align"></i>
-          <%= t('songs.index') %>
-        <% end %>
-      </li>
+      <li> <%= link_to t('songs.index'), group_songs_path(current_user.last_group) %> </li>
 
-      <!-- Tags -->
-      <li>
-        <%= link_to group_tags_path(current_group) do %>
-          <i class="fa fa-tag center-align"></i>
-          <%= t('tags.index')  %>
-        <% end %>
-      </li>
+      <!-- Membros -->
+      <li><%= link_to t('groups.members'), group_path(current_group) %></li>
     <% end %>
 
     <!-- Groups -->
-    <li>
-      <%= link_to groups_path do %>
-        <i class="fa fa-users center-align"></i>
-        <%= t('groups.index')  %>
-      <% end %>
-    </li>
+    <li> <%= link_to t('groups.index'), groups_path %> </li>
 
     <!-- Exit -->
-    <li>
-      <%= link_to destroy_user_session_path, method: :delete do %>
-        <i class="fa fa-sign-out center-align"></i>
-        <%= t('users.sign_out')  %>
-      <% end %>
-    </li>
+    <li> <%= link_to t('users.sign_out'), destroy_user_session_path, method: :delete %> </li>
   </ul>
 
   <!-- logo -->
