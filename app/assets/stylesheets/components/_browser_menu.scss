@@ -1,5 +1,9 @@
 #browser-menu {
-  .nav-avatar { margin-top: 7px; }
+  .nav-avatar {
+    margin-top: 7px;
+    height: 50px;
+    width: 50px;
+  }
 
   .dropdown-button { height: $navbar-height; }
 

@@ -11,7 +11,7 @@
 
     <div class="divider"></div>
 
-    <% unless current_group.nil? %>
+    <% if current_group %>
       <h6><%= current_group.name %></h6>
     <% end %>
   </div>

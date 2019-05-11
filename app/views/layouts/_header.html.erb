@@ -3,7 +3,9 @@
     <nav>
       <div class="nav-wrapper">
         <!-- Group name -->
-        <span class="group-name hide-on-large-only"><strong><%= current_group.name %></strong></span>
+        <% if current_group %>
+          <span class="group-name hide-on-large-only"><strong><%= current_group.name %></strong></span>
+        <% end %>
 
         <!-- Mobile menu -->
         <%= render 'layouts/mobile_menu' %>

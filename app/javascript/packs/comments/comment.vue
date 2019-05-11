@@ -98,6 +98,8 @@ $body-padding: 15px
 .avatar
   grid-area: avatar
   margin-right: 20px
+  height: 50px
+  width: 50px
 
 .body
   grid-area: body

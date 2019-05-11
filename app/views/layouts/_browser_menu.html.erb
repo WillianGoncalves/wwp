@@ -5,7 +5,7 @@
       <%= link_to (image_tag("logo.svg")), root_path, class: "browser-logo hide-on-med-and-down" %>
     </li>
 
-    <% unless current_group.nil? %>
+    <% if current_group %>
       <!-- Group name -->
       <li class="group-name"><b><%= current_group.name %></b></li>
 
@@ -26,11 +26,11 @@
 
       <!-- Membros -->
       <li><%= link_to t('groups.members'), group_path(current_group) %></li>
-    <% end %>
 
-    <li>
-      <div class="vertical-separator"></div>
-    </li>
+      <li>
+        <div class="vertical-separator"></div>
+      </li>
+    <% end %>
 
     <!-- Groups -->
     <li><%= link_to t('groups.index'), groups_path %></li>
@@ -40,7 +40,7 @@
     <li>
       <!-- Account menu button -->
       <a class="dropdown-trigger menu-item" href="#!" data-target="account_menu">
-        <%= image_tag current_user.avatar.url, class: 'circle responsive-img nav-avatar' %>
+        <%= image_tag current_user.avatar.url, class: 'circle nav-avatar' %>
         <i class="material-icons right">arrow_drop_down</i>
       </a>
     </li>
