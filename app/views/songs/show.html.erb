@@ -2,53 +2,38 @@
   <%= stylesheet_link_tag 'pages/songs/show' %>
 <% end %>
 
-<div id="actions" class="right-align">
+<div class="right-align">
   <%= link_to edit_group_song_path(current_group, @song), class: 'btn-floating' do %>
     <i class="material-icons">edit</i>
   <% end %>
 </div>
 
-<div id="song">
-  <div id="general">
-    <h4 id="title">
-      <%= @song.title %>
-
-      <span id="times_played">
-        <%= @song.times_played %> &times;
-      </span>
-    </h4>
-
-    <p id="author"><%= @song.author %></p>
-
-    <div id="tags">
-      <% @song.tags.each do |tag| %>
-        <div>
-          <tag :tag="<%= render 'components/tag.json.jbuilder', tag: tag %>"></tag>
-          <span class="tag-name"><%= tag.name %></span>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <div id="presentations">
-    <section-title><%= t('songs.show.presentations') %></section-title>
-
-    <% if @last_presentation.nil? %>
-      <p><%= t('songs.show.no_presentations') %></p>
-    <% end %>
-
-    <%= render "songs/presentation", {
-      title: t('songs.show.last_presentation'),
-      text: past_presentation_time(@last_presentation),
-      presentation: @last_presentation
-    } %>
-
-    <%= render "songs/presentation", {
-      title: t('songs.show.next_presentation'),
-      text: time_until_presentation(@next_presentation),
-      presentation: @next_presentation
-    } %>
-  </div>
-
-  <%= render "comments/comments", { target: @song } %>
+<div class="title">
+  <%= @song.title %>
 </div>
+
+<p class="author"><%= @song.author %></p>
+
+<div class="presentations">
+  <% if @last_presentation %>
+    <%= link_to group_presentation_path(current_group, @last_presentation) do %>
+      <song-presentation
+        title="<%= t('songs.show.last_presentation') %>"
+        date="<%= presentation_date_with_day_of_week(@last_presentation) %>"
+        time_distance="<%= past_presentation_time(@last_presentation) %>">
+      </song-presentation>
+    <% end %>
+  <% end %>
+
+  <% if @next_presentation %>
+    <%= link_to group_presentation_path(current_group, @next_presentation) do %>
+      <song-presentation
+        title="<%= t('songs.show.next_presentation') %>"
+        date="<%= presentation_date_with_day_of_week(@next_presentation) %>"
+        time_distance="<%= time_until_presentation(@next_presentation) %>">
+      </song-presentation>
+    <% end %>
+  <% end %>
+</div>
+
+<%= render "comments/comments", { target: @song } %>

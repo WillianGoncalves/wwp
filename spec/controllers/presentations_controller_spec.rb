@@ -173,14 +173,20 @@ RSpec.describe PresentationsController, type: :controller do
       context 'when the user is a member' do
         let!(:group) { Fabricate :group, member: user }
         let!(:presentation) { Fabricate :presentation, group: group }
+        let(:presentation_date) { 'presentation_date' }
+        let(:presentation_time) { 'presentation_time' }
 
-        before { get :edit, params: { group_id: group, id: presentation } }
+        before do
+          allow_any_instance_of(PresentationsHelper).to receive(:presentation_date).and_return(presentation_date)
+          allow_any_instance_of(PresentationsHelper).to receive(:presentation_time).and_return(presentation_time)
+          get :edit, params: { group_id: group, id: presentation }
+        end
 
         it 'shows the presentations form' do
           expect(response).to render_template :edit
           expect(assigns(:presentation)).to eq presentation
-          expect(assigns(:date)).to eq presentation.date_time.strftime('%d/%m/%Y')
-          expect(assigns(:time)).to eq presentation.date_time.strftime('%H:%M')
+          expect(assigns(:date)).to eq presentation_date
+          expect(assigns(:time)).to eq presentation_time
         end
       end
 

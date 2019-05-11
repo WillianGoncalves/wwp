@@ -28,8 +28,8 @@ module PresentationsHelper
     "#{prefix} #{time_until}"
   end
 
-  def day_of_week(presentation)
-    l(presentation.date_time, format: '%A')
+  def presentation_date_with_day_of_week(presentation)
+    "#{l(presentation.date_time, format: '%A')}, #{presentation.date_time&.strftime('%d/%m/%Y')}"
   end
 
   def presentation_date(presentation)
