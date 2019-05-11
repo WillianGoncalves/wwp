@@ -1,0 +1,104 @@
+version: 2
+jobs:
+  build:
+    parallelism: 3
+    docker:
+      - image: circleci/ruby:2.4-node
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+          RAILS_ENV: test
+          DATABASE_URL: postgresql://localhost/wwp_test?pool=5
+      - image: circleci/postgres:10-alpine
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: wwp_test
+          POSTGRES_PASSWORD: ""
+    steps:
+      - checkout
+
+      # Which version of bundler?
+      - run:
+          name: Which bundler?
+          command: bundle -v
+
+      # Restore bundle cache
+      - restore_cache:
+          keys:
+            - wwp-{{ checksum "Gemfile.lock" }}
+            - wwp-
+
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+
+      # Store bundle cache
+      - save_cache:
+          key: wwp-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      # Only necessary if app uses webpacker or yarn in some other way
+      - restore_cache:
+          keys:
+            - wwp-yarn-{{ checksum "yarn.lock" }}
+            - wwp-yarn-
+
+      - run:
+          name: Yarn Install
+          command: yarn install --cache-folder ~/.cache/yarn
+
+      # Store yarn / webpacker cache
+      - save_cache:
+          key: wwp-yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+
+      # Run rspec in parallel
+      - type: shell
+        command: |
+          bundle exec rspec --profile 10 \
+                            --format RspecJunitFormatter \
+                            --out test_results/rspec.xml \
+                            --format progress \
+                            $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      # Save test results for timing analysis
+      - store_test_results:
+          path: test_results
+
+      - run: bash .circleci/setup-heroku.sh
+
+      - add_ssh_keys:
+          fingerprints:
+            - "8b:48:5e:67:0e:c9:16:47:32:f2:87:0c:1f:c8:60:ad"
+
+      - deploy:
+          name: Deploy to staging
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "staging" ]; then
+              git push git@heroku.com:staging-wwp.git $CIRCLE_SHA1:refs/heads/master
+              heroku run rails db:migrate --app staging-wwp --exit-code
+              heroku run rails db:seed --app staging-wwp
+              heroku restart --app staging-wwp
+            fi
+
+      - deploy:
+          name: Deploy to production
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "production" ]; then
+              git push git@heroku.com:wwp.git $CIRCLE_SHA1:refs/heads/master
+              heroku run rails db:migrate --app wwp --exit-code
+              heroku run rails db:seed --app wwp
+              heroku restart --app wwp
+            fi

@@ -177,7 +177,10 @@ RSpec.describe GroupsController, type: :controller do
       context 'when the user is a member' do
         let!(:group) { Fabricate :group, member: user }
 
-        before { get :candidates, params: { id: group, format: :json } }
+        before do
+          allow_any_instance_of(AvatarUploader).to receive(:default_url).and_return('avatar.png')
+          get :candidates, params: { id: group, format: :json }
+        end
 
         it 'lists all candidates' do
           expect(response).to have_http_status :ok
