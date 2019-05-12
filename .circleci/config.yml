@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  heroku: circleci/heroku@1.0.0
+  heroku: circleci/heroku@0.0.6
 
 jobs:
   build:
@@ -33,7 +33,7 @@ jobs:
             heroku restart --app staging-wwp
 
 workflows:
-  version: 2.1
+  version: 2
   build-n-deploy:
     jobs:
       - build:
