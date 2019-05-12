@@ -33,6 +33,7 @@ jobs:
             heroku restart --app staging-wwp
 
 workflows:
+  version: 2.1
   build:
     jobs:
       - build:
