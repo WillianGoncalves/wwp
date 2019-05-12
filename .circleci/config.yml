@@ -1,38 +1,50 @@
-version: 2
+version: 2.1
+
+orbs:
+  heroku: circleci/heroku@1.0.0
+
 jobs:
   build:
     machine: true
-    working_directory: ~/app
+    working_directory: ~/app # TODO: remove?
     environment:
       APP_PORT: 3000
-
     steps:
       - checkout
-
       - run:
           name: Start containers
           command: docker-compose up -d
-
       - run:
           name: Run tests
           command: docker-compose exec app rspec
 
-      - deploy:
-          name: Deploy to staging
+  deploy-staging:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - heroku/deploy-via-git:
+          app-name: staging-wwp
+      - run:
+          name: Migrate db
           command: |
-            if [ "${CIRCLE_BRANCH}" == "staging" ]; then
-              git push git@heroku.com:staging-wwp.git $CIRCLE_SHA1:refs/heads/master
-              heroku run rails db:migrate --app staging-wwp --exit-code
-              heroku run rails db:seed --app staging-wwp
-              heroku restart --app staging-wwp
-            fi
+            heroku run rails db:migrate --app staging-wwp --exit-code
+            heroku run rails db:seed --app staging-wwp
+            heroku restart --app staging-wwp
 
-      - deploy:
-          name: Deploy to production
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "production" ]; then
-              git push git@heroku.com:wwp.git $CIRCLE_SHA1:refs/heads/master
-              heroku run rails db:migrate --app wwp --exit-code
-              heroku run rails db:seed --app wwp
-              heroku restart --app wwp
-            fi
+workflows:
+  build:
+    jobs:
+      - build
+        filters:
+          branches:
+            only: master
+  deploy-staging:
+    jobs:
+      - build
+      - deploy-staging:
+          requires:
+            - build
+          filters:
+            branches:
+              only: staging
