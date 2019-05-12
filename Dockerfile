@@ -1,4 +1,4 @@
-FROM ruby:2.4
+FROM ruby:2.4.6
 
 RUN apt-get update && \
       # install postgresql
