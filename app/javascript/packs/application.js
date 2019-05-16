@@ -1,3 +1,4 @@
+import './initializers';
 import Vue from 'vue';
 import UserGroup from './groups/user_group.vue';
 import Group from './groups/group.vue';
