@@ -12,7 +12,7 @@ export default
 </script>
 
 <style scoped lang="sass">
-@import '../../assets/stylesheets/variables/colors';
+@import '../../../assets/stylesheets/variables/colors';
 
 .section-title
   display: flex

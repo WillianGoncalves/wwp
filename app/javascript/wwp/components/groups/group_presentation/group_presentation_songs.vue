@@ -20,8 +20,8 @@ export default
 </script>
 
 <style scoped lang="sass">
-@import '../../../../assets/stylesheets/variables/colors';
-@import '../../../../assets/stylesheets/variables/mixins';
+@import '../../../../../assets/stylesheets/variables/colors';
+@import '../../../../../assets/stylesheets/variables/mixins';
 
 $accordion-animation-time: .4s
 $flip-animation-time: .5s

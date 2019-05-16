@@ -22,7 +22,7 @@ export default
 </script>
 
 <style scoped lang="sass">
-@import '../../../../assets/stylesheets/variables/mixins';
+@import '../../../../../assets/stylesheets/variables/mixins';
 
 .member
   display: grid

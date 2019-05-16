@@ -131,7 +131,7 @@ export default
 </script>
 
 <style scoped lang="sass">
-@import '../../../assets/stylesheets/variables/colors';
+@import '../../../../assets/stylesheets/variables/colors';
 
 .main-content
   border: 1px solid $border-color
