@@ -9,9 +9,14 @@ services:
     volumes:
       - .:/wwp
     depends_on:
-      - 'postgres'
-      - 'webpack'
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails db:create db:migrate db:seed && bundle exec rails s -p 3000 -b '0.0.0.0'"
+      - postgres
+      - webpack
+    command: |
+      bash -c "
+        rm -f tmp/pids/server.pid &&
+        bundle exec rails db:create db:migrate db:seed &&
+        bundle exec rails s -p 3000 -b '0.0.0.0'
+      "
 
   webpack:
     container_name: wwp_webpack
