@@ -25,14 +25,14 @@ module.exports = merge(sharedConfig, {
 
   plugins: [
     new CompressionPlugin({
-      asset: '[path].gz[query]',
+      filename: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.(js|css|html|json|ico|svg|eot|otf|ttf)$/
     }),
 
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"production"'
+        NODE_ENV: '"staging"'
       }
     })
   ]
