@@ -11,6 +11,7 @@ services:
     depends_on:
       - postgres
       - webpack
+      - mailcatcher
     command: |
       bash -c "
         rm -f tmp/pids/server.pid &&
@@ -32,6 +33,11 @@ services:
     image: 'postgres:10'
     volumes:
       - 'postgres:/var/lib/postgresql/data'
+
+  mailcatcher:
+    image: 'schickling/mailcatcher'
+    ports:
+      - 1080:1080
 
 volumes:
   postgres:
