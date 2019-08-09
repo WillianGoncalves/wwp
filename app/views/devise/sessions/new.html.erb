@@ -2,6 +2,10 @@
   <%= stylesheet_link_tag 'pages/devise/login' %>
 <% end %>
 
+<% flash.each do |type, msg| %>
+  <snack-bar type="<%= type %>"><%= msg %></snack-bar>
+<% end %>
+
 <div class="row">
   <div class="col s12 m4 offset-m4" id="container">
     <h5 class="center-align" id="title">what we play</h5>
