@@ -1,26 +1,33 @@
 # What We Play
 
-## Setting up
-
-* `\curl -sSL https://get.rvm.io | bash -s stable` - Install rvm
-* `rvm install 2.4.1` - Install ruby 2.4.1
-* `rvm use 2.4.1@default && gem install rails` - Install rails in ruby 2.4.1@default
-* `sudo apt-get install postgresql postgresql-contrib libpq-dev`
-* `sudo su - postgres`
-* `create role 'role name' with superuser createdb createrole login` - See the role name with `whoami`
-* `rails db:create`
-* `rails db:migrate`
-* `yarn install`
-
 ## Run
 
-To run the app, execute the following commands in separate consoles:
-* `rails s`
-* `./bin/webpack-dev-server`
+`docker-compose up`
+
+Then, access:
+
+`localhost:3000` - app
+
+`localhost:1080` - mailcatcher
 
 ## Annotate
 * annotate fabricators:
 `annotate --exclude tests,fixtures,serializers`
+
+## Test
+
+### Rspec
+
+```
+> docker-compose exec app bash
+> rspec
+```
+
+### Preview emails
+
+| Email | URL |
+|-------|-----|
+|Confirmation isntructions|[http://localhost:3000/rails/mailers/devise/mailer/confirmation_instructions](http://localhost:3000/rails/mailers/devise/mailer/confirmation_instructions)|
 
 ## Deploy
 
