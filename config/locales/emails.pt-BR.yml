@@ -1,0 +1,6 @@
+pt-BR:
+  emails:
+    confirmation:
+      welcome: "Olá, %{name}! Bem-vindo ao What We Play!"
+      instructions: "Você pode confirmar sua conta através do link abaixo"
+      confirm: "Confirmar minha conta"

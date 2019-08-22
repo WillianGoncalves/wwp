@@ -1,5 +1,33 @@
-<p>Welcome <%= @email %>!</p>
+<div style="
+     color: #333333;
+     font-family: Arial, sans-serif;
+     text-align: center;
+  ">
 
-<p>You can confirm your account email through the link below:</p>
+  <p style="font-size: 20px;">
+    <%= t('emails.confirmation.welcome', name: @resource.first_name) %>
+  </p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+  <p>
+    <%= t('emails.confirmation.instructions') %>
+  </p>
+
+  <br />
+
+  <span>
+    <%=
+      link_to t('emails.confirmation.confirm'),
+      confirmation_url(@resource, confirmation_token: @token),
+      { style: "
+        background: #2CC990;
+        border-radius: 3px;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        letter-spacing: 1px;
+        padding: 7px;
+        text-decoration: none;
+        " }
+      %>
+  </span>
+</div>
