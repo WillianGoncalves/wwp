@@ -1,33 +1,53 @@
+<style>
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v13/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format('woff2');
+}
+</style>
+
 <div style="
-     color: #333333;
-     font-family: Arial, sans-serif;
-     text-align: center;
+  background: #eeeeee;
+  display: flex;
+  justify-content: center;
+  padding: 70px 0;
+  ">
+  <div style="
+  background: #ffffff;
+  border-radius: 3px;
+  color: #333333;
+  font-family: Montserrat;
+  padding: 40px;
+  text-align: center;
+  width: 50%;
   ">
 
-  <p style="font-size: 20px;">
-    <%= t('emails.confirmation.welcome', name: @resource.first_name) %>
-  </p>
+    <p style="font-size: 20px;">
+      <%= t('emails.confirmation.welcome', name: @resource.first_name) %>
+    </p>
 
+    <p>
+      <%= t('emails.confirmation.instructions') %>
+    </p>
 
-  <p>
-    <%= t('emails.confirmation.instructions') %>
-  </p>
-
-  <br />
-
-  <span>
-    <%=
-      link_to t('emails.confirmation.confirm'),
-      confirmation_url(@resource, confirmation_token: @token),
-      { style: "
-        background: #2CC990;
-        border-radius: 3px;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        letter-spacing: 1px;
-        padding: 7px;
-        text-decoration: none;
-        " }
-      %>
-  </span>
+    <div style="
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      ">
+      <%=
+        link_to t('emails.confirmation.confirm'),
+          confirmation_url(@resource, confirmation_token: @token),
+        { style: "
+          background: #2CC990;
+          border-radius: 3px;
+          color: #ffffff;
+          letter-spacing: 1px;
+          padding: 7px 10px;
+          text-decoration: none;
+          " }
+        %>
+    </div>
+  </div>
 </div>
