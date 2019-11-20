@@ -14,21 +14,17 @@
     <section-title><%= I18n.t('groups.members') %></section-title>
     <div class="collection">
       <% @group.members.each do |member| %>
-        <member :member="<%= render 'components/member.json.jbuilder', member: member %>"></member>
 
-        <!--
-          <div class="col s12 m4">
-          <user-card :user="<%= member.user.to_json %>">
-          <% if current_user.is_admin_of?(current_group) && current_user != member.user %>
+        <member :member="<%= render 'components/member.json.jbuilder', member: member %>">
+          <% if can_remove_member?(member) %>
             <button class="btn-floating-transparent" slot="delete_button" @click="showModal('#member_deletion_confirmation_modal_<%= member.id %>')">
-            <i class="tiny material-icons">close</i>
+              <i class="tiny material-icons">close</i>
             </button>
           <% end %>
-          </user-card>
-          </div>
-        -->
+        </member>
 
         <%= render "member_deletion_modal", member: member %>
+
       <% end %>
     </div>
   </div>

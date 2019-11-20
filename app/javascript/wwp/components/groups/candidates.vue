@@ -64,7 +64,7 @@ export default
         data: JSON.stringify(members: data)
         dataType: 'json'
         contentType: 'application/json'
-      .done () =>
+      .done ->
         location.reload()
 
   watch:

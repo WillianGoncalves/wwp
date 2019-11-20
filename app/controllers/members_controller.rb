@@ -10,7 +10,7 @@ class MembersController < ApplicationController
     end
 
     if @group.save
-      head :ok
+      head :no_content
     else
       render json: @group.errors.full_messages, status: :bad_request
     end
@@ -22,6 +22,7 @@ class MembersController < ApplicationController
   end
 
   private
+
   def member_params(params)
     params.permit(:user_id)
   end

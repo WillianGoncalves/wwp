@@ -4,6 +4,9 @@
     <div class="member-info">
       <span class="member-name">{{ fullName(member) }}</span>
     </div>
+    <div class="delete-button">
+      <slot name="delete_button"></slot>
+    </div>
   </div>
 </template>
 

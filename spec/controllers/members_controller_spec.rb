@@ -58,7 +58,7 @@ RSpec.describe MembersController, type: :controller do
           before { post :create, params: { group_id: group, members: [member1, member2], format: :json } }
 
           it 'adds the members' do
-            expect(response).to have_http_status :ok
+            expect(response).to have_http_status :no_content
             expect(group.members.count).to eq 3
             expect(user1.groups.count).to eq 1
             expect(user2.groups.count).to eq 1
