@@ -37,14 +37,6 @@ pt-BR:
   join_requests:
     accept: Aceitar
     reject: Rejeitar
-  registrations:
-    edit: Meu perfil
-  users:
-    sign_out: Sair
-    sign_in: Entrar
-    sign_up: Criar conta
-    password:
-      new: Esqueceu sua senha?
   tags:
     index: Categorias
     delete:
@@ -55,3 +47,17 @@ pt-BR:
   members:
     delete:
       message: "Tem certeza de que deseja remover essa pessoa do grupo?"
+  sessions:
+    new: Entrar
+    destroy: Sair
+  registrations:
+    new: Criar conta
+    edit: Meu perfil
+  passwords:
+    title: Para que email você deseja enviar as instruções para criar uma nova senha?
+    new: Esqueceu sua senha?
+    send_instructions: Enviar
+  confirmations:
+    title: Para que email você deseja enviar as instruções de confirmação?
+    new: Não recebeu as instruções de confirmação?
+    send_instructions: Enviar

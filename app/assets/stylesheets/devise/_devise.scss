@@ -1,5 +1,11 @@
 .devise-form {
   .actions {
-    margin-top: 20px;
+    margin: 4rem 0 2rem 0;
   }
+}
+
+.devise-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -8,7 +8,7 @@
 
 <div class="row">
   <div class="col s12 m4 offset-m4" id="container">
-    <h5 class="center-align" id="title">what we play</h5>
+    <h5 class="center-align title">what we play</h5>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'devise-form'}) do |f| %>
       <div class="input-field vertical-margin">
@@ -28,13 +28,15 @@
         </div>
       <% end %>
 
-      <div id="actions" class="center-align">
-        <%= f.submit t('users.sign_in'), class: 'btn' %>
+      <div class="actions center-align">
+        <%= f.submit t('sessions.new'), class: 'btn' %>
       </div>
     <% end %>
+  </div>
+</div>
 
-    <div class="center-align">
-      <%= render "devise/shared/links" %>
-    </div>
+<div class="row">
+  <div class="col s12">
+    <%= render "devise/shared/links" %>
   </div>
 </div>
