@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_21_205512) do
+ActiveRecord::Schema.define(version: 2019_11_21_211709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,8 +40,6 @@ ActiveRecord::Schema.define(version: 2019_11_21_205512) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_groups_on_deleted_at"
   end
 
   create_table "join_requests", id: :serial, force: :cascade do |t|
@@ -80,9 +78,7 @@ ActiveRecord::Schema.define(version: 2019_11_21_205512) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "group_id", null: false
-    t.datetime "deleted_at"
     t.datetime "date_time"
-    t.index ["deleted_at"], name: "index_presentations_on_deleted_at"
     t.index ["group_id"], name: "index_presentations_on_group_id"
   end
 
@@ -93,8 +89,6 @@ ActiveRecord::Schema.define(version: 2019_11_21_205512) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "group_id", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_songs_on_deleted_at"
     t.index ["group_id"], name: "index_songs_on_group_id"
   end
 

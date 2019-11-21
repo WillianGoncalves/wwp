@@ -342,7 +342,6 @@ RSpec.describe SongsController, type: :controller do
         it 'deletes the song' do
           expect(response).to redirect_to group_songs_path(group)
           expect(group.songs.count).to eq 0
-          expect(group.songs.with_deleted.count).to eq 1
         end
       end
 

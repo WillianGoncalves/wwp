@@ -323,7 +323,6 @@ RSpec.describe PresentationsController, type: :controller do
         it 'deletes the presentation' do
           expect(response).to redirect_to group_presentations_path(group)
           expect(group.presentations.count).to eq 0
-          expect(group.presentations.with_deleted.count).to eq 1
         end
       end
 

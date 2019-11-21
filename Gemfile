@@ -16,7 +16,6 @@ gem 'carrierwave', '~> 1.0'
 gem 'cloudinary'
 gem "figaro"
 gem 'webpacker', '~> 2.0'
-gem "paranoia", "~> 2.2"
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
