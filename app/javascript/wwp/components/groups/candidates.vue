@@ -16,7 +16,7 @@
         </div>
 
         <div class="row" id="candidates">
-          <div class="col s12 m4" v-for="candidate in candidates">
+          <div class="col s12 m6" v-for="candidate in candidates">
             <user-card :user="candidate" @click.native="addMember(candidate)"></user-card>
           </div>
         </div>
