@@ -28,7 +28,7 @@ class Song < ApplicationRecord
   has_and_belongs_to_many :tags
   has_many :presentation_songs
   has_many :presentations, through: :presentation_songs
-  has_many :comments, -> { order(:created_at) }, as: :target
+  has_many :comments, -> { order(:created_at) }, as: :target, dependent: :destroy
   validates :title, :group, presence: true
   validates :tone, format: { with: /\A[A-G](b|#)?m?\z/ }
 

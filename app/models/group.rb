@@ -7,15 +7,22 @@
 #  image      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  deleted_at :datetime
+#
+# Indexes
+#
+#  index_groups_on_deleted_at  (deleted_at)
 #
 
 class Group < ApplicationRecord
+  acts_as_paranoid
+
   has_many :join_requests, inverse_of: :group, dependent: :destroy
   has_many :presentations, inverse_of: :group, dependent: :destroy
   has_many :songs, dependent: :destroy
   has_many :members, dependent: :destroy
   has_many :users, through: :members
-  has_many :tags, -> { order(:name) }
+  has_many :tags, -> { order(:name) }, dependent: :destroy
   validates :name, :members, presence: true
 
   mount_uploader :image, GroupImageUploader
