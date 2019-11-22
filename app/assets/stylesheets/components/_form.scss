@@ -21,18 +21,26 @@ form .actions {
   }
 
   label {
+    position: relative;
     margin-left: 10px;
   }
 
-  label:not(.label-icon).active {
-    transform: translate(-10px, -22px) scale(0.8);
-  }
+  .select-wrapper {
+    & + label {
+      top: 0;
+    }
 
-  .select-wrapper .caret {
-    color: $color;
-    z-index: 1;
-    margin-right: 20px;
-    pointer-events: none;
+    & input {
+      text-overflow: ellipsis;
+      padding-right: 28px;
+    }
+
+    .caret {
+      color: $color;
+      z-index: 1;
+      margin-right: 10px;
+      pointer-events: none;
+    }
   }
 
   textarea { padding: 10px; }

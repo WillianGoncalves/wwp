@@ -5,21 +5,24 @@
   <div class="col s12 m8 offset-m2">
     <%= form_with(model: [ current_group, @presentation ]) do |f| %>
       <div class="input-field">
-        <%= text_field_tag :date, @date, { class: 'datepicker', placeholder: t('activerecord.attributes.presentation.date') } %>
+        <%= f.label :date %>
+        <%= text_field_tag :date, @date, { class: 'datepicker' } %>
         <% if flash[:date] %>
           <span class="error"><%= flash[:date] %></span>
         <% end %>
       </div>
 
       <div class="input-field">
-        <%= text_field_tag :time, @time, { class: 'timepicker', placeholder: t('activerecord.attributes.presentation.time') } %>
+        <%= f.label :time %>
+        <%= text_field_tag :time, @time, { class: 'timepicker' } %>
         <% if flash[:time] %>
           <span class="error"><%= flash[:time] %></span>
         <% end %>
       </div>
 
       <div class="input-field">
-        <%= f.text_field :local, placeholder: t('activerecord.attributes.presentation.local') %>
+        <%= f.label :local %>
+        <%= f.text_field :local %>
       </div>
 
       <div>

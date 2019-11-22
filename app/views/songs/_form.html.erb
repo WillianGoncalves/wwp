@@ -18,6 +18,7 @@
     </div>
 
     <div class="input-field">
+      <%= f.label :tags %>
       <%= f.collection_select(:tag_ids, @group.tags, :id, :name, {}, { multiple: true }) %>
     </div>
 
