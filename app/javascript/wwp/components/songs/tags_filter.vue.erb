@@ -1,9 +1,14 @@
 <template>
   <div id="tags_container">
-    <button type="button" class="btn-flat-bordered tag-filter" v-for="tag in tags" @click="toggleTagFilter(tag.id)" :class="{'inactive': !tagFilterIsActive(tag.id)}">
+    <button type="submit" class="btn-flat-bordered tag-filter" v-for="tag in tags" @click="toggleTagFilter(tag.id)" :class="{'inactive': !tagFilterIsActive(tag.id)}">
       <i class="material-icons left tiny" :style="{ color: tag.color }">local_offer</i>
       <span>{{ tag.name }}</span>
     </button>
+
+    <a :href="tagsPath" class="btn-flat-bordered tag-filter">
+      <i class="material-icons left tiny">add</i>
+      <span><%= I18n.t('tags.index') %></span>
+    </a>
   </div>
 </template>
 
@@ -13,9 +18,16 @@ export default
     tags:
       type: Array
       required: true
+    currentGroupId:
+      type: Number
+      required: true
 
   data: ->
     selectedTags: []
+
+  computed:
+    tagsPath: ->
+      "/groups/#{@currentGroupId}/tags"
 
   methods:
     toggleTagFilter: (tagId) ->
@@ -30,6 +42,7 @@ export default
 
     updateHiddenValue: ->
       $('#tags_ids').val(@selectedTags)
+
 </script>
 
 <style scoped lang="sass">

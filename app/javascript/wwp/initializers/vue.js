@@ -11,7 +11,7 @@ import SongsSelector from '../components/presentations/songs_selector.vue';
 import PresentationSongCard from '../components/presentations/presentation_song_card.vue';
 import PresentationCard from '../components/presentations/presentation_card.vue';
 import UserCard from '../components/groups/user_card.vue';
-import TagsFilter from '../components/songs/tags_filter.vue';
+import TagsFilter from '../components/songs/tags_filter.vue.erb';
 import SongsListPaginator from '../components/songs/songs_list_paginator.vue';
 import Member from '../components/groups/members/member.vue';
 import GroupPresentation from '../components/groups/group_presentation/group_presentation.vue';

@@ -2,13 +2,21 @@
   <%= stylesheet_link_tag 'pages/songs/index' %>
 <% end %>
 
-<div class="right-align">
-  <%= link_to t('tags.index'), group_tags_path(current_group), class: 'btn' %>
-  <%= link_to new_group_song_path(current_group), class: 'btn-floating' do %>
-    <i class="material-icons">add</i>
-  <% end %>
-</div>
+<% if @songs.any? %>
+  <div class="right-align">
+    <%= link_to new_group_song_path(current_group), class: 'btn-floating' do %>
+      <i class="material-icons">add</i>
+    <% end %>
+  </div>
 
-<%= render 'search_form' %>
+  <%= render 'search_form' %>
+  <%= render 'songs_list' %>
+<% else %>
+  <div class="center-align">
+    <p><%= t('no_songs') %></p>
 
-<%= render 'songs_list' %>
+    <%= link_to new_group_song_path(current_group), class: 'btn-floating' do %>
+      <i class="material-icons">add</i>
+    <% end %>
+  </div>
+<% end %>

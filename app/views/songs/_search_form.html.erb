@@ -1,18 +1,22 @@
-<%= form_tag group_songs_path(@group), remote: true, method: :get, id: 'songs_list_form' do %>
-  <%= hidden_field_tag 'tags_ids', @tags_ids, id: 'tags_ids' %>
-  <%= hidden_field_tag 'page', @page, id: 'page' %>
-  <%= hidden_field_tag 'items_per_page', @items_per_page, id: 'items_per_page' %>
+<div class="songs-search-form">
+  <%= form_tag group_songs_path(@group), remote: true, method: :get, id: 'songs_list_form' do |f| %>
+    <%= hidden_field_tag 'tags_ids', @tags_ids, id: 'tags_ids' %>
+    <%= hidden_field_tag 'page', @page, id: 'page' %>
+    <%= hidden_field_tag 'items_per_page', @items_per_page, id: 'items_per_page' %>
 
-  <tags-filter :tags="<%= render 'components/tags_filter.json.jbuilder', tags: @group.tags %>"></tags-filter>
+    <tags-filter
+      :tags="<%= render 'components/tags_filter.json.jbuilder', tags: @group.tags %>"
+      :current-group-id="<%= current_group.id %>">
+    </tags-filter>
 
-  <div id="search_input_container" class="input-field">
-    <%= text_field_tag 'query', nil, placeholder: t('songs.search_by') %>
-  </div>
+    <div id="search_input_container" class="input-field">
+      <%= text_field_tag 'query', nil, placeholder: t('songs.search_by') %>
+    </div>
 
-  <div class="right-align">
-    <%= button_tag type: 'submit', class: 'btn-floating vertical-margin' do %>
-      <i class="material-icons">search</i>
-    <% end %>
-  </div>
-<% end %>
-
+    <div class="right-align">
+      <%= button_tag type: 'submit', class: 'btn-floating vertical-margin' do %>
+        <i class="material-icons">search</i>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -27,6 +27,7 @@ pt-BR:
         author: Autor
         tone: Tom
         comments: Comentários
+        tags: Categorias
       tag:
         name: Categoria
         color: Cor

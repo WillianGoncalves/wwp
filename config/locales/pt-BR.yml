@@ -177,3 +177,5 @@ pt-BR:
       short: "%d de %B, %H:%M"
     pm: ''
   caution: Atenção
+  no_songs: "Adicione músicas ao seu repertório"
+  no_results: "Nenhum resultado"
