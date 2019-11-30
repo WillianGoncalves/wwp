@@ -1,16 +1,17 @@
-<%= form_tag(group_presentations_path(current_group), method: 'get') do %>
-  <div class="col s5 m2 input-field no-margin-top">
-    <%= select_tag 'month', options_for_select(months, @month) %>
-  </div>
-  <% if years.count > 1 %>
-    <div class="col s4 m2 input-field no-margin-top">
-      <%= select_tag 'year', options_for_select(years, @year) %>
+<div class='presentations-search-form'>
+  <%= form_tag(group_presentations_path(current_group), method: 'get') do %>
+    <div class="col s12 m4 input-field no-margin-top">
+      <%= select_tag 'month', options_for_select(months, @month) %>
+    </div>
+    <% if years.count > 1 %>
+      <div class="col s12 m4 input-field no-margin-top">
+        <%= select_tag 'year', options_for_select(years, @year) %>
+      </div>
+    <% end %>
+    <div class="col s12 m4 right-align-on-small">
+      <%= button_tag class: 'btn-floating' do %>
+        <i class="material-icons">search</i>
+      <% end %>
     </div>
   <% end %>
-  <div class="col s3 m2 right-align-on-small">
-    <%= button_tag class: 'btn-floating' do %>
-      <i class="material-icons">search</i>
-    <% end %>
-  </div>
-<% end %>
-
+</div>

@@ -1,10 +1,12 @@
-<div class="row">
+<% content_for :stylesheet do %>
+  <%= stylesheet_link_tag 'pages/presentations/index' %>
+<% end %>
+
+<div class="row actions-menu">
   <%= render "search_form" %>
-  <div class="right">
-    <%= link_to new_group_presentation_path(current_group), class: 'btn-floating' do %>
-      <i class="material-icons">add</i>
-    <% end %>
-  </div>
+  <%= link_to new_group_presentation_path(current_group), class: 'btn-floating add-button' do %>
+    <i class="material-icons">add</i>
+  <% end %>
 </div>
 
 <div class="row">

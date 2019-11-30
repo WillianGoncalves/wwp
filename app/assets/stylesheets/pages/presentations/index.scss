@@ -1,0 +1,29 @@
+@import "../../variables/mixins";
+
+.actions-menu {
+  display: grid;
+  grid-template-areas: "search-form add-button";
+  grid-template-columns: 1fr auto;
+
+  .presentations-search-form {
+    grid-area: search-form;
+  }
+
+  .add-button {
+    grid-area: add-button;
+  }
+}
+
+@include on-small {
+  .actions-menu {
+    grid-template-areas:
+      "add-button"
+      "search-form";
+    grid-template-rows: auto 1fr;
+
+    .add-button {
+      place-self: end;
+      margin: 0 0.75rem 1rem 0;
+    }
+  }
+}
