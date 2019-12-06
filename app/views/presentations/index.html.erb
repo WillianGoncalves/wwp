@@ -4,8 +4,10 @@
 
 <div class="row actions-menu">
   <%= render "search_form" %>
-  <%= link_to new_group_presentation_path(current_group), class: 'btn-floating add-button' do %>
-    <i class="material-icons">add</i>
+  <% if @presentations.any? %>
+    <%= link_to new_group_presentation_path(current_group), class: 'btn-floating add-button' do %>
+      <i class="material-icons">add</i>
+    <% end %>
   <% end %>
 </div>
 
@@ -19,6 +21,12 @@
   <% end %>
 
   <% if @presentations.empty? %>
-    <p class="center-align"><%= "#{ t('presentations.no_presentations_in') } #{ t('date.month_names')[@month.to_i] }" %></p>
+    <div class="center-align">
+      <p><%= "#{ t('presentations.no_presentations_in') } #{ t('date.month_names')[@month.to_i] }" %></p>
+
+      <%= link_to new_group_presentation_path(current_group), class: 'btn-floating add-button' do %>
+        <i class="material-icons">add</i>
+      <% end %>
+    </div>
   <% end %>
 </div>
