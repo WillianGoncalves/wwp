@@ -1,5 +1,5 @@
 <template>
-  <div class="section-title" :class="{'bordered': bordered}">
+  <div class="section-heading" :class="{'bordered': bordered}">
     <slot></slot>
   </div>
 </template>
@@ -14,11 +14,11 @@ export default
 <style scoped lang="sass">
 @import '../../../assets/stylesheets/variables/colors';
 
-.section-title
+.section-heading
   display: flex
   justify-content: center
   padding-bottom: 10px
-  margin: 3em 0 1em 0
+  margin: 2rem 0
   text-transform: uppercase
   letter-spacing: 3px
   font-family: 'Unica One', cursive;

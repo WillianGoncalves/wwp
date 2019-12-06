@@ -2,6 +2,8 @@
   <%= stylesheet_link_tag 'pages/presentations/index' %>
 <% end %>
 
+<section-heading><%= I18n.t('presentations.index') %></section-heading>
+
 <div class="row actions-menu">
   <%= render "search_form" %>
   <% if @presentations.any? %>

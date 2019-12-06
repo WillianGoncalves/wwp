@@ -3,6 +3,7 @@
 <% end %>
 
 <% if @songs.any? %>
+  <section-heading><%= I18n.t('songs.index') %></section-heading>
   <div class="right-align">
     <%= link_to new_group_song_path(current_group), class: 'btn-floating' do %>
       <i class="material-icons">add</i>
