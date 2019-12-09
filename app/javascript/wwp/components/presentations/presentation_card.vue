@@ -3,8 +3,14 @@
     <p>
       <span class="day">{{ presentation.day }}</span><span class="month"> / {{ presentation.month }}</span>
     </p>
-    <p><span class="center-align icon"><i class="fa fa-clock-o"></i></span> {{ presentation.time }}</p>
-    <p><span class="center-align icon"><i class="fa fa-map-marker"></i></span> {{ presentation.local }}</p>
+    <div class="presentation-info">
+      <div class="presentation-info__subtitle">Hora</div>
+      <div class="presentation-info__content">{{ presentation.time }}</div>
+    </div>
+    <div class="presentation-info">
+      <div class="presentation-info__subtitle">Local</div>
+      <div class="presentation-info__content">{{ presentation.local }}</div>
+    </div>
   </div>
 </template>
 
@@ -25,9 +31,24 @@ export default
 .month
   text-transform: uppercase
   letter-spacing: 2px
-  font-size: 0.7rem
+  font-size: 0.8rem
 
 .icon
   display: inline-block
   width: 25px
+
+.presentation-info
+  margin-top: 2rem
+
+.presentation-info__subtitle
+  text-transform: uppercase
+  letter-spacing: 3px
+  font-family: 'Unica One', cursive
+  font-size: 0.8rem
+  margin-bottom: 0.5rem
+
+.presentation-info__content
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
 </style>
