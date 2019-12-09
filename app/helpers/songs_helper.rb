@@ -3,4 +3,8 @@ module SongsHelper
     tags = songs.map(&:tags)
     tags.flatten.uniq
   end
+
+  def can_delete_song?(song)
+    song.persisted? && song.presentations.empty?
+  end
 end

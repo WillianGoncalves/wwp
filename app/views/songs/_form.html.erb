@@ -23,7 +23,7 @@
     </div>
 
     <div class="actions right-align">
-      <% if @song.persisted? %>
+      <% if can_delete_song?(@song) %>
         <button class="btn-danger" @click="showModal('#deletion_confirmation_modal')" type="button">
           <%= t('actions.delete') %>
         </button>
