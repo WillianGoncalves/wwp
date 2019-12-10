@@ -37,7 +37,7 @@ export default
     pageCount: ->
       Math.ceil(@songs.length/@itemsPerPage)
 
-  mounted: ->
+  updated: ->
     @paginate()
 
   methods:
