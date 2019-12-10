@@ -1,6 +1,7 @@
 <div id="results">
   <% if @songs.any? %>
-    <ul class="collection">
+    <songs-list :songs="<%= render 'components/songs/songs_list.json.jbuilder', songs: @songs %>"></songs-list>
+    <!--<ul class="collection">
       <% @songs.each do |song| %>
         <%= link_to group_song_path(current_group, song), class: "collection-item" do %>
           <div class="song">
@@ -19,9 +20,9 @@
           </div>
         <% end %>
       <% end %>
-    </ul>
+    </ul>-->
 
-    <songs-list-paginator :page-count="<%= @page_count %>" :current-page="<%= @page %>"></songs-list-paginator>
+    <!--<songs-list-paginator :page-count="<%= @page_count %>" :current-page="<%= @page %>"></songs-list-paginator>-->
   <% else %>
     <div class="center-align">
       <p><%= t('no_results') %></p>

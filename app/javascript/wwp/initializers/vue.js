@@ -20,6 +20,7 @@ import GroupPresentationSongsItem from '../components/groups/group_presentation/
 import SectionHeading from '../components/section_heading.vue';
 import SongPresentation from '../components/songs/song_presentation.vue'
 import SnackBar from '../components/snack_bar.vue'
+import SongsList from '../components/songs/songs_list.vue';
 
 Vue.component('user-group', UserGroup);
 Vue.component('group', Group);
@@ -42,6 +43,7 @@ Vue.component('group-presentation-songs-item', GroupPresentationSongsItem)
 Vue.component('section-heading', SectionHeading)
 Vue.component('song-presentation', SongPresentation)
 Vue.component('snack-bar', SnackBar)
+Vue.component('songs-list', SongsList)
 
 const replaceHtml = (element, content) => {
   const Component = Vue.extend({});

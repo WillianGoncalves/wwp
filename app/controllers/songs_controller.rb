@@ -9,19 +9,19 @@ class SongsController < ApplicationController
   def index
     @songs = @group.songs.order(:title)
 
-    if search_params[:tags_ids].present?
-      tags_ids = (search_params[:tags_ids]).split(',')
-      @songs = @songs.joins(:tags).where('tags.id IN (?)', tags_ids).distinct
-    end
+    #if search_params[:tags_ids].present?
+      #tags_ids = (search_params[:tags_ids]).split(',')
+      #@songs = @songs.joins(:tags).where('tags.id IN (?)', tags_ids).distinct
+    #end
 
-    if search_params[:query].present?
-      q = "%#{search_params[:query].downcase}%"
-      @songs = @songs.where('lower(title) LIKE ? OR lower(author) LIKE ?', q, q)
-    end
+    #if search_params[:query].present?
+      #q = "%#{search_params[:query].downcase}%"
+      #@songs = @songs.where('lower(title) LIKE ? OR lower(author) LIKE ?', q, q)
+    #end
 
-    calculate_page_count(@songs.count)
+    #calculate_page_count(@songs.count)
 
-    @songs = @songs.limit(@items_per_page).offset((@page - 1) * @items_per_page)
+    #@songs = @songs.limit(@items_per_page).offset((@page - 1) * @items_per_page)
 
     respond_to do |format|
       format.html

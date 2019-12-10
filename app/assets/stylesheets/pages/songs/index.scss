@@ -1,5 +1,4 @@
 @import "../../variables/colors";
-@import "../../variables/mixins";
 
 #legend {
   display: flex;
@@ -9,34 +8,6 @@
     margin-right: 25px;
     margin-bottom: 10px;
   }
-}
-
-.collection-item {
-  display: grid !important;
-  grid-template-columns: auto 1fr auto auto;
-  grid-template-areas: "song author tags tone";
-  grid-column-gap: 10px;
-}
-
-@include on-small {
-  .collection-item {
-    grid-template-columns: 1fr auto;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-      "song tone"
-      "author tags";
-  }
-}
-
-.song { grid-area: song; }
-.author { grid-area: author; }
-.tags {
-  grid-area: tags;
-  align-self: center;
-}
-.tone {
-  grid-area: tone;
-  text-align: right;
 }
 
 #search_input_container { margin-top: 0.5em; }
