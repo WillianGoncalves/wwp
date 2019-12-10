@@ -1,0 +1,10 @@
+{
+  "message": {
+    "hello": "teste",
+    "songs": {
+      "index": {
+        "titleOrAuthor": "Título ou autor"
+      }
+    }
+  }
+}

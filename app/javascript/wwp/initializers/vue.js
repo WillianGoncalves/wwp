@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import i18n from '../locales';
+
 import UserGroup from '../components/groups/user_group.vue';
 import Group from '../components/groups/group.vue';
 import Avatar from '../components/avatar.vue';
@@ -52,8 +54,18 @@ const replaceHtml = (element, content) => {
   }).$mount(element);
 };
 
-new Vue({
+const vm = new Vue({
+  i18n,
   el: '#app',
+  data: () => {
+    return {
+      locale: ''
+    }
+  },
+  mounted() {
+    // Get the locale from "data-locale" attribute, in div #app. See application.html.erb.
+    this.locale = this.$el.dataset.locale
+  },
   methods: {
     showModal: (modalId) => {
       $(modalId).modal();
@@ -63,3 +75,7 @@ new Vue({
   }
 });
 
+// The default locale is 'pt-BR'.
+// Here, we update the locale according to the one
+// passed to the vue instance (vm.locale).
+i18n.locale = vm.locale

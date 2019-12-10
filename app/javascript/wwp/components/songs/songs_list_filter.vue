@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="input-field">
-      <input id="search" type="text" v-model="textFilter">
+      <input id="search" type="text" v-model="textFilter" :placeholder="$t('songs.index.titleOrAuthor')">
     </div>
   </div>
 </template>
