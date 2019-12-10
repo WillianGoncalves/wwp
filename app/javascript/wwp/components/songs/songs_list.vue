@@ -2,11 +2,15 @@
   <div>
     <songs-list-filter :songs="songs" v-on:filtered="updateFilteredSongs" />
 
-    <div class="collection">
+    <div class="collection" v-if="paginatedSongs.length">
       <songs-list-item v-for="song in paginatedSongs" :song="song" />
     </div>
 
     <songs-list-paginator :songs="filteredSongs" :items-per-page="3" :current-page="1" v-on:paginated="updateList" />
+
+      <div class="center-align" v-if="paginatedSongs.length === 0">
+      <p>{{ $t('noResults') }}</p>
+    </div>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="paginator-container">
+  <div class="paginator-container" v-if="pageCount > 1">
     <paginate
       v-model="page"
       :page-count="pageCount"

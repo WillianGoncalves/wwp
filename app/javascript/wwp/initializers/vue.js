@@ -47,13 +47,6 @@ Vue.component('song-presentation', SongPresentation)
 Vue.component('snack-bar', SnackBar)
 Vue.component('songs-list', SongsList)
 
-const replaceHtml = (element, content) => {
-  const Component = Vue.extend({});
-  new Component({
-    template: content
-  }).$mount(element);
-};
-
 const vm = new Vue({
   i18n,
   el: '#app',
@@ -71,7 +64,6 @@ const vm = new Vue({
       $(modalId).modal();
       $(modalId).modal('open');
     },
-    replaceHtml: (element, content) => replaceHtml(element, content)
   }
 });
 
