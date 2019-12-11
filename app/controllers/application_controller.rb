@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_group
 
   def current_group
-    @current_group ||= current_user.last_group
+    @current_group ||= current_user&.last_group
   end
 
   def after_sign_in_path_for(user)

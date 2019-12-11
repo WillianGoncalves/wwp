@@ -1,1 +1,1 @@
-json.(group, :id, :name)
+json.(group, :id, :name) if group.present?
