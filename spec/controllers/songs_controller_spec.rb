@@ -93,81 +93,23 @@ RSpec.describe SongsController, type: :controller do
         let!(:group) { Fabricate :group, member: user }
         let!(:songs) { Fabricate.times 10, :song, group: group }
 
-        context 'through browser' do
-          before { get :index, params: { group_id: group, items_per_page: 10 } }
+        before { get :index, params: { group_id: group } }
 
-          it 'lists all group songs' do
-            expect(response).to render_template :index
-            expect(assigns(:songs)).to match_array songs
-          end
-        end
-
-        context 'through javascript' do
-          context 'without filters' do
-            before { get :index, params: { group_id: group, items_per_page: 10, format: :json } }
-
-            it 'lists all group songs' do
-              expect(response).to have_http_status :ok
-              expect(assigns(:songs)).to match_array songs
-            end
-          end
-
-          context 'filtering' do
-            let!(:tag) { Fabricate :tag, group: group }
-            let!(:song) { Fabricate :song, title: 'example', author: 'example', tags: [ tag ], group: group }
-
-            context 'by tag' do
-              before { get :index, params: { group_id: group, tags_ids: tag.id , format: :json } }
-
-              it 'lists only songs with the tag' do
-                expect(response).to have_http_status :ok
-                expect(assigns(:songs)).to match_array [ song ]
-              end
-            end
-
-            context 'by title or author' do
-              before { get :index, params: { group_id: group, query: 'example' , format: :json } }
-
-              it 'lists only songs with the term' do
-                expect(response).to have_http_status :ok
-                expect(assigns(:songs)).to match_array [ song ]
-              end
-            end
-          end
-
-          context 'paging' do
-            before { get :index, params: { group_id: group, items_per_page: 5, page: 2, format: :json } }
-
-            it 'lists all group songs' do
-              expect(response).to have_http_status :ok
-              expect(assigns(:songs)).to match_array songs.last(5)
-            end
-          end
+        it 'lists all group songs' do
+          expect(response).to render_template :index
+          expect(assigns(:songs)).to match_array songs
         end
       end
 
       context 'when the user is not a member' do
         let!(:group) { Fabricate :group }
+        let!(:songs) { Fabricate.times 2, :song, group: group }
 
-        context 'through browser' do
-          let!(:songs) { Fabricate.times 2, :song, group: group }
+        before { get :index, params: { group_id: group } }
 
-          before { get :index, params: { group_id: group } }
-
-          it 'does not list group songs' do
-            expect(response).to redirect_to root_path
-            expect(flash[:alert]).to be_present
-          end
-        end
-
-        context 'through javascript' do
-          let!(:songs) { Fabricate.times 2, :song, group: group }
-
-          before { get :index, params: { group_id: group, format: :json } }
-
-          it 'does not list group songs' do
-            expect(response).to have_http_status :bad_request
-          end
+        it 'does not list group songs' do
+          expect(response).to redirect_to root_path
+          expect(flash[:alert]).to be_present
         end
       end
     end

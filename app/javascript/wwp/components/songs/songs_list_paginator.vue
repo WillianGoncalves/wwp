@@ -1,5 +1,5 @@
 <template>
-  <div class="paginator-container">
+  <div class="paginator-container" v-if="pageCount > 1">
     <paginate
       v-model="page"
       :page-count="pageCount"
@@ -10,7 +10,7 @@
       :next-link-class="'prev-next-item'"
       :next-text="'chevron_right'"
       :no-li-surround="true"
-      :click-handler="clickHandler">
+      :click-handler="paginate">
     </paginate>
   </div>
 </template>
@@ -20,22 +20,61 @@ import paginate from 'vuejs-paginate'
 
 export default
   props:
-    pageCount:
-      type: Number
+    songs:
+      type: Array
       required: true
-    currentPage:
+    itemsPerPage:
       type: Number
-      required: true
       default: 1
 
   components:
     'paginate': paginate
 
   data: ->
-    page: @currentPage
+    page: 1
+
+  computed:
+    pageCount: ->
+      Math.ceil(@songs.length/@itemsPerPage)
+
+  updated: ->
+    @paginate()
 
   methods:
-    clickHandler: (page) ->
-      $('#page').val(page)
-      $('#songs_list_form').submit()
+    paginate: ->
+      fromItem = (@page - 1) * @itemsPerPage
+      toItem = fromItem + @itemsPerPage
+      paginatedSongs = @songs.slice(fromItem, toItem)
+      @.$emit('paginated', paginatedSongs)
+
 </script>
+
+<style lang="sass">
+@import '../../../../assets/stylesheets/variables/colors';
+@import '../../../../assets/stylesheets/typography';
+
+.paginator-container
+  display: flex
+  justify-content: center
+
+.paginator
+  display: flex
+  align-items: center
+  padding: 10px
+  border: 1px solid $border-color
+  border-radius: 50px
+  background: #fff
+
+.page-item
+  padding: 0 15px
+  outline: 0
+
+  &.active
+    color: $secondary-color
+
+.prev-next-item
+  font-family: 'Material Icons'
+  font-size: 1.2em
+  padding: 0 15px
+  outline: 0
+</style>

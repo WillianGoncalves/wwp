@@ -15,7 +15,11 @@
 
     <%= render 'layouts/header' %>
 
-    <main id="app" class="container">
+    <main
+      id="app"
+      class="container"
+      :data-locale="'<%= I18n.locale %>'"
+      :data-current-group="'<%= render "components/app.json.jbuilder", group: current_group %>'">
       <%= yield %>
     </main>
 

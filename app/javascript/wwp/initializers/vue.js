@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import i18n from '../locales';
+
 import UserGroup from '../components/groups/user_group.vue';
 import Group from '../components/groups/group.vue';
 import Avatar from '../components/avatar.vue';
@@ -20,6 +22,7 @@ import GroupPresentationSongsItem from '../components/groups/group_presentation/
 import SectionHeading from '../components/section_heading.vue';
 import SongPresentation from '../components/songs/song_presentation.vue'
 import SnackBar from '../components/snack_bar.vue'
+import SongsList from '../components/songs/songs_list.vue';
 
 Vue.component('user-group', UserGroup);
 Vue.component('group', Group);
@@ -42,22 +45,31 @@ Vue.component('group-presentation-songs-item', GroupPresentationSongsItem)
 Vue.component('section-heading', SectionHeading)
 Vue.component('song-presentation', SongPresentation)
 Vue.component('snack-bar', SnackBar)
+Vue.component('songs-list', SongsList)
 
-const replaceHtml = (element, content) => {
-  const Component = Vue.extend({});
-  new Component({
-    template: content
-  }).$mount(element);
-};
-
-new Vue({
+const vm = new Vue({
+  i18n,
   el: '#app',
+  data: () => {
+    return {
+      locale: '',
+      currentGroup: {},
+    }
+  },
+  mounted() {
+    // Get the locale from "data-locale" attribute, in div #app. See application.html.erb.
+    this.locale = this.$el.dataset.locale
+    this.currentGroup = JSON.parse(this.$el.dataset.currentGroup)
+  },
   methods: {
     showModal: (modalId) => {
       $(modalId).modal();
       $(modalId).modal('open');
     },
-    replaceHtml: (element, content) => replaceHtml(element, content)
   }
 });
 
+// The default locale is 'pt-BR'.
+// Here, we update the locale according to the one
+// passed to the vue instance (vm.locale).
+i18n.locale = vm.locale

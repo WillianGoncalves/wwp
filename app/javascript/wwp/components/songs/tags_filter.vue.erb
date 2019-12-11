@@ -18,16 +18,13 @@ export default
     tags:
       type: Array
       required: true
-    currentGroupId:
-      type: Number
-      required: true
 
   data: ->
     selectedTags: []
 
   computed:
     tagsPath: ->
-      "/groups/#{@currentGroupId}/tags"
+      "/groups/#{@$root.$data.currentGroup.id}/tags"
 
   methods:
     toggleTagFilter: (tagId) ->
