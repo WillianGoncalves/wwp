@@ -52,12 +52,14 @@ const vm = new Vue({
   el: '#app',
   data: () => {
     return {
-      locale: ''
+      locale: '',
+      currentGroup: {},
     }
   },
   mounted() {
     // Get the locale from "data-locale" attribute, in div #app. See application.html.erb.
     this.locale = this.$el.dataset.locale
+    this.currentGroup = JSON.parse(this.$el.dataset.currentGroup)
   },
   methods: {
     showModal: (modalId) => {

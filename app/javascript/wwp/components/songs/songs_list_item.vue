@@ -1,5 +1,5 @@
 <template>
-  <div class="songs-list__item collection-item">
+  <a :href="`/groups/${ $root.$data.currentGroup.id }/songs/${ song.id }`" class="songs-list__item collection-item">
     <div class="song">
       {{ song.title }}
     </div>
@@ -13,7 +13,7 @@
     <div class="tags">
       <tag v-for="tag in song.tags" :tag="tag"></tag>
     </div>
-  </div>
+  </a>
 </template>
 
 <script lang="coffee">
