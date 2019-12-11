@@ -6,7 +6,7 @@
       <songs-list-item v-for="song in paginatedSongs" :song="song" />
     </div>
 
-    <songs-list-paginator :songs="filteredSongs" :items-per-page="3" :current-page="1" v-on:paginated="updateList" ></songs-list-paginator>
+    <songs-list-paginator :songs="filteredSongs" :items-per-page="8" :current-page="1" v-on:paginated="updateList" ></songs-list-paginator>
 
     <div class="center-align" v-if="paginatedSongs.length === 0">
       <p>{{ $t('noResults') }}</p>

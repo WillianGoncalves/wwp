@@ -10,7 +10,6 @@
     <% end %>
   </div>
 
-  <%#= render 'search_form' %>
   <songs-list :songs="<%= render 'components/songs/songs_list.json.jbuilder', songs: @songs %>"></songs-list>
 <% else %>
   <div class="center-align">
