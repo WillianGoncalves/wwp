@@ -1,5 +1,5 @@
 <template>
-  <a :href="`/groups/${ $root.$data.currentGroup.id }/songs/${ song.id }`" class="songs-list__item collection-item">
+  <div class="songs-list__item collection-item">
     <div class="song">
       {{ song.title }}
     </div>
@@ -13,7 +13,7 @@
     <div class="tags">
       <tag v-for="tag in song.tags" :tag="tag"></tag>
     </div>
-  </a>
+  </div>
 </template>
 
 <script lang="coffee">
@@ -26,12 +26,16 @@ export default
 
 <style scoped lang="sass">
 @import '../../../../assets/stylesheets/variables/mixins';
+@import '../../../../assets/stylesheets/variables/colors';
 
 .songs-list__item
   display: grid !important
   grid-template-columns: auto 1fr auto auto
   grid-template-areas: "song author tags tone"
   grid-column-gap: 10px
+  &:hover
+    cursor: pointer
+    background: $primary-color-dark
 
 @include on-small
   .songs-list__item

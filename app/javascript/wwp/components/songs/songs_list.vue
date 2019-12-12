@@ -3,10 +3,10 @@
     <songs-list-filter :songs="songs" v-on:filtered="updateFilteredSongs"></songs-list-filter>
 
     <div class="collection" v-if="paginatedSongs.length">
-      <songs-list-item v-for="song in paginatedSongs" :song="song" />
+      <songs-list-item v-for="song in paginatedSongs" :song="song" @click.native="selectSong(song)"/>
     </div>
 
-    <songs-list-paginator :songs="filteredSongs" :items-per-page="8" :current-page="1" v-on:paginated="updateList" ></songs-list-paginator>
+    <songs-list-paginator :songs="filteredSongs" :items-per-page="8" :current-page="1" v-on:paginated="updateList"></songs-list-paginator>
 
     <div class="center-align" v-if="paginatedSongs.length === 0">
       <p>{{ $t('noResults') }}</p>
@@ -24,6 +24,8 @@ export default
     songs:
       type: Array
       required: true
+    onSelectSong:
+      type: Function
 
   data: ->
     filteredSongs: []
@@ -40,4 +42,10 @@ export default
 
     updateList: (songs) ->
       @paginatedSongs = songs
+
+    selectSong: (song) ->
+      if @onSelectSong
+        @onSelectSong(song)
+      else
+        window.location.href = "/groups/#{@$root.$data.currentGroup.id}/songs/#{song.id}"
 </script>

@@ -34,7 +34,8 @@
           </div>
         </transition>
 
-        <song-options :songs="songs" v-on:selectSong="selectSong"></song-options>
+        <songs-list :songs="songs" :on-select-song="songSelected"></songs-list>
+        <!--<song-options :songs="songs" v-on:selectSong="selectSong"></song-options>-->
       </div>
     </transition>
   </div>
@@ -46,14 +47,12 @@ import SongOptions from './song_options.vue';
 
 export default
   props:
-    groupid:
-      type: Number
+    songs:
+      type: Array
       required: true
 
   data: ->
     textFilter: ''
-    songs: []
-    tags: []
     tagsFilter: []
     selectedSongs: []
     showSelector: false
@@ -64,14 +63,8 @@ export default
     'song-options': SongOptions
 
   methods:
-    listSongs: ->
-      $.get "/groups/#{@groupid}/songs.json", (data) =>
-        @songs = @_songs = data
-        @loadPresentationSongs()
-
-    listTags: ->
-      $.get "/groups/#{@groupid}/tags.json", (data) =>
-        @tags = data
+    songSelected: (song) ->
+      console.log(song)
 
     toggleTagFilter: (tagId) ->
       if @tagFilterIsActive(tagId)
@@ -123,10 +116,6 @@ export default
           tagIds = song.tags.map (tag) => tag.id
           for tagId in @tagsFilter
             return true if tagIds.includes(tagId)
-
-  created: ->
-    @listSongs()
-    @listTags()
 
 </script>
 
