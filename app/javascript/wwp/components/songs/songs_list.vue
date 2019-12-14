@@ -15,6 +15,7 @@
 </template>
 
 <script lang="coffee">
+import { mapState } from 'vuex';
 import SongsListItem from './songs_list_item.vue';
 import SongsListFilters from './songs_list_filters.vue';
 import SongsListPaginator from './songs_list_paginator.vue';
@@ -30,6 +31,8 @@ export default
   data: ->
     filteredSongs: []
     paginatedSongs: []
+
+  computed: mapState(['currentGroup'])
 
   components:
     'songs-list-item': SongsListItem
@@ -47,5 +50,5 @@ export default
       if @onSelectSong
         @onSelectSong(song)
       else
-        window.location.href = "/groups/#{@$root.$data.currentGroup.id}/songs/#{song.id}"
+        window.location.href = "/groups/#{@currentGroup.id}/songs/#{song.id}"
 </script>

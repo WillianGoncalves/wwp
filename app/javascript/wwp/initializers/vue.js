@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import i18n from '../locales';
+import store from './store';
 
 import UserGroup from '../components/groups/user_group.vue';
 import Group from '../components/groups/group.vue';
@@ -49,17 +50,18 @@ Vue.component('songs-list', SongsList)
 
 const vm = new Vue({
   i18n,
+  store,
   el: '#app',
   data: () => {
     return {
       locale: '',
-      currentGroup: {},
     }
   },
   mounted() {
     // Get the locale from "data-locale" attribute, in div #app. See application.html.erb.
     this.locale = this.$el.dataset.locale
-    this.currentGroup = JSON.parse(this.$el.dataset.currentGroup)
+    const groupId = this.$el.dataset.groupId
+    store.dispatch('getCurrentGroup', { groupId })
   },
   methods: {
     showModal: (modalId) => {

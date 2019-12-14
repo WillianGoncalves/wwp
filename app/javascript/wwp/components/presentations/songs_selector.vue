@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <transition name="fade" mode="out-in" @enter="initTabs">
       <button type="button" class="btn-floating" @click="showSelector = true" v-if="!showSelector">
         <i class="fa fa-music"></i>
@@ -55,7 +54,6 @@ export default
   methods:
     initTabs: ->
       tabs = document.querySelectorAll('.tabs')
-      console.log(tabs)
       M.Tabs.init(tabs)
 
     selectSong: (song) ->

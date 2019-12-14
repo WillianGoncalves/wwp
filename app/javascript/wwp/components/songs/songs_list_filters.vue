@@ -6,6 +6,7 @@
 </template>
 
 <script lang="coffee">
+import { mapGetters } from 'vuex';
 import SongsListFilter from './songs_list_filter.vue';
 import SongsListTagsFilter from './songs_list_tags_filter.vue';
 
@@ -19,9 +20,7 @@ export default
     'songs-list-filter': SongsListFilter
     'songs-list-tags-filter': SongsListTagsFilter
 
-  computed:
-    tags: ->
-      @$root.$data.currentGroup.tags || []
+  computed: mapGetters(['tags'])
 
   mounted: ->
     @filter()
