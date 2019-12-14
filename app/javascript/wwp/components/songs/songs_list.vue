@@ -1,6 +1,6 @@
 <template>
   <div>
-    <songs-list-filter :songs="songs" v-on:filtered="updateFilteredSongs"></songs-list-filter>
+    <songs-list-filters :songs="songs" v-on:filtered="updateFilteredSongs"></songs-list-filters>
 
     <div class="collection" v-if="paginatedSongs.length">
       <songs-list-item v-for="song in paginatedSongs" :song="song" @click.native="selectSong(song)"/>
@@ -16,7 +16,7 @@
 
 <script lang="coffee">
 import SongsListItem from './songs_list_item.vue';
-import SongsListFilter from './songs_list_filter.vue';
+import SongsListFilters from './songs_list_filters.vue';
 import SongsListPaginator from './songs_list_paginator.vue';
 
 export default
@@ -33,7 +33,7 @@ export default
 
   components:
     'songs-list-item': SongsListItem
-    'songs-list-filter': SongsListFilter
+    'songs-list-filters': SongsListFilters
     'songs-list-paginator': SongsListPaginator
 
   methods:

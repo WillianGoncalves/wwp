@@ -9,7 +9,7 @@ export default
       type: Object
       required: true
 
-  data: () ->
-    style:
+  computed:
+    style: () ->
       color: @tag.color.code
 </script>
