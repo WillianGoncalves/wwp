@@ -1,5 +1,5 @@
 <template>
-  <div class="songs-list__item collection-item">
+  <div :class="[isSelected ? 'selected' : '', 'songs-list__item', 'collection-item']">
     <div class="song">
       {{ song.title }}
     </div>
@@ -22,6 +22,10 @@ export default
     song:
       type: Object
       required: true
+
+  computed:
+    isSelected: ->
+      @$store.state.selectedSongs.includes(@song)
 </script>
 
 <style scoped lang="sass">
@@ -36,6 +40,9 @@ export default
   &:hover
     cursor: pointer
     background: $primary-color-dark
+  &.selected
+    .song
+      color: $secondary-color
 
 @include on-small
   .songs-list__item

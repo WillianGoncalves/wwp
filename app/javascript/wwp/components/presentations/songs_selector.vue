@@ -19,11 +19,11 @@
           </div>
 
           <div id="all" class="col s12">
-            <songs-list :songs="songs" :on-select-song="selectSong"></songs-list>
+            <songs-list :songs="songs" :on-select-song="selectOrUnselectSong"></songs-list>
           </div>
 
           <div id="selected" class="col s12">
-            <selected-songs :songs="selectedSongs" v-on:unselectSong="unselectSong" v-on:updateSongsOrder="updateSongsOrder"></selected-songs>
+            <selected-songs />
           </div>
         </div>
       </div>
@@ -32,6 +32,7 @@
 </template>
 
 <script lang="coffee">
+import { mapState, mapMutations } from 'vuex';
 import M from 'materialize-css';
 import SelectedSongs from './selected_songs.vue';
 import SongOptions from './song_options.vue';
@@ -43,36 +44,25 @@ export default
       required: true
 
   data: ->
-    selectedSongs: []
     showSelector: false
     filterBy: 'text'
+
+  computed: mapState(['selectedSongs'])
 
   components:
     'selected-songs': SelectedSongs
     'song-options': SongOptions
 
-  methods:
+  methods: {
+    mapMutations(['selectOrUnselectSong'])...,
+
     initTabs: ->
       tabs = document.querySelectorAll('.tabs')
       M.Tabs.init(tabs)
 
-    selectSong: (song) ->
-      return if @selectedSongs.includes(song)
-      @selectedSongs.push(song)
-      @updateHiddenValue()
-
-    unselectSong: (song) ->
-      index = @selectedSongs.indexOf(song)
-      @selectedSongs.splice(index, 1)
-      @updateHiddenValue()
-
     updateHiddenValue: ->
       stringIds = @selectedSongs.map((song) => song.id)
       $('#song_ids').val(stringIds)
-
-    updateSongsOrder: (reorderedSongs) ->
-      @selectedSongs = reorderedSongs
-      @updateHiddenValue()
 
     loadPresentationSongs: ->
       hiddenContent = $('#song_ids').val()
@@ -83,6 +73,7 @@ export default
           if song.id == songId
             @selectedSongs.push(song)
             break
+  }
 </script>
 
 <style scoped lang="sass">
