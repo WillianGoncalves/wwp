@@ -13,8 +13,8 @@
         <div class="row">
           <div class="col s12">
             <ul class="tabs">
-              <li class="tab col s6"><a href="#all" class="active">Todas</a></li>
-              <li class="tab col s6"><a href="#selected">Selecionadas <span class="selectedCounter">{{ selectedSongs.length }}</span></a></li>
+              <li class="tab col s6"><a href="#all" class="active">{{ $t('presentations.new.all') }}</a></li>
+              <li class="tab col s6"><a href="#selected">{{ $t('presentations.new.selected') }} <span class="selectedCounter">{{ selectedSongs.length }}</span></a></li>
             </ul>
           </div>
 

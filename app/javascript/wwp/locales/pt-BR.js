@@ -4,5 +4,11 @@ export default {
     index: {
       titleOrAuthor: "Título ou autor"
     }
+  },
+  presentations: {
+    new: {
+      all: "Todas",
+      selected: "Selecionadas"
+    }
   }
 }
