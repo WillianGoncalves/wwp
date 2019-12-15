@@ -1,5 +1,7 @@
 <template>
   <div>
+    <input type="hidden" name="song_ids" id="song_ids" :value="selectedSongsIds" multiple="multiple">
+
     <transition name="fade" mode="out-in" @enter="initTabs">
       <button type="button" class="btn-floating" @click="showSelector = true" v-if="!showSelector">
         <i class="fa fa-music"></i>
@@ -47,7 +49,11 @@ export default
     showSelector: false
     filterBy: 'text'
 
-  computed: mapState(['selectedSongs'])
+  computed: {
+    mapState(['selectedSongs'])...,
+    selectedSongsIds: ->
+      @selectedSongs.map (song) => song.id
+  }
 
   components:
     'selected-songs': SelectedSongs
@@ -59,10 +65,6 @@ export default
     initTabs: ->
       tabs = document.querySelectorAll('.tabs')
       M.Tabs.init(tabs)
-
-    updateHiddenValue: ->
-      stringIds = @selectedSongs.map((song) => song.id)
-      $('#song_ids').val(stringIds)
 
     loadPresentationSongs: ->
       hiddenContent = $('#song_ids').val()
