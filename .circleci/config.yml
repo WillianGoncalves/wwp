@@ -19,7 +19,7 @@ jobs:
           command: docker-compose exec app bash -c "./wait-for-it.sh postgres:5432"
       - run:
           name: Run tests
-          command: docker-compose exec app rspec
+          command: docker-compose exec app bash -c "bundle exec rspec"
 
   deploy-staging:
     executor: heroku/default
