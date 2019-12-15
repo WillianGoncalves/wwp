@@ -24,16 +24,9 @@ class Presentation < ApplicationRecord
   has_many :songs, through: :presentation_songs
   has_many :comments, as: :target
   validates :local, :date_time, :group, :presentation_songs, presence: true
-  validate :validate_date_time
 
   def add_song(song)
     index = presentation_songs.size + 1
     presentation_songs.build(song: song, index: index)
-  end
-
-  def validate_date_time
-    if date_time && date_time < DateTime.now
-      errors.add(:date_time, :invalid_date_time)
-    end
   end
 end

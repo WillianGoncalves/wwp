@@ -233,18 +233,6 @@ RSpec.describe PresentationsController, type: :controller do
               expect(group.presentations.count).to eq 0
             end
           end
-
-          context 'invalid date' do
-            let!(:songs) { Fabricate.times 2, :song, group: group }
-            let(:presentation) { { local: 'foo' } }
-
-            before { post :create, params: { group_id: group, presentation: presentation, date: '01/01/2000', time: '12:00', song_ids: song_ids(songs) } }
-
-            it 'does not create a presentation' do
-              expect(response).to render_template :new
-              expect(group.presentations.count).to eq 0
-            end
-          end
         end
       end
 
