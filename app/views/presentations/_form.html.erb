@@ -26,8 +26,12 @@
       </div>
 
       <div>
-        <%= hidden_field_tag :song_ids, song_ids(@presentation), { id: 'song_ids', multiple: true } %>
-        <songs-selector id="songs_selector" :groupid="<%= current_group.id %>"></songs-selector>
+        <songs-selector
+          id="songs_selector"
+          :songs="<%= render 'components/songs/songs_list.json.jbuilder', songs: current_group.songs %>"
+          :presentation-songs="<%= render 'components/songs/songs_list.json.jbuilder', songs: @presentation.songs %>">
+        </songs-selector>
+
         <% if @presentation.errors[:presentation_songs].present? %>
           <span class="error"><%= @presentation.errors[:presentation_songs].first %></span>
         <% end %>

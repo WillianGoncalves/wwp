@@ -15,6 +15,11 @@ class GroupsController < ApplicationController
   def show
     @next_presentation = @group.next_presentation
     current_user.update(last_group: @group) if current_user.groups.include?(@group)
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def new

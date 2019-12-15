@@ -1,133 +1,76 @@
 <template>
   <div>
-    <selected-songs :songs="selectedSongs" v-on:unselectSong="unselectSong" v-on:updateSongsOrder="updateSongsOrder" v-if="selectedSongs.length > 0"></selected-songs>
+    <input type="hidden" name="song_ids" id="song_ids" :value="selectedSongsIds" multiple="multiple">
 
-    <transition name="fade" mode="out-in">
+    <transition name="fade" mode="out-in" @enter="initTabs">
       <button type="button" class="btn-floating" @click="showSelector = true" v-if="!showSelector">
         <i class="fa fa-music"></i>
       </button>
 
       <div v-if="showSelector" class="main-content">
-        <div>
-          <button type="button" class="btn-flat menu-item waves-effect" @click="filterBy = 'text'">
-            <i class="material-icons dark-icon">title</i>
-          </button>
-          <button type="button" class="btn-flat menu-item waves-effect" @click="filterBy = 'tags'">
-            <i class="material-icons dark-icon">local_offer</i>
-          </button>
-          <button type="button" class="btn-flat menu-item right" @click="showSelector = false">
-            <i class="material-icons dark-icon">done</i>
-          </button>
+        <button type="button" class="btn-flat menu-item right" @click="showSelector = false">
+          <i class="material-icons dark-icon">done</i>
+        </button>
+
+        <div class="row">
+          <div class="col s12">
+            <ul class="tabs">
+              <li class="tab col s6"><a href="#all" class="active">{{ $t('presentations.new.all') }}</a></li>
+              <li class="tab col s6"><a href="#selected">{{ $t('presentations.new.selected') }} <span class="selectedCounter">{{ selectedSongs.length }}</span></a></li>
+            </ul>
+          </div>
+
+          <div id="all" class="col s12">
+            <songs-list :songs="songs" :on-select-song="selectOrUnselectSong"></songs-list>
+          </div>
+
+          <div id="selected" class="col s12">
+            <selected-songs />
+          </div>
         </div>
-
-        <transition name="slide-fade" mode="out-in">
-          <div class="input-field" v-if="filterBy == 'text'" key="textFilter">
-            <i class="material-icons prefix">search</i>
-            <input id="search" type="text" v-model="textFilter">
-          </div>
-
-          <div v-else key="tagsFilter">
-            <button type="button" class="btn-flat-bordered tag-filter" v-for="tag in tags" @click="toggleTagFilter(tag.id)" :class="{'inactive': !tagFilterIsActive(tag.id)}">
-              <i class="material-icons left tiny" :style="{ color: tag.color }">local_offer</i>
-              <span>{{ tag.name }}</span>
-            </button>
-          </div>
-        </transition>
-
-        <song-options :songs="songs" v-on:selectSong="selectSong"></song-options>
       </div>
     </transition>
   </div>
 </template>
 
 <script lang="coffee">
+import { mapState, mapMutations } from 'vuex';
+import M from 'materialize-css';
 import SelectedSongs from './selected_songs.vue';
 import SongOptions from './song_options.vue';
 
 export default
   props:
-    groupid:
-      type: Number
+    songs:
+      type: Array
       required: true
+    presentationSongs:
+      type: Array
 
   data: ->
-    textFilter: ''
-    songs: []
-    tags: []
-    tagsFilter: []
-    selectedSongs: []
     showSelector: false
     filterBy: 'text'
+
+  mounted: ->
+    @setSelectedSongs(@presentationSongs) if @presentationSongs
+
+  computed: {
+    mapState(['selectedSongs'])...,
+    selectedSongsIds: ->
+      @selectedSongs.map (song) => song.id
+  }
 
   components:
     'selected-songs': SelectedSongs
     'song-options': SongOptions
 
-  methods:
-    listSongs: ->
-      $.get "/groups/#{@groupid}/songs.json", (data) =>
-        @songs = @_songs = data
-        @loadPresentationSongs()
+  methods: {
+    mapMutations(['selectOrUnselectSong', 'setSelectedSongs'])...,
 
-    listTags: ->
-      $.get "/groups/#{@groupid}/tags.json", (data) =>
-        @tags = data
-
-    toggleTagFilter: (tagId) ->
-      if @tagFilterIsActive(tagId)
-        @tagsFilter.splice(@tagsFilter.indexOf(tagId), 1)
-      else
-        @tagsFilter.push(tagId)
-
-    tagFilterIsActive: (tagId) ->
-      @tagsFilter.includes(tagId)
-
-    selectSong: (song) ->
-      return if @selectedSongs.includes(song)
-      @selectedSongs.push(song)
-      @updateHiddenValue()
-
-    unselectSong: (song) ->
-      index = @selectedSongs.indexOf(song)
-      @selectedSongs.splice(index, 1)
-      @updateHiddenValue()
-
-    updateHiddenValue: ->
-      stringIds = @selectedSongs.map((song) => song.id)
-      $('#song_ids').val(stringIds)
-
-    updateSongsOrder: (reorderedSongs) ->
-      @selectedSongs = reorderedSongs
-      @updateHiddenValue()
-
-    loadPresentationSongs: ->
-      hiddenContent = $('#song_ids').val()
-      return if hiddenContent.length == 0
-      songIds = hiddenContent.split(',').map ((id) => parseInt(id))
-      for songId in songIds
-        for song in @_songs
-          if song.id == songId
-            @selectedSongs.push(song)
-            break
-
-  watch:
-    textFilter: ->
-      @songs = @_songs.filter (song) =>
-        song.title.toLowerCase().includes(@textFilter.toLowerCase())
-
-    tagsFilter: ->
-      if @tagsFilter.length == 0
-        @songs = @_songs
-      else
-        @songs = @_songs.filter (song) =>
-          tagIds = song.tags.map (tag) => tag.id
-          for tagId in @tagsFilter
-            return true if tagIds.includes(tagId)
-
-  created: ->
-    @listSongs()
-    @listTags()
-
+    initTabs: ->
+      tabs = document.querySelectorAll('.tabs')
+      M.Tabs.init(tabs)
+  }
 </script>
 
 <style scoped lang="sass">
@@ -142,11 +85,12 @@ export default
   color: $color
   border-radius: 90px
 
-.inactive
-  filter: grayscale(1)
-
 .menu-item
   padding: 0 1rem
+
+.selectedCounter
+  margin-left: 10px
+  font-weight: bold
 
 .fade-enter-active, .fade-leave-active
   transition: opacity .2s

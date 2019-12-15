@@ -12,7 +12,7 @@
 class Group < ApplicationRecord
   has_many :join_requests, inverse_of: :group, dependent: :destroy
   has_many :presentations, inverse_of: :group, dependent: :destroy
-  has_many :songs, dependent: :destroy
+  has_many :songs, -> { order(:title) }, dependent: :destroy
   has_many :members, dependent: :destroy
   has_many :users, through: :members
   has_many :tags, -> { order(:name) }, dependent: :destroy
