@@ -25,7 +25,8 @@ export default
 
   computed:
     isSelected: ->
-      @$store.state.selectedSongs.includes(@song)
+      songsIds = @$store.state.selectedSongs.map (song) => song.id
+      songsIds.includes(@song.id)
 </script>
 
 <style scoped lang="sass">

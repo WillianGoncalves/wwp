@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-//import axios from 'axios';
-const axios = require('axios');
+import axios from 'axios';
 
 Vue.use(Vuex)
 
@@ -22,6 +21,9 @@ const mutations = {
     } else {
       selectedSongs.push(song)
     }
+  },
+  setSelectedSongs(state, selectedSongs) {
+    state.selectedSongs = selectedSongs
   },
   reorderSelectedSongs(state, reorderedSongs) {
     state.selectedSongs = reorderedSongs

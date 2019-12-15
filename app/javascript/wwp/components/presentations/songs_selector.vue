@@ -44,10 +44,15 @@ export default
     songs:
       type: Array
       required: true
+    presentationSongs:
+      type: Array
 
   data: ->
     showSelector: false
     filterBy: 'text'
+
+  mounted: ->
+    @setSelectedSongs(@presentationSongs) if @presentationSongs
 
   computed: {
     mapState(['selectedSongs'])...,
@@ -60,21 +65,11 @@ export default
     'song-options': SongOptions
 
   methods: {
-    mapMutations(['selectOrUnselectSong'])...,
+    mapMutations(['selectOrUnselectSong', 'setSelectedSongs'])...,
 
     initTabs: ->
       tabs = document.querySelectorAll('.tabs')
       M.Tabs.init(tabs)
-
-    loadPresentationSongs: ->
-      hiddenContent = $('#song_ids').val()
-      return if hiddenContent.length == 0
-      songIds = hiddenContent.split(',').map ((id) => parseInt(id))
-      for songId in songIds
-        for song in @_songs
-          if song.id == songId
-            @selectedSongs.push(song)
-            break
   }
 </script>
 
