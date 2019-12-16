@@ -61,7 +61,7 @@ const vm = new Vue({
     // Get the locale from "data-locale" attribute, in div #app. See application.html.erb.
     this.locale = this.$el.dataset.locale
     const groupId = this.$el.dataset.groupId
-    store.dispatch('getCurrentGroup', { groupId })
+    if (groupId) store.dispatch('getCurrentGroup', { groupId })
   },
   methods: {
     showModal: (modalId) => {

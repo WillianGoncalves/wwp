@@ -19,7 +19,7 @@
       id="app"
       class="container"
       :data-locale="'<%= I18n.locale %>'"
-      :data-group-id="'<%= current_group.id %>'">
+      :data-group-id="'<%= current_group&.id %>'">
       <%= yield %>
     </main>
 

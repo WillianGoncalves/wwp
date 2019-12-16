@@ -31,11 +31,13 @@ const mutations = {
 }
 
 const actions = {
-  getCurrentGroup({ commit }, { groupId }) {
-    axios.get(`/groups/${ groupId }.json`)
-      .then((response) => {
-        commit('setCurrentGroup', response.data)
-      })
+  getCurrentGroup({ state, commit }, { groupId }) {
+    if (groupId && groupId !== state.currentGroup.id) {
+      axios.get(`/groups/${ groupId }.json`)
+        .then((response) => {
+          commit('setCurrentGroup', response.data)
+        })
+    }
   }
 }
 
