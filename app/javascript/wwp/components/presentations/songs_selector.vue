@@ -15,8 +15,15 @@
         <div class="row">
           <div class="col s12">
             <ul class="tabs">
-              <li class="tab col s6"><a href="#all" class="active">{{ $t('presentations.new.all') }}</a></li>
-              <li class="tab col s6"><a href="#selected">{{ $t('presentations.new.selected') }} <span class="selectedCounter">{{ selectedSongs.length }}</span></a></li>
+              <li class="tab col s6">
+                <a href="#all" class="active">{{ $t('presentations.new.all') }}</a>
+              </li>
+              <li class="tab col s6">
+                <a href="#selected">
+                  <span class="selectedCounter">{{ selectedSongs.length }}</span>
+                  {{ $tc('presentations.new.selected', selectedSongs.length) }}
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -25,7 +32,7 @@
           </div>
 
           <div id="selected" class="col s12">
-            <selected-songs />
+            <selected-songs-list />
           </div>
         </div>
       </div>
@@ -36,7 +43,7 @@
 <script lang="coffee">
 import { mapState, mapMutations } from 'vuex';
 import M from 'materialize-css';
-import SelectedSongs from './selected_songs.vue';
+import SelectedSongsList from './selected_songs_list.vue';
 import SongOptions from './song_options.vue';
 
 export default
@@ -61,7 +68,7 @@ export default
   }
 
   components:
-    'selected-songs': SelectedSongs
+    'selected-songs-list': SelectedSongsList
     'song-options': SongOptions
 
   methods: {

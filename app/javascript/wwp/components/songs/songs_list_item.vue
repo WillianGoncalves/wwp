@@ -53,6 +53,9 @@ export default
 
 .song
   grid-area: song
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
 
 .author
   grid-area: author

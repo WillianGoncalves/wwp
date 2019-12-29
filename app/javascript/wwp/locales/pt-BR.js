@@ -8,7 +8,7 @@ export default {
   presentations: {
     new: {
       all: "Todas",
-      selected: "Selecionadas"
+      selected: "Selecionadas | Selecionada | Selecionadas"
     }
   }
 }
